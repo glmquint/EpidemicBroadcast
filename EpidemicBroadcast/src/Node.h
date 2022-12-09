@@ -21,22 +21,22 @@
 #include <stdio.h>
 using namespace omnetpp;
 
-/**
- * TODO - Generated class
- */
+
 class Node : public cSimpleModule
 {
     private:
     bool isInfected = false;
     bool receivedInfection = false;
     bool collisionCheck = false;
+    bool* isReachable;
+    int self_id;
 
 
   protected:
     virtual void initialize(int stage) override;
-    virtual int numInitStages() const;
+    virtual int numInitStages() const override;
     virtual void handleMessage(cMessage *msg) override;
-    void sendSelf();
+    void scheduleClock();
     void sendAll();
 };
 

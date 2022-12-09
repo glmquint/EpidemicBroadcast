@@ -19,76 +19,84 @@ Define_Module(Node);
 
 int Node::numInitStages() const { return 2; }
 
-void Node::sendSelf(){
-    cMessage * selfmessage = new cMessage("Probabilita");
-    simtime_t sim = simTime()+par("timer");
-    scheduleAt(sim,selfmessage);
-}
-
 void Node::sendAll(){
-    int n = par("numberOfGates");
-    int nodeNumber = getIndex();
-    for(int i = 0;i<n; ++i ){
+    int n = par("numberOfNodes");
+    for(int i = 0; i<n; ++i ){
        char str[20];
-       sprintf(str, "Infetto %s", getName());
+       sprintf(str, "Infetto %d", self_id);
 
         cMessage * mess = new cMessage(str);
-        cGate *g = gate("out",i);
-        if(g->getIndex()!=nodeNumber) // and gate in lista di adiacenza
+        if(isReachable[i])
             send(mess,"out",i);
     }
 }
 
+void Node::scheduleClock(){
+    cMessage *self = new cMessage("clock");
+    simtime_t sim = simTime()+par("timer");
+    scheduleAt(sim,self);
+}
+
 void Node::initialize(int stage)
 {
+    self_id = getIndex();
     if (stage == 0){
-        char str[15];
+        isReachable = new bool[par("numberOfNodes")]();
+        char str[8];
         double pos_x = par("pos_x");
         double pos_y = par("pos_y");
-        sprintf(str, "%f %f", pos_x, pos_y);
-        cMessage* msg = new cMessage(str);
-        //sendDirect(msg, getParentModule()->getSubmodule("oracle", 0), "in", getIndex());
-        sendDirect(msg, getModuleByPath("oracle"), "in", getIndex());
+        double other_x, other_y;
+        for (int i = 0; i < (int)par("numberOfNodes"); ++i){
+            if (i == self_id){
+                isReachable[i] = false;
+                continue;
+            }
+            sprintf(str, "nodeX[%d]", i);
+            cModule* other = getModuleByPath(str);
+            other_x = other->par("pos_x");
+            other_y = other->par("pos_y");
+            double distance = (other_x - pos_x)*(other_x - pos_x) +
+                    (other_y - pos_y)*(other_y - pos_y);
+            double radius_squared = (double)par("radius") * (double)par("radius");
+            isReachable[i] = radius_squared >= distance;
+            EV << self_id << "(" << pos_x << "," << pos_y << ")"
+                    << " " << i << "(" << other_x << "," << other_y << ")"
+                    << " -> " << isReachable[i]
+                    << " because distance: " << distance
+                    << " radius_squared: " << radius_squared << endl;
+        }
+
     } else if (stage == 1){
-        /* abbiamo già la lista di adiacenza
-         * se il nodo è il primo infetto
-         * far partire l'infezione
-         */
         if(par("firstInfected")){
-            //double probability=par("sendingProbability");
-            //double limit=par("limitProbability");
             sendAll();
             isInfected=true;
         }
+        scheduleClock();
     }
-    //EV << getIndex() << ": " << par("pos_x") << " " << par("pos_y") << endl;
-
 }
 
 void Node::handleMessage(cMessage *msg)
 {
-    /* se il messaggio proviene dall'oracle,
-     * allora salva la lista di adiacenza
-     */
     if(isInfected){
         delete(msg);
         return;
     }
-    if(!(strcmp("clock", msg->getName()))){
+    if(!strcmp("clock", msg->getName())){
         collisionCheck = false;
         if(receivedInfection){
             double probability=par("sendingProbability");
             double limit=par("limitProbability");
-            EV<<"INFETTO"<<getName()<<endl;
+            EV<<"INFETTO "<<self_id<<endl;
             if(probability<=limit){
-                EV<<"INVIATO"<<getName()<<endl;
+                EV<<"INVIATO "<<self_id<<endl;
                 isInfected=true;
                 sendAll();
             }
         }
-    }
+        scheduleClock();
 
-    else{
+    }
+    else {
         if(!collisionCheck){
             collisionCheck = true;
             receivedInfection = true;
