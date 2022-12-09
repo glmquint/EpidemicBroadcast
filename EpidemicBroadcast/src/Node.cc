@@ -17,6 +17,8 @@
 #include <stdio.h>
 Define_Module(Node);
 
+int Node::numInitStages()  { return 3; }
+
 void Node::sendSelf(){
     cMessage * selfmessage = new cMessage("Probabilita");
     simtime_t sim = simTime()+par("timer");
@@ -32,28 +34,44 @@ void Node::sendAll(){
 
         cMessage * mess = new cMessage(str);
         cGate *g = gate("out",i);
-        if(g->getIndex()!=nodeNumber)
+        if(g->getIndex()!=nodeNumber) // and gate in lista di adiacenza
             send(mess,"out",i);
     }
 }
 
-void Node::initialize()
+void Node::initialize(int stage)
 {
-    // compute probability
+    if (stage == 0){
+        char str[15];
+        double pos_x = par("pos_x");
+        double pos_y = par("pos_y");
+        sprintf(str, "%f %f", pos_x, pos_y);
+        cMessage* msg = new cMessage(str);
 
-    if(par("firstInfected")){
-
-        double probability=par("sendingProbability");
-        double limit=par("limitProbability");
-
-        sendAll();
-
-        isInfected=true;
+        //sendDirect(msg, getParentModule()->getSubmodule("oracle", 0), "in", getIndex());
+        sendDirect(msg, getModuleByPath("oracle"), "in", getIndex());
+    } else if (stage == 2){
+        /* abbiamo già la lista di adiacenza
+         * se il nodo è il primo infetto
+         * far partire l'infezione
+         */
+        // compute probability
+        if(par("firstInfected")){
+            //double probability=par("sendingProbability");
+            //double limit=par("limitProbability");
+            sendAll();
+            isInfected=true;
+        }
     }
+    //EV << getIndex() << ": " << par("pos_x") << " " << par("pos_y") << endl;
+
 }
 
 void Node::handleMessage(cMessage *msg)
 {
+    /* se il messaggio proviene dall'oracle,
+     * allora salva la lista di adiacenza
+     */
     if(isInfected){
         delete(msg);
         return;

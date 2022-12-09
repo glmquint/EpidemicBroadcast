@@ -13,28 +13,22 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-//
-// TODO auto-generated module
-//
+#ifndef __EPIDEMICBROADCAST_ORACLE_H_
+#define __EPIDEMICBROADCAST_ORACLE_H_
 
-package epidemicbroadcast;
+#include <omnetpp.h>
 
-simple Node
+using namespace omnetpp;
+
+/**
+ * TODO - Generated class
+ */
+class Oracle : public cSimpleModule
 {
-    parameters:
-        int numberOfGates = default (4);
-        volatile double sendingProbability = uniform(0,1);
-        double limitProbability=0.5; 
-        bool firstInfected=default(false);
-        double timer = default(0.5);
-        double pos_x = uniform(0, 10);
-    	double pos_y = uniform(0, 10);
-    	double radius = 5.0;
+  protected:
+    virtual void initialize(int stage) override;
+    virtual int numInitStages();
+    virtual void handleMessage(cMessage *msg) override;
+};
 
-        
-    gates:
-        input in[numberOfGates];
-        output out[numberOfGates];
-        input synch;
-        input oracle;
-}
+#endif

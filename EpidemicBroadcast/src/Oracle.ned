@@ -13,28 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
+package epidemicbroadcast;
+
 //
 // TODO auto-generated module
 //
-
-package epidemicbroadcast;
-
-simple Node
+simple Oracle
 {
     parameters:
-        int numberOfGates = default (4);
-        volatile double sendingProbability = uniform(0,1);
-        double limitProbability=0.5; 
-        bool firstInfected=default(false);
-        double timer = default(0.5);
-        double pos_x = uniform(0, 10);
-    	double pos_y = uniform(0, 10);
-    	double radius = 5.0;
-
-        
+        int numberOfNodes = default(4);
     gates:
-        input in[numberOfGates];
-        output out[numberOfGates];
-        input synch;
-        input oracle;
+        input in[numberOfNodes];
 }

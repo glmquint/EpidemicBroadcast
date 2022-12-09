@@ -31,8 +31,10 @@ class Node : public cSimpleModule
     bool receivedInfection = false;
     bool collisionCheck = false;
 
+
   protected:
-    virtual void initialize() override;
+    virtual void initialize(int stage) override;
+    virtual int numInitStages();
     virtual void handleMessage(cMessage *msg) override;
     void sendSelf();
     void sendAll();

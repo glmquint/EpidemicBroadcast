@@ -13,32 +13,25 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
+#include "Oracle.h"
 
-#include "Synchronizer.h"
+Define_Module(Oracle);
 
-Define_Module(Synchronizer);
+int Oracle::numInitStages()  { return 2; }
 
-void Synchronizer::initialize()
+void Oracle::initialize(int stage)
 {
-    //cMessage *clock = new cMessage("clock");
-    cMessage *self = new cMessage("self");
-    /*int n = par("numberOfNodes");
-    for(int i = 0; i<n; ++i){
-        send(clock, "out", i);
-    }*/
-    simtime_t sim = simTime()+par("timer");
-    scheduleAt(sim,self);
+    if (stage == 1){
+        EV << "secondo stage" << endl;
+        /* abbiamo già tutte le posizioni
+         * calcola liste di adiacenze
+         * invia a ciascun nodo la propria lista
+         */
+    }
 }
 
-void Synchronizer::handleMessage(cMessage *msg)
+void Oracle::handleMessage(cMessage *msg)
 {
-    int n = par("numberOfNodes");
-    for(int i = 0; i<n; ++i){
-        cMessage *clock = new cMessage("clock");
-        send(clock, "out", i);
-    }
-    cMessage *self = new cMessage("self");
-    simtime_t sim = simTime()+par("timer");
-    scheduleAt(sim,self);
-    delete(msg);
+    EV << msg->getName() << endl;
+    /* salva l'i-esima posizione */
 }
