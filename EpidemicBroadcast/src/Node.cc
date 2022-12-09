@@ -17,7 +17,7 @@
 #include <stdio.h>
 Define_Module(Node);
 
-int Node::numInitStages()  { return 3; }
+int Node::numInitStages() const { return 2; }
 
 void Node::sendSelf(){
     cMessage * selfmessage = new cMessage("Probabilita");
@@ -47,15 +47,13 @@ void Node::initialize(int stage)
         double pos_y = par("pos_y");
         sprintf(str, "%f %f", pos_x, pos_y);
         cMessage* msg = new cMessage(str);
-
         //sendDirect(msg, getParentModule()->getSubmodule("oracle", 0), "in", getIndex());
         sendDirect(msg, getModuleByPath("oracle"), "in", getIndex());
-    } else if (stage == 2){
+    } else if (stage == 1){
         /* abbiamo già la lista di adiacenza
          * se il nodo è il primo infetto
          * far partire l'infezione
          */
-        // compute probability
         if(par("firstInfected")){
             //double probability=par("sendingProbability");
             //double limit=par("limitProbability");

@@ -34,7 +34,7 @@ class Node : public cSimpleModule
 
   protected:
     virtual void initialize(int stage) override;
-    virtual int numInitStages();
+    virtual int numInitStages() const;
     virtual void handleMessage(cMessage *msg) override;
     void sendSelf();
     void sendAll();

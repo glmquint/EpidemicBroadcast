@@ -17,11 +17,21 @@
 
 Define_Module(Oracle);
 
-int Oracle::numInitStages()  { return 2; }
+int Oracle::numInitStages() const { return 2; }
 
 void Oracle::initialize(int stage)
 {
+    if (stage == 0){
+        EV<<"primo stage"<<endl;
+        counter = 0;
+        EV<<counter<<endl;
+        while(counter<4){}
+        EV<<counter<<endl;
+    }
     if (stage == 1){
+        EV<<counter<<endl;
+        while(counter<4){}
+        EV<<counter<<endl;
         EV << "secondo stage" << endl;
         /* abbiamo già tutte le posizioni
          * calcola liste di adiacenze
@@ -33,5 +43,7 @@ void Oracle::initialize(int stage)
 void Oracle::handleMessage(cMessage *msg)
 {
     EV << msg->getName() << endl;
-    /* salva l'i-esima posizione */
+    counter++;
+    //EV<<counter<<endl;
+     //salva l'i-esima posizione
 }

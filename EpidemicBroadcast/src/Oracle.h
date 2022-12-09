@@ -25,9 +25,12 @@ using namespace omnetpp;
  */
 class Oracle : public cSimpleModule
 {
+private:
+    int counter = 0;
   protected:
+    //virtual void activity() override;
     virtual void initialize(int stage) override;
-    virtual int numInitStages();
+    virtual int numInitStages() const;
     virtual void handleMessage(cMessage *msg) override;
 };
 

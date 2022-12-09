@@ -38,10 +38,12 @@ network Floorplan
         synchronizer: Synchronizer {
             @display("p=189,321");
         }
-        oracle: Oracle{}
+        oracle: Oracle {
+            @display("p=160,105");
+        }
     connections allowunconnected:
         for i=0..sizeof(nodeX)-1, for j=0..sizeof(nodeX)-1 {
-            nodeX[i].out[j] --> {  delay = 25ms; } --> nodeX[j].in[i] if i!=j ;//&& 
+            nodeX[i].out[j] --> {  delay = 25ms; } --> nodeX[j].in[i] if i!=j;//&& 
             	//(nodeX[i].radius * nodeX[i].radius) > 
             		//(nodeX[j].x_pos - nodeX[i].x_pos)*(nodeX[j].x_pos - nodeX[i].x_pos) + 
             		//(nodeX[j].y_pos - nodeX[i].y_pos)*(nodeX[j].y_pos - nodeX[i].y_pos);*/
@@ -51,5 +53,5 @@ network Floorplan
         for i=0..sizeof(nodeX)-1 {
             synchronizer.out[i] --> {  delay = 150ms; } --> nodeX[i].synch;
         }
-       
+
 }
