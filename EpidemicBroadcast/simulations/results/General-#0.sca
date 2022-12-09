@@ -1,8 +1,8 @@
 version 3
-run General-0-20221209-23:16:14-3800
+run General-0-20221209-23:33:58-10684
 attr configname General
-attr datetime 20221209-23:16:14
-attr datetimef 20221209-231614
+attr datetime 20221209-23:33:58
+attr datetimef 20221209-233358
 attr experiment General
 attr inifile omnetpp.ini
 attr iterationvars ""
@@ -10,7 +10,7 @@ attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network epidemicbroadcast.simulations.Floorplan
-attr processid 3800
+attr processid 10684
 attr repetition 0
 attr replication #0
 attr resultdir results

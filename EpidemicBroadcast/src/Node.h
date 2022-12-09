@@ -33,8 +33,8 @@ class Node : public cSimpleModule
 
 
   protected:
-    virtual void initialize(int stage) override;
-    virtual int numInitStages() const override;
+    virtual void initialize() override;
+    //virtual int numInitStages() const override;
     virtual void handleMessage(cMessage *msg) override;
     void scheduleClock();
     void sendAll();
