@@ -19,24 +19,28 @@
 
 #include <omnetpp.h>
 #include <stdio.h>
+#include <iostream>
+#include <numeric>
 using namespace omnetpp;
 
-/**
- * TODO - Generated class
- */
+
 class Node : public cSimpleModule
 {
     private:
-    bool isInfected = false;
+    bool hasInfected = false;
     bool receivedInfection = false;
     bool collisionCheck = false;
+    bool* isReachable;
+    bool hasValidMsg = false;
+    int self_id;
 
 
   protected:
-    virtual void initialize(int stage) override;
-    virtual int numInitStages() const;
+    virtual void initialize() override;
+    //virtual int numInitStages() const override;
     virtual void handleMessage(cMessage *msg) override;
-    void sendSelf();
+    void colorNode(char* color);
+    void scheduleClock();
     void sendAll();
 };
 

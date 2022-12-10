@@ -16,8 +16,6 @@
 package epidemicbroadcast.simulations;
 
 import epidemicbroadcast.Node;
-import epidemicbroadcast.Synchronizer;
-import epidemicbroadcast.Oracle;
 
 
 network Floorplan
@@ -25,33 +23,12 @@ network Floorplan
     parameters:
         int numberOfNodes = default(4);
 
-        @display("bgb=558,430");
-    types:
-        channel Unnamed
-        {
-        }
+        @display("bgb=642,470");
 
     submodules:
-        nodeX[numberOfNodes]: Node {
-            @display("p=278,167,m,4,50,50;is=s");
-        }
-        synchronizer: Synchronizer {
-            @display("p=189,321");
-        }
-        oracle: Oracle {
-            @display("p=160,105");
-        }
+        nodeX[numberOfNodes]: Node {}
     connections allowunconnected:
         for i=0..sizeof(nodeX)-1, for j=0..sizeof(nodeX)-1 {
-            nodeX[i].out[j] --> {  delay = 25ms; } --> nodeX[j].in[i] if i!=j;//&& 
-            	//(nodeX[i].radius * nodeX[i].radius) > 
-            		//(nodeX[j].x_pos - nodeX[i].x_pos)*(nodeX[j].x_pos - nodeX[i].x_pos) + 
-            		//(nodeX[j].y_pos - nodeX[i].y_pos)*(nodeX[j].y_pos - nodeX[i].y_pos);*/
+            nodeX[i].out[j] --> {  delay = 25ms; } --> nodeX[j].in[i];
         }
-
-
-        for i=0..sizeof(nodeX)-1 {
-            synchronizer.out[i] --> {  delay = 150ms; } --> nodeX[i].synch;
-        }
-
 }
