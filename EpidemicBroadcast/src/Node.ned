@@ -22,17 +22,18 @@ package epidemicbroadcast;
 simple Node
 {
     parameters:
-        int numberOfNodes = default (4);
+        int numberOfNodes = default(4);
         volatile double sendingProbability = uniform(0,1);
-        double limitProbability=0.5; 
-        bool firstInfected=default(false);
+        double limitProbability = 0.2;
+        bool firstInfected = default(false);
         double timer = default(0.5);
-        double pos_x = uniform(0, 500);
-    	double pos_y = uniform(0, 500);
-    	double radius = default(130.0);
-    	@display("p=$pos_x,$pos_y;r=$radius");
+        double pos_x = default(uniform(0, 500));
+        double pos_y = default(uniform(0, 500));
+        double radius = default(150.0);
+        //@display("p=$pos_x,$pos_y;r=$radius;");
+        @display("p=$pos_x,$pos_y");
 
-        
+
     gates:
         input in[numberOfNodes];
         output out[numberOfNodes];

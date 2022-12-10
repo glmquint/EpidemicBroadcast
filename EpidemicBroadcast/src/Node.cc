@@ -15,9 +15,9 @@
 
 #include "Node.h"
 #include <stdio.h>
+#include <iostream>
+#include <numeric>
 Define_Module(Node);
-
-//int Node::numInitStages() const { return 2; }
 
 void Node::sendAll(){
     int n = par("numberOfNodes");
@@ -29,6 +29,9 @@ void Node::sendAll(){
         if(isReachable[i])
             send(mess,"out",i);
     }
+    hasInfected=true;
+    EV<<"INVIATO "<<self_id<<endl;
+    colorNode((char*)"red");
 }
 
 void Node::scheduleClock(){
@@ -40,17 +43,12 @@ void Node::scheduleClock(){
 void Node::initialize()
 {
     self_id = getIndex();
-    //if (stage == 0){
     isReachable = new bool[par("numberOfNodes")]();
     char str[8];
     double pos_x = par("pos_x");
     double pos_y = par("pos_y");
     double other_x, other_y;
     for (int i = 0; i < (int)par("numberOfNodes"); ++i){
-        if (i == self_id){
-            isReachable[i] = false;
-            continue;
-        }
         sprintf(str, "nodeX[%d]", i);
         cModule* other = getModuleByPath(str);
         other_x = other->par("pos_x");
@@ -58,54 +56,71 @@ void Node::initialize()
         double distance = (other_x - pos_x)*(other_x - pos_x) +
                 (other_y - pos_y)*(other_y - pos_y);
         double radius_squared = (double)par("radius") * (double)par("radius");
-        isReachable[i] = radius_squared >= distance;
-        EV << self_id << "(" << pos_x << "," << pos_y << ")"
-                << " " << i << "(" << other_x << "," << other_y << ")"
-                << " -> " << isReachable[i]
-                << " because distance: " << distance
-                << " radius_squared: " << radius_squared << endl;
+        isReachable[i] = (i != self_id && radius_squared >= distance);
+//        EV << self_id << "(" << pos_x << "," << pos_y << ")"
+//                << " " << i << "(" << other_x << "," << other_y << ")"
+//                << " -> " << isReachable[i]
+//                << " because distance: " << distance
+//                << " radius_squared: " << radius_squared << endl;
+        cDisplayString& connDispStr = gate("out", i)->getDisplayString();
+        if (isReachable[i])
+            connDispStr.parse("ls=black");
+        else
+            connDispStr.parse("ls=red,0;");
     }
-
-    //} else if (stage == 1){
+    int sum = 0;
+    for (int i = 0; i < (int)par("numberOfNodes"); ++i){
+        sum += isReachable[i];
+    }
+    EV << self_id << " neighbor count: " << sum << endl;
     if(par("firstInfected")){
         sendAll();
-        isInfected=true;
-    }
-    scheduleClock();
-    //}
+    } else
+        scheduleClock();
+}
+
+void Node::colorNode(char* color){
+    char str[50];
+    cDisplayString& nodeDispStr = getDisplayString();
+    sprintf(str, "p=$pos_x,$pos_y;i=block/process,%s,50", color);
+    nodeDispStr.parse(str);
 }
 
 void Node::handleMessage(cMessage *msg)
 {
-    if(isInfected){
-        delete(msg);
-        return;
+    if(hasInfected){ // node is disabled after completing his job
+        goto end;
     }
-    if(!strcmp("clock", msg->getName())){
+    if(!strcmp("clock", msg->getName())){ // new time slot
         collisionCheck = false;
         if(receivedInfection){
+            hasValidMsg = true;
             double probability=par("sendingProbability");
             double limit=par("limitProbability");
             EV<<"INFETTO "<<self_id<<endl;
             if(probability<=limit){
-                EV<<"INVIATO "<<self_id<<endl;
-                isInfected=true;
                 sendAll();
+                goto end;
             }
+            colorNode((char*)"blue");
+        } else {
+            colorNode((char*)"lightgrey");
         }
         scheduleClock();
-
     }
-    else {
+    else if (!hasValidMsg){ // infection from other node
         if(!collisionCheck){
             collisionCheck = true;
             receivedInfection = true;
+            colorNode((char*)"green");
         }
         else{
             EV<<"COLLISIONE "<<getName()<<endl;
+            receivedInfection = false;
+            colorNode((char*)"orange");
         }
 
     }
-
-    delete(msg);
+    end:
+        delete(msg);
 }
