@@ -25,9 +25,10 @@ void Node::sendAll(){
        char str[20];
        sprintf(str, "Infetto %d", self_id);
 
-        cMessage * mess = new cMessage(str);
-        if(isReachable[i])
+        if(isReachable[i]){
+            cMessage * mess = new cMessage(str);
             send(mess,"out",i);
+        }
     }
     hasInfected=true;
     EV<<"INVIATO "<<self_id<<endl;
