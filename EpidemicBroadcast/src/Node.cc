@@ -20,6 +20,7 @@
 Define_Module(Node);
 
 void Node::sendAll(){
+
     int n = par("numberOfNodes");
     for(int i = 0; i<n; ++i ){
        char str[20];
@@ -74,11 +75,13 @@ void Node::initialize()
     for (int i = 0; i < numberOfNodes; ++i){
         sum += isReachable[i];
     }
-    EV << self_id << " neighbor count: " << sum << endl;
+    //EV << self_id << " neighbor count: " << sum << endl;
     if(par("firstInfected")){
         sendAll();
     } else
         scheduleClock();
+    /*======statistics======*/
+    collisionSignal = registerSignal("collision");
 }
 
 void Node::colorNode(char* color){
@@ -95,6 +98,7 @@ void Node::handleMessage(cMessage *msg)
     }
     if(!strcmp("clock", msg->getName())){ // new time slot
         collisionCheck = false;
+        collisionOccurred = false;
         if(receivedInfection){
             hasValidMsg = true;
             double probability=par("sendingProbability");
@@ -120,6 +124,10 @@ void Node::handleMessage(cMessage *msg)
             EV<<"COLLISIONE "<<getName()<<endl;
             receivedInfection = false;
             colorNode((char*)"orange");
+            if (!collisionOccurred){
+                emit(collisionSignal, 1);
+                collisionOccurred = true;
+            }
         }
 
     }

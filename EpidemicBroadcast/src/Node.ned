@@ -32,6 +32,9 @@ simple Node
         double radius = default(200.0);
         //@display("p=$pos_x,$pos_y;r=$radius;");
         @display("p=$pos_x,$pos_y");
+        //=====statistics=======//
+        @signal[collision](type=int);
+		@statistic[collisionStat](source="collision";record=sum;);
 
 
     gates:
