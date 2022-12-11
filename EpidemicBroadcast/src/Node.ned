@@ -24,17 +24,23 @@ simple Node
     parameters:
         int numberOfNodes = default(4);
         volatile double sendingProbability = uniform(0,1);
-        double limitProbability = 0.4;
+        double limitProbability = 0.5;
         bool firstInfected = default(false);
-        double timer = default(0.5);
+        double timer = default(1.0);
         double pos_x = default(uniform(0, 500));
         double pos_y = default(uniform(0, 500));
-        double radius = default(200.0);
+        double radius = default(100.0);
         //@display("p=$pos_x,$pos_y;r=$radius;");
         @display("p=$pos_x,$pos_y");
         //=====statistics=======//
         @signal[collision](type=int);
 		@statistic[collisionStat](source="collision";record=sum;);
+		@signal[neighbors](type=int);
+		@statistic[neighborsStat](source="neighbors";record=sum;);
+		@signal[endTime](type=double);
+		@statistic[endTimeStat](source="endTime";record=max;);
+		@signal[hop](type=int);
+		@statistic[hopStat](source="hop";record=max;);
 
 
     gates:

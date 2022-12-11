@@ -27,7 +27,7 @@ network Floorplan
 
     submodules:
         nodeX[numberOfNodes]: Node {}
-    connections allowunconnected:
+    connections:// allowunconnected:
         for i=0..sizeof(nodeX)-1, for j=0..sizeof(nodeX)-1 {
             nodeX[i].out[j] --> {  delay = 25ms; } --> nodeX[j].in[i];
         }
