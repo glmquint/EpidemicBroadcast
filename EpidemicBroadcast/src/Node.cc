@@ -44,19 +44,20 @@ void Node::scheduleClock(){
 void Node::initialize()
 {
     self_id = getIndex();
-    isReachable = new bool[par("numberOfNodes")]();
+    int numberOfNodes = par("numberOfNodes");
+    isReachable = new bool[numberOfNodes]();
     char str[8];
     double pos_x = par("pos_x");
     double pos_y = par("pos_y");
     double other_x, other_y;
-    for (int i = 0; i < (int)par("numberOfNodes"); ++i){
+    double radius_squared = (double)par("radius") * (double)par("radius");
+    for (int i = 0; i < numberOfNodes; ++i){
         sprintf(str, "nodeX[%d]", i);
         cModule* other = getModuleByPath(str);
         other_x = other->par("pos_x");
         other_y = other->par("pos_y");
         double distance = (other_x - pos_x)*(other_x - pos_x) +
                 (other_y - pos_y)*(other_y - pos_y);
-        double radius_squared = (double)par("radius") * (double)par("radius");
         isReachable[i] = (i != self_id && radius_squared >= distance);
 //        EV << self_id << "(" << pos_x << "," << pos_y << ")"
 //                << " " << i << "(" << other_x << "," << other_y << ")"
@@ -70,7 +71,7 @@ void Node::initialize()
             connDispStr.parse("ls=red,0;");
     }
     int sum = 0;
-    for (int i = 0; i < (int)par("numberOfNodes"); ++i){
+    for (int i = 0; i < numberOfNodes; ++i){
         sum += isReachable[i];
     }
     EV << self_id << " neighbor count: " << sum << endl;
