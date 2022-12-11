@@ -19,19 +19,22 @@
 #include <numeric>
 Define_Module(Node);
 
+# define INFECTION_FRMT "Infetto %d"
+
 void Node::sendAll(){
+
     int n = par("numberOfNodes");
     for(int i = 0; i<n; ++i ){
        char str[20];
-       sprintf(str, "Infetto %d", self_id);
+       sprintf(str, INFECTION_FRMT, infectionHop);
 
         if(isReachable[i]){
             cMessage * mess = new cMessage(str);
             send(mess,"out",i);
         }
+        EV<<"INVIATO "<<str<<endl;
     }
     hasInfected=true;
-    EV<<"INVIATO "<<self_id<<endl;
     colorNode((char*)"red");
 }
 
@@ -44,19 +47,20 @@ void Node::scheduleClock(){
 void Node::initialize()
 {
     self_id = getIndex();
-    isReachable = new bool[par("numberOfNodes")]();
+    int numberOfNodes = par("numberOfNodes");
+    isReachable = new bool[numberOfNodes]();
     char str[8];
     double pos_x = par("pos_x");
     double pos_y = par("pos_y");
     double other_x, other_y;
-    for (int i = 0; i < (int)par("numberOfNodes"); ++i){
+    double radius_squared = (double)par("radius") * (double)par("radius");
+    for (int i = 0; i < numberOfNodes; ++i){
         sprintf(str, "nodeX[%d]", i);
         cModule* other = getModuleByPath(str);
         other_x = other->par("pos_x");
         other_y = other->par("pos_y");
         double distance = (other_x - pos_x)*(other_x - pos_x) +
                 (other_y - pos_y)*(other_y - pos_y);
-        double radius_squared = (double)par("radius") * (double)par("radius");
         isReachable[i] = (i != self_id && radius_squared >= distance);
 //        EV << self_id << "(" << pos_x << "," << pos_y << ")"
 //                << " " << i << "(" << other_x << "," << other_y << ")"
@@ -69,15 +73,28 @@ void Node::initialize()
         else
             connDispStr.parse("ls=red,0;");
     }
-    int sum = 0;
-    for (int i = 0; i < (int)par("numberOfNodes"); ++i){
-        sum += isReachable[i];
+    neighborsSignal = registerSignal("neighbors");
+    endTimeSignal = registerSignal("endTime");
+    collisionSignal = registerSignal("collision");
+    hopSignal = registerSignal("hop");
+
+    int sumNeighbors = 0;
+    for (int i = 0; i < numberOfNodes; ++i){
+        sumNeighbors += isReachable[i];
     }
-    EV << self_id << " neighbor count: " << sum << endl;
+    //EV << self_id << " neighbor count: " << sumNeighbors << endl;
     if(par("firstInfected")){
         sendAll();
-    } else
+        emit(endTimeSignal, 0.0);
+        emit(hopSignal, infectionHop);
+    } else {
         scheduleClock();
+        emit(endTimeSignal, -1.0);
+        emit(hopSignal, -1);
+    }
+    /*======statistics======*/
+
+    emit(neighborsSignal, sumNeighbors);
 }
 
 void Node::colorNode(char* color){
@@ -94,13 +111,19 @@ void Node::handleMessage(cMessage *msg)
     }
     if(!strcmp("clock", msg->getName())){ // new time slot
         collisionCheck = false;
+        collisionOccurred = false;
         if(receivedInfection){
+            if (!hasValidMsg){
+                emit(endTimeSignal, simTime());
+                emit(hopSignal, infectionHop);
+            }
             hasValidMsg = true;
             double probability=par("sendingProbability");
             double limit=par("limitProbability");
             EV<<"INFETTO "<<self_id<<endl;
             if(probability<=limit){
                 sendAll();
+                /*====statistics====*/
                 goto end;
             }
             colorNode((char*)"blue");
@@ -113,12 +136,19 @@ void Node::handleMessage(cMessage *msg)
         if(!collisionCheck){
             collisionCheck = true;
             receivedInfection = true;
+            sscanf(msg->getName(), INFECTION_FRMT, &infectionHop);
+            infectionHop++;
+            EV << "received" << msg->getName() << " -> " << infectionHop << endl;
             colorNode((char*)"green");
         }
         else{
             EV<<"COLLISIONE "<<getName()<<endl;
             receivedInfection = false;
             colorNode((char*)"orange");
+            if (!collisionOccurred){
+                emit(collisionSignal, 1);
+                collisionOccurred = true;
+            }
         }
 
     }

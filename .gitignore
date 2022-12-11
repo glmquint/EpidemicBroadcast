@@ -5,3 +5,6 @@ EpidemicBroadcast/src/epidemicbroadcast.exe
 EpidemicBroadcast/simulations/results
 EpidemicBroadcast/out/clang-release/src
 EpidemicBroadcast/src/epidemicbroadcast.exe
+EpidemicBroadcast/out/clang-debug/src
+EpidemicBroadcast/simulations/General.anf
+EpidemicBroadcast/src/epidemicbroadcast_dbg.exe

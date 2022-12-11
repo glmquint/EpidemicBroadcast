@@ -33,6 +33,13 @@ class Node : public cSimpleModule
     bool* isReachable;
     bool hasValidMsg = false;
     int self_id;
+    int infectionHop = 0;
+    /*====statistics=====*/
+    bool collisionOccurred = false;
+    simsignal_t collisionSignal;
+    simsignal_t neighborsSignal;
+    simsignal_t endTimeSignal;
+    simsignal_t hopSignal;
 
 
   protected:
