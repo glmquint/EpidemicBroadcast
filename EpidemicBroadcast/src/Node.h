@@ -40,6 +40,7 @@ class Node : public cSimpleModule
     simsignal_t neighborsSignal;
     simsignal_t endTimeSignal;
     simsignal_t hopSignal;
+    simsignal_t statusSignal;
 
 
   protected:
@@ -49,6 +50,7 @@ class Node : public cSimpleModule
     void colorNode(char* color);
     void scheduleClock();
     void sendAll();
+    void setStatusVector();
 };
 
 #endif

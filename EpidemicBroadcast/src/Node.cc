@@ -77,6 +77,7 @@ void Node::initialize()
     endTimeSignal = registerSignal("endTime");
     collisionSignal = registerSignal("collision");
     hopSignal = registerSignal("hop");
+    statusSignal = registerSignal("statusVector");
 
     int sumNeighbors = 0;
     for (int i = 0; i < numberOfNodes; ++i){
@@ -93,7 +94,7 @@ void Node::initialize()
         emit(hopSignal, -1);
     }
     /*======statistics======*/
-
+    setStatusVector();
     emit(neighborsSignal, sumNeighbors);
 }
 
@@ -104,12 +105,22 @@ void Node::colorNode(char* color){
     nodeDispStr.parse(str);
 }
 
+void Node::setStatusVector(){
+    if(collisionOccurred)
+        emit(statusSignal, 1);
+    else if(receivedInfection)
+        emit(statusSignal, 2);
+    else
+        emit(statusSignal, 0);
+}
+
 void Node::handleMessage(cMessage *msg)
 {
     if(hasInfected){ // node is disabled after completing his job
         goto end;
     }
     if(!strcmp("clock", msg->getName())){ // new time slot
+        setStatusVector();
         collisionCheck = false;
         collisionOccurred = false;
         if(receivedInfection){
