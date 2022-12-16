@@ -106,27 +106,27 @@ void Node::sendAll(double time)
     emit(hopSignal, infectionHop);
 }
 
+char* STAR2COLOR[5] = {(char*)"lightgrey", (char*)"green", (char*)"orange", (char*)"blue", (char*)"red"};
+
 void Node::colorNode()
 {
     char str[50];
     char* color;
     cDisplayString& nodeDispStr = getDisplayString();
-    switch (star){
-        case OneMessage:
-            color = (char*)"green";
-            break;
-        case Collision:
-            color = (char*)"orange";
-            break;
-        case Ready:
-            color = (char*)"blue";
-            break;
-        case Done:
-            color = (char*)"red";
-            break;
-        default:
-            color = (char*)"lightgrey";
-    }
+    //char** arr = new arr*["lightgrey", "green", "orange", "blue", "red"]();
+    color = STAR2COLOR[star];
+//    switch (star){
+//        case OneMessage:
+//            color = (char*)"green"; break;
+//        case Collision:
+//            color = (char*)"orange"; break;
+//        case Ready:
+//            color = (char*)"blue"; break;
+//        case Done:
+//            color = (char*)"red"; break;
+//        default:
+//            color = (char*)"lightgrey";
+//    }
     sprintf(str, "p=$pos_x,$pos_y;i=block/process,%s,50", color);
     nodeDispStr.parse(str);
 }
@@ -134,56 +134,6 @@ void Node::colorNode()
 Status Node::getStatus(){
     return star;
 }
-
-//void Node::handleMessage(cMessage *msg)
-//{
-//    if(hasInfected){ // node is disabled after completing his job
-//        goto end;
-//    }
-//    if(!strcmp("clock", msg->getName())){ // new time slot
-//        collisionCheck = false;
-//        collisionOccurred = false;
-//        if(receivedInfection){
-//            if (!hasValidMsg){
-//                emit(endTimeSignal, simTime());
-//                emit(hopSignal, infectionHop);
-//            }
-//            hasValidMsg = true;
-//            EV<<"INFETTO "<<self_id<<endl;
-//            sendingProbability=par("sendingProbability");
-//            if(sendingProbability<=limitProbability){
-//                sendAll();
-//                goto end;
-//            }
-//            colorNode((char*)"blue");
-//        } else {
-//            colorNode((char*)"lightgrey");
-//        }
-//        scheduleClock();
-//    } else if (!hasValidMsg){ // infection from other node
-//        if(!collisionCheck){
-//            collisionCheck = true;
-//            receivedInfection = true;
-//            sscanf(msg->getName(), INFECTION_FRMT, &infectionHop);
-//            infectionHop++;
-//            EV << "received" << msg->getName() << " -> " << infectionHop << endl;
-//            colorNode((char*)"green");
-//        }
-//        else{
-//            //EV<<"COLLISIONE "<<getName()<<endl;
-//            receivedInfection = false;
-//            colorNode((char*)"orange");
-//            if (!collisionOccurred){
-//                emit(collisionSignal, 1);
-//                collisionOccurred = true;
-//
-//            }
-//        }
-//
-//    }
-//    end:
-//        delete(msg);
-//}
 
 Status Node::lottery()
 {
@@ -200,14 +150,10 @@ void Node::handleMessage(cMessage* msg)
     if(!strcmp("clock", msg->getName())){
         switch (star) {
             case OneMessage:
-                star = lottery();
-                break;
-            case Collision:
-                star = Waiting;
-                break;
             case Ready:
-                star = lottery();
-                break;
+                star = lottery(); break;
+            case Collision:
+                star = Waiting; break;
             default:
                 break;
         }
@@ -217,12 +163,10 @@ void Node::handleMessage(cMessage* msg)
                 sscanf(msg->getName(), INFECTION_FRMT, &infectionHop);
                 infectionHop++;
                 EV << "received" << msg->getName() << " -> " << infectionHop << endl;
-                star = OneMessage;
-                break;
+                star = OneMessage; break;
             case OneMessage:
                 emit(collisionSignal, 1);
-                star = Collision;
-                break;
+                star = Collision; break;
             default:
                 break;
         }
