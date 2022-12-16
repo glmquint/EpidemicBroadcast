@@ -21,36 +21,42 @@
 #include <stdio.h>
 #include <iostream>
 #include <numeric>
+#include "status.h"
+//#include "StatCollector.h"
 using namespace omnetpp;
-
 
 class Node : public cSimpleModule
 {
     private:
-    bool hasInfected = false;
-    bool receivedInfection = false;
-    bool collisionCheck = false;
-    bool* isReachable;
-    bool hasValidMsg = false;
-    int self_id;
-    int infectionHop = 0;
-    /*====statistics=====*/
-    bool collisionOccurred = false;
-    simsignal_t collisionSignal;
-    simsignal_t neighborsSignal;
-    simsignal_t endTimeSignal;
-    simsignal_t hopSignal;
-    simsignal_t statusSignal;
+    //    bool hasInfected = false;
+    //    bool receivedInfection = false;
+    //    bool collisionCheck = false;
+        Status star;
+        bool* isReachable;
+        int numberOfNodes;
+    //    bool hasValidMsg = false;
+        int self_id;
+        int infectionHop = 0;
+        double sendingProbability;
+        double limitProbability;
+        /*====statistics=====*/
+    //    bool collisionOccurred = false;
+        simsignal_t collisionSignal;
+        simsignal_t neighborsSignal;
+        simsignal_t endTimeSignal;
+        simsignal_t hopSignal;
 
-
-  protected:
-    virtual void initialize() override;
-    //virtual int numInitStages() const override;
-    virtual void handleMessage(cMessage *msg) override;
-    void colorNode(char* color);
-    void scheduleClock();
-    void sendAll();
-    void setStatusVector();
+    public:
+        Status getStatus();
+    protected:
+        virtual void initialize() override;
+        //virtual int numInitStages() const override;
+        virtual void handleMessage(cMessage *msg) override;
+        void setupAdjacencyList();
+        void colorNode();
+        void scheduleClock();
+        void sendAll(double time);
+        Status lottery();
 };
 
 #endif

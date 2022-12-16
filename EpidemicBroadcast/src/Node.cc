@@ -21,33 +21,39 @@ Define_Module(Node);
 
 # define INFECTION_FRMT "Infetto %d"
 
-void Node::sendAll(){
-
-    int n = par("numberOfNodes");
-    for(int i = 0; i<n; ++i ){
-       char str[20];
-       sprintf(str, INFECTION_FRMT, infectionHop);
-
-        if(isReachable[i]){
-            cMessage * mess = new cMessage(str);
-            send(mess,"out",i);
-        }
-        EV<<"INVIATO "<<str<<endl;
-    }
-    hasInfected=true;
-    colorNode((char*)"red");
-}
-
-void Node::scheduleClock(){
-    cMessage *self = new cMessage("clock");
-    simtime_t sim = simTime()+par("timer");
-    scheduleAt(sim,self);
-}
-
 void Node::initialize()
 {
+    //statCollectorRef = check_and_cast<StatCollector*>(getModuleByPath("statCollector"));
     self_id = getIndex();
-    int numberOfNodes = par("numberOfNodes");
+    limitProbability=par("limitProbability");
+    int sumNeighbors = 0;
+    numberOfNodes = par("numberOfNodes");
+
+    setupAdjacencyList();
+    for (int i = 0; i < numberOfNodes; ++i){
+        sumNeighbors += isReachable[i];
+    }
+
+    neighborsSignal = registerSignal("neighbors");
+    endTimeSignal = registerSignal("endTime");
+    collisionSignal = registerSignal("collision");
+    hopSignal = registerSignal("hop");
+    //EV << self_id << " neighbor count: " << sumNeighbors << endl;
+    if(par("firstInfected")){
+        sendAll(0.0);
+        star = Done;
+        colorNode();
+    } else {
+        scheduleClock();
+        star = Waiting;
+        emit(endTimeSignal, -1.0);
+        emit(hopSignal, -1);
+    }
+    emit(neighborsSignal, sumNeighbors);
+}
+
+void Node::setupAdjacencyList()
+{
     isReachable = new bool[numberOfNodes]();
     char str[8];
     double pos_x = par("pos_x");
@@ -73,96 +79,156 @@ void Node::initialize()
         else
             connDispStr.parse("ls=red,0;");
     }
-    neighborsSignal = registerSignal("neighbors");
-    endTimeSignal = registerSignal("endTime");
-    collisionSignal = registerSignal("collision");
-    hopSignal = registerSignal("hop");
-    statusSignal = registerSignal("statusVector");
-
-    int sumNeighbors = 0;
-    for (int i = 0; i < numberOfNodes; ++i){
-        sumNeighbors += isReachable[i];
-    }
-    //EV << self_id << " neighbor count: " << sumNeighbors << endl;
-    if(par("firstInfected")){
-        sendAll();
-        emit(endTimeSignal, 0.0);
-        emit(hopSignal, infectionHop);
-    } else {
-        scheduleClock();
-        emit(endTimeSignal, -1.0);
-        emit(hopSignal, -1);
-    }
-    /*======statistics======*/
-    setStatusVector();
-    emit(neighborsSignal, sumNeighbors);
 }
 
-void Node::colorNode(char* color){
+void Node::scheduleClock()
+{
+    cMessage *self = new cMessage("clock");
+    simtime_t sim = simTime()+par("timer");
+    scheduleAt(sim,self);
+}
+
+void Node::sendAll(double time)
+{
+    for(int i = 0; i < numberOfNodes; ++i ){
+       char str[20];
+       sprintf(str, INFECTION_FRMT, infectionHop);
+
+        if(isReachable[i]){
+            cMessage * mess = new cMessage(str);
+            send(mess,"out",i);
+        }
+        EV<<"INVIATO "<<str<<endl;
+    }
+    //hasInfected=true;
+//    colorNode((char*)"red");
+    emit(endTimeSignal, time);
+    emit(hopSignal, infectionHop);
+}
+
+void Node::colorNode()
+{
     char str[50];
+    char* color;
     cDisplayString& nodeDispStr = getDisplayString();
+    switch (star){
+        case OneMessage:
+            color = (char*)"green";
+            break;
+        case Collision:
+            color = (char*)"orange";
+            break;
+        case Ready:
+            color = (char*)"blue";
+            break;
+        case Done:
+            color = (char*)"red";
+            break;
+        default:
+            color = (char*)"lightgrey";
+    }
     sprintf(str, "p=$pos_x,$pos_y;i=block/process,%s,50", color);
     nodeDispStr.parse(str);
 }
 
-void Node::setStatusVector(){
-    if(collisionOccurred)
-        emit(statusSignal, 1);
-    else if(receivedInfection)
-        emit(statusSignal, 2);
-    else
-        emit(statusSignal, 0);
+Status Node::getStatus(){
+    return star;
 }
 
-void Node::handleMessage(cMessage *msg)
-{
-    if(hasInfected){ // node is disabled after completing his job
-        goto end;
-    }
-    if(!strcmp("clock", msg->getName())){ // new time slot
-        setStatusVector();
-        collisionCheck = false;
-        collisionOccurred = false;
-        if(receivedInfection){
-            if (!hasValidMsg){
-                emit(endTimeSignal, simTime());
-                emit(hopSignal, infectionHop);
-            }
-            hasValidMsg = true;
-            double probability=par("sendingProbability");
-            double limit=par("limitProbability");
-            EV<<"INFETTO "<<self_id<<endl;
-            if(probability<=limit){
-                sendAll();
-                /*====statistics====*/
-                goto end;
-            }
-            colorNode((char*)"blue");
-        } else {
-            colorNode((char*)"lightgrey");
-        }
-        scheduleClock();
-    }
-    else if (!hasValidMsg){ // infection from other node
-        if(!collisionCheck){
-            collisionCheck = true;
-            receivedInfection = true;
-            sscanf(msg->getName(), INFECTION_FRMT, &infectionHop);
-            infectionHop++;
-            EV << "received" << msg->getName() << " -> " << infectionHop << endl;
-            colorNode((char*)"green");
-        }
-        else{
-            EV<<"COLLISIONE "<<getName()<<endl;
-            receivedInfection = false;
-            colorNode((char*)"orange");
-            if (!collisionOccurred){
-                emit(collisionSignal, 1);
-                collisionOccurred = true;
-            }
-        }
+//void Node::handleMessage(cMessage *msg)
+//{
+//    if(hasInfected){ // node is disabled after completing his job
+//        goto end;
+//    }
+//    if(!strcmp("clock", msg->getName())){ // new time slot
+//        collisionCheck = false;
+//        collisionOccurred = false;
+//        if(receivedInfection){
+//            if (!hasValidMsg){
+//                emit(endTimeSignal, simTime());
+//                emit(hopSignal, infectionHop);
+//            }
+//            hasValidMsg = true;
+//            EV<<"INFETTO "<<self_id<<endl;
+//            sendingProbability=par("sendingProbability");
+//            if(sendingProbability<=limitProbability){
+//                sendAll();
+//                goto end;
+//            }
+//            colorNode((char*)"blue");
+//        } else {
+//            colorNode((char*)"lightgrey");
+//        }
+//        scheduleClock();
+//    } else if (!hasValidMsg){ // infection from other node
+//        if(!collisionCheck){
+//            collisionCheck = true;
+//            receivedInfection = true;
+//            sscanf(msg->getName(), INFECTION_FRMT, &infectionHop);
+//            infectionHop++;
+//            EV << "received" << msg->getName() << " -> " << infectionHop << endl;
+//            colorNode((char*)"green");
+//        }
+//        else{
+//            //EV<<"COLLISIONE "<<getName()<<endl;
+//            receivedInfection = false;
+//            colorNode((char*)"orange");
+//            if (!collisionOccurred){
+//                emit(collisionSignal, 1);
+//                collisionOccurred = true;
+//
+//            }
+//        }
+//
+//    }
+//    end:
+//        delete(msg);
+//}
 
+Status Node::lottery()
+{
+    sendingProbability=par("sendingProbability");
+    if(sendingProbability<=limitProbability){
+        sendAll(simTime().dbl());
+        return Done;
     }
-    end:
-        delete(msg);
+    return Ready;
+}
+
+void Node::handleMessage(cMessage* msg)
+{
+    if(!strcmp("clock", msg->getName())){
+        switch (star) {
+            case OneMessage:
+                star = lottery();
+                break;
+            case Collision:
+                star = Waiting;
+                break;
+            case Ready:
+                star = lottery();
+                break;
+            default:
+                break;
+        }
+    } else {
+        switch (star) {
+            case Waiting:
+                sscanf(msg->getName(), INFECTION_FRMT, &infectionHop);
+                infectionHop++;
+                EV << "received" << msg->getName() << " -> " << infectionHop << endl;
+                star = OneMessage;
+                break;
+            case OneMessage:
+                emit(collisionSignal, 1);
+                star = Collision;
+                break;
+            default:
+                break;
+        }
+    }
+    colorNode();
+    if (star != Done)
+        scheduleClock();
+    delete(msg);
 }

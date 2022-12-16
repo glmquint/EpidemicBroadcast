@@ -41,8 +41,6 @@ simple Node
 		@statistic[endTimeStat](source="endTime";record=max;);
 		@signal[hop](type=int);
 		@statistic[hopStat](source="hop";record=max;);
-		@signal[statusVector](type=int);
-		@statistic[statusStat](source="statusVector";record=vector;);
 		
 
 

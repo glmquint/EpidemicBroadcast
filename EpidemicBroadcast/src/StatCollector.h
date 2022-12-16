@@ -13,24 +13,28 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package epidemicbroadcast.simulations;
+#ifndef __EPIDEMICBROADCAST_STATCOLLECTOR_H_
+#define __EPIDEMICBROADCAST_STATCOLLECTOR_H_
 
-import epidemicbroadcast.Node;
-import epidemicbroadcast.StatCollector;
+#include <omnetpp.h>
+#include "status.h"
+#include "Node.h"
 
+using namespace omnetpp;
 
-network Floorplan
+class StatCollector : public cSimpleModule
 {
-    parameters:
-        int numberOfNodes = default(4);
+  public:
+    void registerStatus(char status[9]);
+  private:
+    int stats[5][45];
+    int numberOfNodes;
+    Node** nodes;
 
-        @display("bgb=642,470");
+  protected:
+    virtual void initialize() override;
+    virtual void finish() override;
+    virtual void handleMessage(cMessage *msg) override;
+};
 
-    submodules:
-        nodeX[numberOfNodes]: Node {};
-        statCollector: StatCollector{}
-    connections:// allowunconnected:
-        for i=0..sizeof(nodeX)-1, for j=0..sizeof(nodeX)-1 {
-            nodeX[i].out[j] --> {  delay = 25ms; } --> nodeX[j].in[i];
-        }
-}
+#endif

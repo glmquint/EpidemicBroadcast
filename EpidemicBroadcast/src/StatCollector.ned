@@ -13,24 +13,14 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package epidemicbroadcast.simulations;
+package epidemicbroadcast;
 
-import epidemicbroadcast.Node;
-import epidemicbroadcast.StatCollector;
-
-
-network Floorplan
+//
+// TODO auto-generated module
+//
+simple StatCollector
 {
     parameters:
         int numberOfNodes = default(4);
-
-        @display("bgb=642,470");
-
-    submodules:
-        nodeX[numberOfNodes]: Node {};
-        statCollector: StatCollector{}
-    connections:// allowunconnected:
-        for i=0..sizeof(nodeX)-1, for j=0..sizeof(nodeX)-1 {
-            nodeX[i].out[j] --> {  delay = 25ms; } --> nodeX[j].in[i];
-        }
+        double timer = default(1.0);
 }
