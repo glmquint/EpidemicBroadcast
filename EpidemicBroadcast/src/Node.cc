@@ -102,6 +102,7 @@ void Node::sendAll(double time)
     }
     //hasInfected=true;
 //    colorNode((char*)"red");
+
     emit(endTimeSignal, time);
     emit(hopSignal, infectionHop);
 }

@@ -31,6 +31,15 @@ class StatCollector : public cSimpleModule
     int numberOfNodes;
     Node** nodes;
 
+    simsignal_t collectorSignal [5];
+    /*
+    simsignal_t waitingSignal;
+    simsignal_t oneMSGSignal;
+    simsignal_t collisionCollectorSignal;
+    simsignal_t readySignal;
+    simsignal_t doneSignal;
+    */
+
   protected:
     virtual void initialize() override;
     virtual void finish() override;

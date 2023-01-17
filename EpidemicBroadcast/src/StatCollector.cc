@@ -32,6 +32,19 @@ void StatCollector::initialize()
         for (int j = 0; j < 5; ++j)
             stats[j][i] = 0;
     }
+
+    collectorSignal[0] = registerSignal("waiting");
+    collectorSignal[1] = registerSignal("oneMSG");
+    collectorSignal[2] = registerSignal("collision");
+    collectorSignal[3] = registerSignal("ready");
+    collectorSignal[4] = registerSignal("done");
+
+    /*waitingSignal = registerSignal("waiting");
+    oneMSGSignal = registerSignal("oneMSG");
+    collisionCollectorSignal = registerSignal("collision");
+    readySignal = registerSignal("ready");
+    doneSignal = registerSignal("done");
+    */
     cMessage *self = new cMessage("clock");
     simtime_t sim = simTime()+((double)par("timer")/2);
     scheduleAt(sim,self);
@@ -45,6 +58,9 @@ void StatCollector::handleMessage(cMessage *msg)
         Status s = nodes[i]->getStatus();
         stats[s][t]++;
         //EV << t << " " << i << " (" << s << ")" << endl;
+    }
+    for(int i = 0; i<5; ++i){
+        emit(collectorSignal[i], stats[i][t]);
     }
     cMessage *self = new cMessage("clock");
     simtime_t sim = simTime()+par("timer");

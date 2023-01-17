@@ -23,4 +23,17 @@ simple StatCollector
     parameters:
         int numberOfNodes = default(4);
         double timer = default(1.0);
+        
+        //=====statistics=======//
+        @signal[waiting](type=int);
+		@statistic[waitingStat](source="waiting";record=vector;);
+		@signal[oneMSG](type=int);
+		@statistic[oneMSGStat](source="oneMSG";record=vector;);
+		@signal[collision](type=double);
+		@statistic[collision](source="collision";record=vector;);
+		@signal[ready](type=int);
+		@statistic[readyStat](source="ready";record=vector;);
+		@signal[done](type=int);
+		@statistic[doneStat](source="done";record=vector;);
+		
 }
