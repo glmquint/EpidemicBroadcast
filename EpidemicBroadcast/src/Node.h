@@ -41,10 +41,12 @@ class Node : public cSimpleModule
         double limitProbability;
         /*====statistics=====*/
     //    bool collisionOccurred = false;
+       /*
         simsignal_t collisionSignal;
         simsignal_t neighborsSignal;
         simsignal_t endTimeSignal;
         simsignal_t hopSignal;
+        */
 
     public:
         Status getStatus();

@@ -83,18 +83,18 @@ void StatCollector::handleMessage(cMessage *msg)
 
 void StatCollector::finish()
 {
-    EV << "t W " << "1 " << "C " << "R " << "D sum" << endl;
+   // EV << "t W " << "1 " << "C " << "R " << "D sum" << endl;
     int sum, nodesInStatus;
     for (int i = 0; i < 45; ++i){
         //EV << i << " W: " << statsW[i] << " R: " << statsR[i] << " C: " << statsC[i] << endl;
-        EV << i;
+        //EV << i;
         sum = 0;
         for (int j = 0; j < 5; ++j){
             nodesInStatus = stats[j][i];
             sum += nodesInStatus;
-            EV << " " << nodesInStatus;
+            //EV << " " << nodesInStatus;
         }
-        EV << "  " << sum << endl;
+        //EV << "  " << sum << endl;
         assert(sum == numberOfNodes);
     }
 }

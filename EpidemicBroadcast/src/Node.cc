@@ -34,10 +34,12 @@ void Node::initialize()
         sumNeighbors += isReachable[i];
     }
 
+    /*
     neighborsSignal = registerSignal("neighbors");
     endTimeSignal = registerSignal("endTime");
     collisionSignal = registerSignal("collision");
     hopSignal = registerSignal("hop");
+    */
     //EV << self_id << " neighbor count: " << sumNeighbors << endl;
     if(par("firstInfected")){
         sendAll(0.0);
@@ -46,10 +48,10 @@ void Node::initialize()
     } else {
         scheduleClock();
         star = Waiting;
-        emit(endTimeSignal, -1.0);
-        emit(hopSignal, -1);
+        //emit(endTimeSignal, -1.0);
+        //emit(hopSignal, -1);
     }
-    emit(neighborsSignal, sumNeighbors);
+    //emit(neighborsSignal, sumNeighbors);
 }
 
 void Node::setupAdjacencyList()
@@ -103,8 +105,8 @@ void Node::sendAll(double time)
     //hasInfected=true;
 //    colorNode((char*)"red");
 
-    emit(endTimeSignal, time);
-    emit(hopSignal, infectionHop);
+    //emit(endTimeSignal, time);
+    //emit(hopSignal, infectionHop);
 }
 
 char* STAR2COLOR[5] = {(char*)"lightgrey", (char*)"green", (char*)"orange", (char*)"blue", (char*)"red"};
@@ -151,6 +153,8 @@ void Node::handleMessage(cMessage* msg)
     if(!strcmp("clock", msg->getName())){
         switch (star) {
             case OneMessage:
+                star = lottery();
+                break;
             case Ready:
                 star = lottery(); break;
             case Collision:
@@ -166,14 +170,14 @@ void Node::handleMessage(cMessage* msg)
                 EV << "received" << msg->getName() << " -> " << infectionHop << endl;
                 star = OneMessage; break;
             case OneMessage:
-                emit(collisionSignal, 1);
+                //emit(collisionSignal, 1);
                 star = Collision; break;
             default:
                 break;
         }
     }
     colorNode();
-    if (star != Done)
+    if (star != Done && !strcmp("clock", msg->getName()))
         scheduleClock();
     delete(msg);
 }
