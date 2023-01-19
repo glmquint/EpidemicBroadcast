@@ -30,8 +30,10 @@ class StatCollector : public cSimpleModule
     int stats[5][45];
     int numberOfNodes;
     Node** nodes;
+    bool emitCheck = true;
 
     simsignal_t collectorSignal [5];
+    simsignal_t rateSignal;
     /*
     simsignal_t waitingSignal;
     simsignal_t oneMSGSignal;

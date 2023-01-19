@@ -25,15 +25,18 @@ simple StatCollector
         double timer = default(1.0);
         
         //=====statistics=======//
-        @signal[waiting](type=int);
+        @signal[waiting](type=double);
 		@statistic[waitingStat](source="waiting";record=vector;);
-		@signal[oneMSG](type=int);
+		@signal[oneMSG](type=double);
 		@statistic[oneMSGStat](source="oneMSG";record=vector;);
 		@signal[collision](type=double);
 		@statistic[collision](source="collision";record=vector;);
-		@signal[ready](type=int);
+		@signal[ready](type=double);
 		@statistic[readyStat](source="ready";record=vector;);
-		@signal[done](type=int);
+		@signal[done](type=double);
 		@statistic[doneStat](source="done";record=vector;);
+		
+		@signal[rate](type=double);
+		@statistic[rateStatistic](source="rate"; record=vector,max;);
 		
 }
