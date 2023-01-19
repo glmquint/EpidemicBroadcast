@@ -24,7 +24,7 @@ simple Node
     parameters:
         int numberOfNodes = default(4);
         volatile double sendingProbability = uniform(0,1);
-        double limitProbability = 0.5;
+        double limitProbability = default(0.5);
         bool firstInfected = default(false);
         double timer = default(1.0);
         double pos_x = default(uniform(0, 500));
