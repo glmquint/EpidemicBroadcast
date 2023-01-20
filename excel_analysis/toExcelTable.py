@@ -9,7 +9,7 @@ if (len(argv) < 2):
 for in_file in argv[1:]:
     print(in_file)
     df=pd.read_csv(in_file)
-    writer = pd.ExcelWriter(f'output_{in_file}.xlsx', engine='xlsxwriter')   
+    writer = pd.ExcelWriter(f'output_{in_file.split(".csv")[0]}.xlsx', engine='xlsxwriter')   
     workbook=writer.book
     worksheet=workbook.add_worksheet('Result')
     writer.sheets['Result'] = worksheet
