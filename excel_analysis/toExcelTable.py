@@ -6,14 +6,15 @@ if (len(argv) < 2):
     print(f"USAGE: {argv[0]} file1.csv [fileN.csv]\n    Example:\n{argv[0]} *.csv")
     quit()
 
+out_filename = f'output.xlsx'
+writer = pd.ExcelWriter(out_filename, engine='xlsxwriter')   
+workbook=writer.book
 for in_file in argv[1:]:
     df=pd.read_csv(in_file)
-    out_filename = f'output_{in_file.split(".csv")[0]}.xlsx'
     print(in_file, out_filename)
-    writer = pd.ExcelWriter(out_filename, engine='xlsxwriter')   
-    workbook=writer.book
-    worksheet=workbook.add_worksheet('Result')
-    writer.sheets['Result'] = worksheet
+    out_worksheet = f"{in_file.split('.csv')[0]}"
+    worksheet=workbook.add_worksheet(out_worksheet)
+    writer.sheets[out_worksheet] = worksheet
     df=df[['run','name','vectime','vecvalue']]
     df=df.dropna(subset=['vectime'])
     df=df.reset_index()
@@ -31,11 +32,12 @@ for in_file in argv[1:]:
             finalDf.loc[index]=[runDf[row],nameDf[row],timeDf[0][row],valueDf[0][row]]
             finalDf['vectime']=pd.to_numeric(finalDf['vectime'])
             finalDf['vecvalue']=pd.to_numeric(finalDf['vecvalue'])
-            finalDf.to_excel(writer,sheet_name='Result',startcol=6*run , index=False)
+            finalDf.to_excel(writer,sheet_name=out_worksheet,startcol=6*run , index=False)
             run+=1
             index=0
         else:
             for col in range(0,len(timeDf.columns)):
                 finalDf.loc[index]=[runDf[row],nameDf[row],timeDf[col][row],valueDf[col][row]]
                 index+=1                  
-    writer.save()
+
+writer.save()
