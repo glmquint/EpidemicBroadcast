@@ -20,6 +20,7 @@ Define_Module(StatCollector);
 
 void StatCollector::initialize()
 {
+    assert(TIME_LIMIT == par("time_limit"));
     int sumNeighbors = 0;
     char str[8];
     numberOfNodes = par("numberOfNodes");
@@ -28,16 +29,15 @@ void StatCollector::initialize()
         sprintf(str, "nodeX[%d]", i);
         nodes[i] = check_and_cast<Node*>(getModuleByPath(str));
     }
-    for (int i = 0; i < 45; ++i){
-        for (int j = 0; j < 5; ++j)
+    for (int i = 0; i < TIME_LIMIT; ++i){
+        for (int j = 0; j < STATUS_NUMBER; ++j)
             stats[j][i] = 0;
     }
-
-    collectorSignal[0] = registerSignal("waiting");
-    collectorSignal[1] = registerSignal("oneMSG");
-    collectorSignal[2] = registerSignal("collision");
-    collectorSignal[3] = registerSignal("ready");
-    collectorSignal[4] = registerSignal("done");
+    collectorSignal[Waiting] = registerSignal("waiting");
+    collectorSignal[OneMessage] = registerSignal("oneMSG");
+    collectorSignal[Collision] = registerSignal("collision");
+    collectorSignal[Ready] = registerSignal("ready");
+    collectorSignal[Done] = registerSignal("done");
     rateSignal = registerSignal("rate");
 
     /*waitingSignal = registerSignal("waiting");
@@ -60,13 +60,13 @@ void StatCollector::handleMessage(cMessage *msg)
         stats[s][t]++;
         //EV << t << " " << i << " (" << s << ")" << endl;
     }
-    for(int i = 0; i<5; ++i){
+    for(int i = 0; i<STATUS_NUMBER; ++i){
         double rate = (double)stats[i][t]/numberOfNodes;
         emit(collectorSignal[i], rate);
     }
 
-    if(emitCheck && stats[1][t]==0 && stats[3][t]==0){
-        double doneRate = (double)stats[4][t]/numberOfNodes;
+    if(emitCheck && stats[OneMessage][t]==0 && stats[Ready][t]==0){
+        double doneRate = (double)stats[Done][t]/numberOfNodes;
         emit(rateSignal, doneRate);
         emitCheck = false;
     }
@@ -96,11 +96,11 @@ void StatCollector::finish()
 {
    // EV << "t W " << "1 " << "C " << "R " << "D sum" << endl;
     int sum, nodesInStatus;
-    for (int i = 0; i < 45; ++i){
+    for (int i = 0; i < TIME_LIMIT; ++i){
         //EV << i << " W: " << statsW[i] << " R: " << statsR[i] << " C: " << statsC[i] << endl;
         //EV << i;
         sum = 0;
-        for (int j = 0; j < 5; ++j){
+        for (int j = 0; j < STATUS_NUMBER; ++j){
             nodesInStatus = stats[j][i];
             sum += nodesInStatus;
             //EV << " " << nodesInStatus;

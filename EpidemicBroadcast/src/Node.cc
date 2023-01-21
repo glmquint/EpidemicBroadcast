@@ -109,27 +109,14 @@ void Node::sendAll(double time)
     //emit(hopSignal, infectionHop);
 }
 
-char* STAR2COLOR[5] = {(char*)"lightgrey", (char*)"green", (char*)"orange", (char*)"blue", (char*)"red"};
+char* STAR2COLOR[STATUS_NUMBER] = {(char*)"lightgrey", (char*)"green", (char*)"orange", (char*)"blue", (char*)"red"};
 
 void Node::colorNode()
 {
     char str[50];
     char* color;
     cDisplayString& nodeDispStr = getDisplayString();
-    //char** arr = new arr*["lightgrey", "green", "orange", "blue", "red"]();
     color = STAR2COLOR[star];
-//    switch (star){
-//        case OneMessage:
-//            color = (char*)"green"; break;
-//        case Collision:
-//            color = (char*)"orange"; break;
-//        case Ready:
-//            color = (char*)"blue"; break;
-//        case Done:
-//            color = (char*)"red"; break;
-//        default:
-//            color = (char*)"lightgrey";
-//    }
     sprintf(str, "p=$pos_x,$pos_y;i=block/process,%s,50", color);
     nodeDispStr.parse(str);
 }
@@ -153,8 +140,6 @@ void Node::handleMessage(cMessage* msg)
     if(!strcmp("clock", msg->getName())){
         switch (star) {
             case OneMessage:
-                star = lottery();
-                break;
             case Ready:
                 star = lottery(); break;
             case Collision:
@@ -170,7 +155,6 @@ void Node::handleMessage(cMessage* msg)
                 EV << "received" << msg->getName() << " -> " << infectionHop << endl;
                 star = OneMessage; break;
             case OneMessage:
-                //emit(collisionSignal, 1);
                 star = Collision; break;
             default:
                 break;

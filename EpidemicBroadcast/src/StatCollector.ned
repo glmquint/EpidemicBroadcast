@@ -22,6 +22,7 @@ simple StatCollector
 {
     parameters:
         int numberOfNodes = default(4);
+        int time_limit=default(45);
         double timer = default(1.0);
         
         //=====statistics=======//

@@ -20,19 +20,22 @@
 #include "status.h"
 #include "Node.h"
 
+#define TIME_LIMIT 60
+
 using namespace omnetpp;
 
 class StatCollector : public cSimpleModule
 {
-  public:
-    void registerStatus(char status[9]);
+  //public:
+    //void registerStatus(char status[9]);
   private:
-    int stats[5][45];
+    int stats[STATUS_NUMBER][TIME_LIMIT];
     int numberOfNodes;
     Node** nodes;
     bool emitCheck = true;
+    //int time_limit = par("time_limit");
 
-    simsignal_t collectorSignal [5];
+    simsignal_t collectorSignal [STATUS_NUMBER];
     simsignal_t rateSignal;
     /*
     simsignal_t waitingSignal;
