@@ -27,7 +27,7 @@ class StatCollector : public cSimpleModule
   public:
     void registerStatus(char status[9]);
   private:
-    int stats[5][45];
+    int stats[5][100];
     int numberOfNodes;
     Node** nodes;
     bool emitCheck = true;
@@ -44,7 +44,7 @@ class StatCollector : public cSimpleModule
 
   protected:
     virtual void initialize() override;
-    virtual void finish() override;
+    //virtual void finish() override;
     virtual void handleMessage(cMessage *msg) override;
 };
 
