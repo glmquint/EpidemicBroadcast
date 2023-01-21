@@ -47,7 +47,7 @@ class StatCollector : public cSimpleModule
 
   protected:
     virtual void initialize() override;
-    virtual void finish() override;
+    //virtual void finish() override;
     virtual void handleMessage(cMessage *msg) override;
 };
 

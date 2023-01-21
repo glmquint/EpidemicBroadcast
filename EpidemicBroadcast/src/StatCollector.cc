@@ -91,7 +91,7 @@ void StatCollector::handleMessage(cMessage *msg)
 //    else if (strcmp(status, "COLLISION"))
 //        statsC[t] += 1;
 //}
-
+/*
 void StatCollector::finish()
 {
    // EV << "t W " << "1 " << "C " << "R " << "D sum" << endl;
@@ -108,4 +108,4 @@ void StatCollector::finish()
         //EV << "  " << sum << endl;
         assert(sum == numberOfNodes);
     }
-}
+}*/
