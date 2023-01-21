@@ -20,7 +20,7 @@
 #include "status.h"
 #include "Node.h"
 
-#define TIME_LIMIT 60
+#define TIME_LIMIT 200
 
 using namespace omnetpp;
 
