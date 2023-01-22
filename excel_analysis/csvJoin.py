@@ -35,7 +35,7 @@ for i in range(0, len(d), 33): #foreach scenario
     writer.sheets[scenario] = worksheet
     arr = []
     indx = []
-    for j in range(0, 33): #foreach repetition
+    for j in range(0, num_rep): #foreach repetition
         k = i+j
         #print(f"{k = }")
         vectime = d[k].iat[27, 6].split(' ') #vectime
