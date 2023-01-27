@@ -10,3 +10,7 @@ EpidemicBroadcast/simulations/General.anf
 EpidemicBroadcast/src/epidemicbroadcast_dbg.exe
 EpidemicBroadcast/.settings/language.settings.xml
 .DS_Store
+*.aux
+*.log
+*.bak
+*.toc
