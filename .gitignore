@@ -16,3 +16,4 @@ EpidemicBroadcast/.settings/language.settings.xml
 *.toc
 *.gz
 documentation/*.pdf
+*.out
