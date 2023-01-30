@@ -1,10 +1,56 @@
-%\include{preamble}
+\section{Case Study}
+\subsection{Introduction}
+In this chapter we want to analyze the case at 200 nodes, as it is the quantity that is halfway between our configurations. At the end of the simulations we decided to calculate the average coverage rate, summarized in this table.
 
-%\begin{document}
-\chapter{Case Study}
-%\include{Tables_Boxplot}
-%\include{Factorial_analysis}
-\include{Model_fitting}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+       & r=10    & r=30    & r=50    & r=75    & r=100   \\ \hline
+p=0,15 & 0,90727 & 1       & 1       & 1       & 1       \\ \hline
+p=0,3  & 0,89379 & 0,99924 & 0,99561 & 1       & 0,99924 \\ \hline
+p=0,5  & 0,79909 & 0,99424 & 0,98803 & 0,98894 & 0,99591 \\ \hline
+p=0,7  & 0,71045 & 0,97985 & 0,96455 & 0,93727 & 0,9903  \\ \hline
+p=0,85 & 0,57303 & 0,94212 & 0,90212 & 0,91833 & 0,9797  \\ \hline
+p=1    & 0,47545 & 0,81909 & 0,67121 & 0,76303 & 0,96727 \\ \hline
+\end{tabular}
+\caption{Mean coverage rate}
+\label{tab:my-table}
+\end{table}
 
+Since the mean didn't give enough information about the index variation, we decided to calculate the standard deviation as well. In this way we have excluded the configurations with a difference between mean and standard deviation of the coverage rate less than 90\%.
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+       & r=10    & r=30    & r=50    & r=75    & r=100   \\ \hline
+p=0,15 & 0,16006 & 0       & 0       & 0       & 0       \\ \hline
+p=0,3  & 0,12149 & 0,00283 & 0,01886 & 0       & 0,00435 \\ \hline
+p=0,5  & 0,21101 & 0,00686 & 0,0454  & 0,02858 & 0,01618 \\ \hline
+p=0,7  & 0,24243 & 0,02438 & 0,06648 & 0,09235 & 0,02274 \\ \hline
+p=0,85 & 0,26813 & 0,06087 & 0,11409 & 0,11198 & 0,03477 \\ \hline
+p=1    & 0,27804 & 0,14129 & 0,17092 & 0,12449 & 0,03833 \\ \hline
+\end{tabular}
+\caption{Standard deviation of the coverage percentage}
+\label{tab:my-table}
+\end{table}
 
-%\end{document}
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+       & r=10    & r=30                            & r=50                            & r=75                            & r=100                           \\ \hline
+p=0,15 & 0,74721 & \cellcolor[HTML]{92D050}1       & \cellcolor[HTML]{92D050}1       & \cellcolor[HTML]{92D050}1       & \cellcolor[HTML]{92D050}1       \\ \hline
+p=0,3  & 0,7723  & \cellcolor[HTML]{92D050}0,99641 & \cellcolor[HTML]{92D050}0,97674 & \cellcolor[HTML]{92D050}1       & \cellcolor[HTML]{92D050}0,99489 \\ \hline
+p=0,5  & 0,58808 & \cellcolor[HTML]{92D050}0,98738 & \cellcolor[HTML]{92D050}0,94263 & \cellcolor[HTML]{92D050}0,96036 & \cellcolor[HTML]{92D050}0,97973 \\ \hline
+p=0,7  & 0,46802 & \cellcolor[HTML]{92D050}0,95547 & \cellcolor[HTML]{92D050}0,89807 & 0,84492                         & \cellcolor[HTML]{92D050}0,96756 \\ \hline
+p=0,85 & 0,3049  & \cellcolor[HTML]{92D050}0,88125 & 0,78803                         & 0,80636                         & \cellcolor[HTML]{92D050}0,94492 \\ \hline
+p=1    & 0,19741 & 0,67781                         & 0,5003                          & 0,63854                         & \cellcolor[HTML]{92D050}0,92895 \\ \hline
+\end{tabular}
+\caption{Run that we decide to analyze}
+\label{tab:my-table}
+\end{table}
+
