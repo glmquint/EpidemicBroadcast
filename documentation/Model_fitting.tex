@@ -1,7 +1,75 @@
-\include{Preamble}
+%\include{Preamble}
 
-\begin{document}
+%\begin{document}
 \section{Model fitting}
-In the following section we try to find and determine a model, in regards of how many nodes finished successfully. Given the shape of the curve
+In the following section we try to find and determine a model, in regards of how many nodes finished successfully. Given the shape of the curve with a potentially fast start that then saturates and become constant, there are several options for models:
+\begin{itemize}
+	\item Logistic model $ Y = \frac{A}{1 + e^{-rt}} $
+	\item Gompertz model $ Y = Ae^{-Be^{-rt}} $
+	\item Sigmoid model $ Y = A\frac{1-e^{-rt}}{1+e^{-rt}}$
+	\item Asymptotic model $ Y = A + Be^{-rt}$
+\end{itemize} 
 
-\end{document}
+The next step is to find the most adapt for our case, by looking for the requirement and assumption of each model, the first one is quickly discarded because it requires the output have only two possible outcomes, such as "success" and "failure", this is not the case.
+Similarly the Sigmoid model is discard because it assume the output to follow a S shape behavior with a slow start,an accelerated growth and then a slow decline, depending on the configuration for the runs this is not always true.
+
+The requirements for both Gompertz and asymptotic models are met, in particular:
+\begin{itemize}
+	\item the outcome variable is continuous
+	\item there is no multicollinearity
+	\item the sample is large enough
+	\item there are outliers
+	\item the linearity of the logarithm is respected
+	
+	\item for the Gomperz
+		\begin{itemize}
+			\item the sample shows a monotonic behavior
+		\end{itemize}
+		\item for the asymptotic
+		\begin{itemize}
+			\item the sample shows a asymptotic behavior
+		\end{itemize}
+\end{itemize}
+
+By performing a residual analysis the Gomperz model result to be the most suited for our samples, it also fits the logic of one of its typical usage of examining disease spread.
+
+\section{Factorial analysis on the models parameters}
+As previously stated we consider for extremes the values 0.15 and 0.85 for probability and 10 and 75 for the range.
+
+The Gompertz model ($ Y = Ae^{-Be^{-rt}} $) have three parameters:
+\begin{itemize}
+	\item A is the asymptote
+	\item B is the displacement on the x axis
+	\item r is the grow rate
+\end{itemize}
+The first to be analyzed is the asymptote.
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|cl|ll|l}
+\cline{1-4}
+\multicolumn{2}{|c|}{\multirow{2}{*}{Asymptote}}        & \multicolumn{2}{c|}{Radius}              &  \\ \cline{3-4}
+\multicolumn{2}{|c|}{}                                  & \multicolumn{1}{l|}{10}       & 75       &  \\ \cline{1-4}
+\multicolumn{1}{|c|}{\multirow{2}{*}{Probability}} & 0.15 & \multicolumn{1}{l|}{0,911651} & 0,999465 &  \\ \cline{2-4}
+\multicolumn{1}{|c|}{}                             & 0.85 & \multicolumn{1}{l|}{0,574134} & 0,918475 &  \\ \cline{1-4}
+\end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{l|l|l|l|l|ll}
+\cline{2-7}
+ & I & Prob & Radius & RP & \multicolumn{1}{l|}{Asymptote} & \multicolumn{1}{l|}{SST\_i} \\ \cline{2-7} 
+ & 1 & -1 & -1 & 1 & \multicolumn{1}{l|}{0,911651} & \multicolumn{1}{l|}{0,003687} \\ \cline{2-7} 
+ & 1 & 1 & -1 & -1 & \multicolumn{1}{l|}{0,574134} & \multicolumn{1}{l|}{0,076617} \\ \cline{2-7} 
+ & 1 & -1 & 1 & -1 & \multicolumn{1}{l|}{0,999465} & \multicolumn{1}{l|}{0,022062} \\ \cline{2-7} 
+ & 1 & 1 & 1 & 1 & \multicolumn{1}{l|}{0,918475} & \multicolumn{1}{l|}{0,004562} \\ \hline
+\multicolumn{1}{|l|}{4q} & 3,403726 & -0,41851 & 0,432155 & 0,256526 & \multicolumn{1}{l|}{total} & \multicolumn{1}{l|}{0,106928} \\ \hline
+\multicolumn{1}{|l|}{q} & 0,850931 & -0,10463 & 0,108039 & 0,064132 &  &  \\ \cline{1-5}
+\multicolumn{1}{|l|}{4 q\textasciicircum{}2} &  & 0,043787 & 0,046689 & 0,016451 &  &  \\ \cline{1-5}
+\multicolumn{1}{|l|}{Influenza} &  & 0,409502 & 0,436643 & 0,153855 &  &  \\ \cline{1-5}
+\end{tabular}
+\end{table}
+%\end{document}
