@@ -33,14 +33,22 @@ The following modules have been implemented:
 \item \texttt{Node} that can receive and transmit messages according to the specifications
 \item \texttt{StatCollector} that retrieves statistical information from the system for each time slot, after all nodes have completed their task
 \end{itemize}
+For debugging purpose, a color code inside omnetpp's graphical interface has been chosen to reflect the status of each node at every instant.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{./images/floorplan3.png}
+\caption{debugging view of the simulated floorplan}
+\end{figure}
+
 \subsection{Node Behaviour}
 A node can be found on 5 different statuses
 \begin{itemize}
-\item \textit{Waiting}. Node is listening for an upcoming message from one of its neighbors
-\item \textit{OneMessage}. Node received exactly one message in this time slot. At the end of it, if it doesn't receive any other message, it will transition to the Ready state, otherwise it will be a Collision
-\item \textit{Collision}. Node received more that one message in this time slot. In the next time slot it will restart its cycle from the Waiting state
-\item \textit{Ready}. Node has a valid copy of the message. At the start of every time slot the Node extracts a Bernoullian RV with probability $p$. If it succeeds, it relays the message to its neighbors and transitions to the Done state, regardless of it having generated a collision or not.
-\item \textit{Done}. The node has completed its cycle. It won't respond to any more incoming messages
+\item \textit{Waiting}. Node is listening for an upcoming message from one of its neighbors (gray)
+\item \textit{OneMessage}. Node received exactly one message in this time slot. At the end of it, if it doesn't receive any other message, it will transition to the Ready state, otherwise it will be a Collision (blue)
+\item \textit{Collision}. Node received more that one message in this time slot. In the next time slot it will restart its cycle from the Waiting state (orange)
+\item \textit{Ready}. Node has a valid copy of the message. At the start of every time slot the Node extracts a Bernoullian RV with probability $p$. If it succeeds, it relays the message to its neighbors and transitions to the Done state, regardless of it having generated a collision or not. (green)
+\item \textit{Done}. The node has completed its cycle. It won't respond to any more incoming messages (red)
 \end{itemize}
 Synchronization between nodes is idealized and isn't modeled. Each node starts its communication exactly at the beginning of the current time-slot.
 \subsection{StatCollector Behaviour}
