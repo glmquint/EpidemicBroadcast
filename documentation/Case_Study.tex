@@ -1,4 +1,4 @@
-\section{Case Study}
+\section{Case Study: 200 Nodes}
 \subsection{Introduction}
 In this chapter we want to analyze the case at 200 nodes, as it is the quantity that is halfway between our configurations. At the end of the simulations we decided to calculate the average coverage rate, summarized in this table.
 
@@ -44,11 +44,43 @@ In this way we have excluded the configurations with a difference between mean a
 p=0,15 & 0,74721 & \cellcolor[HTML]{92D050}1       & \cellcolor[HTML]{92D050}1       & \cellcolor[HTML]{92D050}1       & \cellcolor[HTML]{92D050}1       \\ \hline
 p=0,3  & 0,7723  & \cellcolor[HTML]{92D050}0,99641 & \cellcolor[HTML]{92D050}0,97674 & \cellcolor[HTML]{92D050}1       & \cellcolor[HTML]{92D050}0,99489 \\ \hline
 p=0,5  & 0,58808 & \cellcolor[HTML]{92D050}0,98738 & \cellcolor[HTML]{92D050}0,94263 & \cellcolor[HTML]{92D050}0,96036 & \cellcolor[HTML]{92D050}0,97973 \\ \hline
-p=0,7  & 0,46802 & \cellcolor[HTML]{92D050}0,95547 & \cellcolor[HTML]{92D050}0,89807 & 0,84492                         & \cellcolor[HTML]{92D050}0,96756 \\ \hline
-p=0,85 & 0,3049  & \cellcolor[HTML]{92D050}0,88125 & 0,78803                         & 0,80636                         & \cellcolor[HTML]{92D050}0,94492 \\ \hline
+p=0,7  & 0,46802 & \cellcolor[HTML]{92D050}0,95547 & 0,89807                         & 0,84492                         & \cellcolor[HTML]{92D050}0,96756 \\ \hline
+p=0,85 & 0,3049  & 0,88125                         & 0,78803                         & 0,80636                         & \cellcolor[HTML]{92D050}0,94492 \\ \hline
 p=1    & 0,19741 & 0,67781                         & 0,5003                          & 0,63854                         & \cellcolor[HTML]{92D050}0,92895 \\ \hline
 \end{tabular}
 \caption{Run that we decide to analyze}
 \label{tab:my-table}
 \end{table}
 
+\section{Performance indexes}
+After selecting the runs to be analysed, we chose to plot the most interesting performance indicators such as the percentage of collisions, coverage and the completion time of each scenario. For symmetry, the graphs also show configurations, such as the one with probability 0.7 and radius 75, which we had previously rejected.
+
+\subsection{Coverage percentage}
+\begin{figure}[h!]
+\centering
+    \includegraphics[width= 1\textwidth]{./images/Rate200Boxplot.png}
+    \caption{Coverage percentage}
+    \label{fig:immagine}
+\end{figure}
+
+\noindent Looking at this graph, it can be seen that increasing the probability does not give better coverage in most cases, as one would expect. In fact, it should be emphasized that as the probability increases, collisions also increase accordingly.
+
+\subsection{Coverage time}
+\begin{figure}
+\centering
+    \includegraphics[width= 1\textwidth]{./images/Time200Boxplot.png}
+    \caption{Coverage time}
+    \label{fig:immagine}
+\end{figure}
+\noindent As imagined, the coverage time decreases as the probability increases, as a higher probability translates into more nodes that can send the infection message.
+
+\subsection{Mean collision rate}
+
+\begin{figure}
+\centering
+    \includegraphics[width= 1\textwidth]{./images/Collision200Boxplot.png}
+    \caption{Mean collision rate}
+    \label{fig:immagine}
+\end{figure}
+
+\noindent As regards the collision index, the average value from the initial instant to the completion instant was obtained for all 33 runs. It was not possible to detect clearly visible trends, as for radius 30 and 50 collisions increase on average as the probability increases, while a decrease is noted for 75 and a more or less stationary situation for radius 100
