@@ -52,6 +52,13 @@ A node can be found on 5 different statuses
 \item \textit{Done}. The node has completed its cycle. It won't respond to any more incoming messages (red)
 \end{itemize}
 Synchronization between nodes is idealized and isn't modeled. Each node starts its communication exactly at the beginning of the current time-slot.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{./images/fsm.png}
+\caption{Finite State Machine Diagram for the Node component}
+\label{fig:fsm}
+\end{figure}
 \subsection{StatCollector Behaviour}
 This module is a singleton for each simulation and isn't accessible to the rest of nodes. Because we assumed that every communication completes after $250$ ms (the delay of transmission), this modules executes with the same slotted frequency as all other nodes but with an offset of $500$ ms. This guarantees that the information retrieved by \texttt{StatCollector} comes after every node has already transitioned to the new status. From now on, if any time indication contains a $n,5$ offset, it is considered relative to the $n$-th time slot.
 
