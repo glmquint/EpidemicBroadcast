@@ -15,7 +15,7 @@ p=0,85 & 0,57303 & 0,94212 & 0,90212 & 0,91833 & 0,9797  \\ \hline
 p=1    & 0,47545 & 0,81909 & 0,67121 & 0,76303 & 0,96727 \\ \hline
 \end{tabular}
 \caption{Mean coverage percentage}
-\label{tab:my-table}
+\label{tab:mean-coverage-percentage}
 \end{table}
 
 Since the mean didn't give enough information about the index variation, we decided to calculate the standard deviation as well.
@@ -32,7 +32,7 @@ p=0,85 & 0,26813 & 0,06087 & 0,11409 & 0,11198 & 0,03477 \\ \hline
 p=1    & 0,27804 & 0,14129 & 0,17092 & 0,12449 & 0,03833 \\ \hline
 \end{tabular}
 \caption{Standard deviation of the coverage percentage}
-\label{tab:my-table}
+\label{tab:std-coverage-percentage}
 \end{table}
 
 In this way we have excluded the configurations with a difference between mean and standard deviation of the coverage rate less than 90\%. We are interested in configurations that have a satisfactory coverage percentage, as these situations model a reliable real system.
@@ -49,7 +49,7 @@ p=0,85 & 0,3049  & 0,88125                         & 0,78803                    
 p=1    & 0,19741 & 0,67781                         & 0,5003                          & 0,63854                         & \cellcolor[HTML]{92D050}0,92895 \\ \hline
 \end{tabular}
 \caption{Run that we decide to analyze}
-\label{tab:my-table}
+\label{tab:run-to-analyze}
 \end{table}
 
 \section{Performance indexes}
@@ -60,7 +60,7 @@ After selecting the runs to be analysed, we chose to plot the most interesting p
 \centering
     \includegraphics[width= 1\textwidth]{./images/Rate200Boxplot.png}
     \caption{Coverage percentage}
-    \label{fig:immagine}
+    \label{fig:coverage-percentage}
 \end{figure}
 
 \noindent Looking at this graph, it can be seen that increasing the probability does not give better coverage in most cases, as one would expect. In fact, it should be emphasized that as the probability increases, collisions also increase accordingly.
@@ -70,7 +70,7 @@ After selecting the runs to be analysed, we chose to plot the most interesting p
 \centering
     \includegraphics[width= 1\textwidth]{./images/Time200Boxplot.png}
     \caption{Coverage time}
-    \label{fig:immagine}
+    \label{fig:coverage-time}
 \end{figure}
 \noindent As imagined, the coverage time decreases as the probability increases, as a higher probability translates into more nodes that can send the infection message.
 
@@ -80,7 +80,7 @@ After selecting the runs to be analysed, we chose to plot the most interesting p
 \centering
     \includegraphics[width= 1\textwidth]{./images/Collision200Boxplot.png}
     \caption{Mean collision rate}
-    \label{fig:immagine}
+    \label{fig:mean-collision-rate}
 \end{figure}
 
 \noindent As regards the collision index, the average value from the initial instant to the completion instant was obtained for all 33 runs. It was not possible to detect clearly visible trends, however, it should be noted that as the radius and the probability increase, the possibility of having many nodes reached by the infection message in the first instants without collisions is high.
@@ -89,11 +89,62 @@ After selecting the runs to be analysed, we chose to plot the most interesting p
 
 \subsection{Hierarchy of priorities}
 Thinking of a real system we have elaborated a hierarchy of priorities to try to understand which system was the most adherent to these characteristics:
-\begin{itemize}
+
+\begin{enumerate}
 \item High coverage percentage
 \item Minimum coverage time
 \item Minimum collision rate
-\end{itemize}
+\end{enumerate}
 
-Analyzing the configurations, the one that comes closest to these characteristics is the one with probability 0.3 and radius 75
+Considering runs of interest, as highlighted in Table \ref{tab:run-to-analyze}, we filter only those with $(p=0.15)$ and with $(p=0.3;r=75)$, as they are the only configurations always covering all nodes.
+We can rank them based on the coverage time, using Table \ref{fig:coverage-time} and we see that an increase for low probabilities is clearly beneficial for a system speed-up. We can observe that the third quartile for $p=0.3$, $r=75$ is strictly below the first quartile for every configuration with $p=0.15$ and thus we can assert with a confidence level of at least 75\% that this configuration is faster. Therefore we choose it as the best trade-off to analyze.
 
+\subsection{Time evolution}
+Thanks to the data collected, we have the state of the system for each instant of time, and we are able to analyze the temporal evolution of the system. In the graph in Figure \ref{fig:done-status} we have considered radius 75 and probabity 0,3 inside the 200 nodes case.
+\begin{figure}[H]
+\centering
+    \includegraphics[width= 1\textwidth]{./images/DoneStatus_200N-30p75r.png}
+    \caption{Done status}
+    \label{fig:done-status}
+\end{figure}
+
+\subsection{Factorial Analysis of ending time and ending coverage}
+
+We compute a $2^kr$ factorial analysis to highlight the influence of radius $r$ and probability $p$ on two of our performance indexes, fitting the output variable to a bi-dimensional nonlinear regression model in the form of 
+$$
+y = q_0 + x_R \cdot r + q_P \cdot p + q_{RP} \cdot r \cdot p
+$$
+
+Starting with the final node coverage, i.e. the fraction of nodes in the Done status at the end of simulation, extreme values are shown in Table \ref{tab:extreme-factors-end-coverage} and the final influence in Table \ref{tab:influence-on-end-coverage}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|cl|r|r|l}
+\cline{1-4}
+\multicolumn{2}{|c|}{\multirow{2}{*}{End Coverage}}     & \multicolumn{1}{c|}{Radius} & \multicolumn{1}{c|}{}   &  \\ \cline{3-4}
+\multicolumn{2}{|c|}{}                                  & \multicolumn{1}{l|}{10}     & \multicolumn{1}{l|}{75} &  \\ \cline{1-4}
+\multicolumn{1}{|c|}{\multirow{2}{*}{Probability}} & 15 & 0,907273                    & 1                       &  \\ \cline{2-4}
+\multicolumn{1}{|c|}{}                             & 85 & 0,57303                     & 0,918333                &  \\ \cline{1-4}
+\end{tabular}
+\caption{Extreme factor levels for ending coverage}
+\label{tab:extreme-factors-end-coverage}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+                       & I        & Prob     & Radius   & RP       &          &          \\ \hline
+                       & 1        & -1       & -1       & 1        & 0,907273 & 0,003319 \\ \hline
+                       & 1        & 1        & -1       & -1       & 0,57303  & 0,076523 \\ \hline
+                       & 1        & -1       & 1        & -1       & 1        & 0,022602 \\ \hline
+                       & 1        & 1        & 1        & 1        & 0,918333 & 0,004716 \\ \hline
+4q                     & 3,398636 & -0,41591 & 0,43803  & 0,252576 &          & 0,107161 \\ \hline
+q                      & 0,849659 & -0,10398 & 0,109508 & 0,063144 &          &          \\ \hline
+4 q\textasciicircum{}2 &          & 0,043245 & 0,047968 & 0,015949 &          &          \\ \hline
+                       &          &          &          &          &          &          \\ \hline
+Influenza              &          & 0,403551 & 0,447621 & 0,148828 &          &          \\ \hline
+\end{tabular}
+\caption{Influence of factors for ending coverage}
+\label{tab:influence-on-end-coverage}
+\end{table}
