@@ -55,7 +55,6 @@ p=1    & 0,19741 & 0,67781                         & 0,5003                     
 \section{Performance indexes}
 After selecting the runs to be analysed, we chose to plot the most interesting performance indicators such as the percentage of collisions, coverage and the completion time of each scenario. For symmetry, the graphs also show configurations, such as the one with probability 0.7 and radius 75, which we had previously rejected.
 
-\subsection{Coverage percentage}
 \begin{figure}[h!]
 \centering
     \includegraphics[width= 1\textwidth]{./images/Rate200Boxplot.png}
@@ -63,27 +62,24 @@ After selecting the runs to be analysed, we chose to plot the most interesting p
     \label{fig:coverage-percentage}
 \end{figure}
 
-\noindent Looking at this graph, it can be seen that increasing the probability does not give better coverage in most cases, as one would expect. In fact, it should be emphasized that as the probability increases, collisions also increase accordingly.
 
-\subsection{Coverage time}
-\begin{figure}
+\begin{figure}[h!]
 \centering
     \includegraphics[width= 1\textwidth]{./images/Time200Boxplot.png}
     \caption{Coverage time}
     \label{fig:coverage-time}
 \end{figure}
-\noindent As imagined, the coverage time decreases as the probability increases, as a higher probability translates into more nodes that can send the infection message.
 
-\subsection{Mean collision rate}
+\clearpage 
 
-\begin{figure}
+\begin{figure}[h!]
 \centering
     \includegraphics[width= 1\textwidth]{./images/Collision200Boxplot.png}
     \caption{Mean collision rate}
     \label{fig:mean-collision-rate}
 \end{figure}
 
-\noindent As regards the collision index, the average value from the initial instant to the completion instant was obtained for all 33 runs. It was not possible to detect clearly visible trends, however, it should be noted that as the radius and the probability increase, the possibility of having many nodes reached by the infection message in the first instants without collisions is high.
+\noindent Looking at coverage percentage graph, it can be seen that increasing the probability does not give better coverage in most cases, as one would expect. In fact, it should be emphasized that as the probability increases, collisions also increase accordingly. As imagined, the coverage time decreases as the probability increases, as a higher probability translates into more nodes that can send the infection message. As regards the collision index, the average value from the initial instant to the completion instant was obtained for all 33 runs. For this index, as expected, there is an increasing trend with the growth of probability, in fact more nodes can transmit at the same time the message. It should be noted that as the radius and the probability increase, the possibility of having many nodes reached by the infection message in the first instants without collisions is high. It also should be highlighted that excluding the borderline case with radius 100, radius 50 and 75 show worse coverage and on average a higher collision rate. 
 
 \clearpage 
 
@@ -149,7 +145,9 @@ Influenza              &          & 0,403551 & 0,447621 & 0,148828 &          & 
 \label{tab:influence-on-end-coverage}
 \end{table}
 
-And for the completion time, the extreme values are shown in Table \ref{tab:extreme-factors-on-completion-time} and influences in Table \ref{tab:influence-on-completion-time}
+We get a pretty balanced influence between radius and probability of about $\sim 42\%$ each, although we must notice that the term $q_P$ is negative $(-0.10)$, which implies a reduction of the final coverage with an increase in probability. Looking at Table \ref{fig:collisions-200} we can clearly understand that this is primarily due to an increase in collisions, which naturally reflects the much lower coverage. Finally, we can assess that the interaction of both parameters is relatively small $(0,1)$, and thus we can study the system by just fixing one parameter and varying the other.
+
+Regarding the completion time, the extreme values are shown in Table \ref{tab:extreme-factors-on-completion-time} and influences in Table \ref{tab:influence-on-completion-time}
 
 \begin{table}[h!]
 \centering
@@ -182,3 +180,5 @@ Influenza              &          & 0,667182 & 0,237209 & 0,09561  &          & 
 \caption{Influence of factors for ending coverage}
 \label{tab:influence-on-completion-time}
 \end{table}
+
+It is clear that having both negative coefficients ($q_P = -32.50$ and $q_R = -19.38$) is beneficial for a faster system termination (lower is better). The probability is also $\sim\times 3$ more effective at reducing the completion time, which is also stated by Figures \ref{fig:coverage-time-50}, \ref{fig:coverage-time-200} and \ref{fig:coverage-time-700} and in line with what is expected: even if it means having more collisions, having a higher probability reduces the time a node waits in the Ready status. Again, the interaction of both parameters is negligible and allows us to study the effect of each parameter separately.
