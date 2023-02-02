@@ -55,7 +55,6 @@ p=1    & 0,19741 & 0,67781                         & 0,5003                     
 \section{Performance indexes}
 After selecting the runs to be analysed, we chose to plot the most interesting performance indicators such as the percentage of collisions, coverage and the completion time of each scenario. For symmetry, the graphs also show configurations, such as the one with probability 0.7 and radius 75, which we had previously rejected.
 
-\subsection{Coverage percentage}
 \begin{figure}[h!]
 \centering
     \includegraphics[width= 1\textwidth]{./images/Rate200Boxplot.png}
@@ -63,27 +62,24 @@ After selecting the runs to be analysed, we chose to plot the most interesting p
     \label{fig:coverage-percentage}
 \end{figure}
 
-\noindent Looking at this graph, it can be seen that increasing the probability does not give better coverage in most cases, as one would expect. In fact, it should be emphasized that as the probability increases, collisions also increase accordingly.
 
-\subsection{Coverage time}
-\begin{figure}
+\begin{figure}[h!]
 \centering
     \includegraphics[width= 1\textwidth]{./images/Time200Boxplot.png}
     \caption{Coverage time}
     \label{fig:coverage-time}
 \end{figure}
-\noindent As imagined, the coverage time decreases as the probability increases, as a higher probability translates into more nodes that can send the infection message.
 
-\subsection{Mean collision rate}
+\clearpage 
 
-\begin{figure}
+\begin{figure}[h!]
 \centering
     \includegraphics[width= 1\textwidth]{./images/Collision200Boxplot.png}
     \caption{Mean collision rate}
     \label{fig:mean-collision-rate}
 \end{figure}
 
-\noindent As regards the collision index, the average value from the initial instant to the completion instant was obtained for all 33 runs. It was not possible to detect clearly visible trends, however, it should be noted that as the radius and the probability increase, the possibility of having many nodes reached by the infection message in the first instants without collisions is high.
+\noindent Looking at coverage percentage graph, it can be seen that increasing the probability does not give better coverage in most cases, as one would expect. In fact, it should be emphasized that as the probability increases, collisions also increase accordingly. As imagined, the coverage time decreases as the probability increases, as a higher probability translates into more nodes that can send the infection message. As regards the collision index, the average value from the initial instant to the completion instant was obtained for all 33 runs. It was not possible to detect clearly visible trends, however, it should be noted that as the radius and the probability increase, the possibility of having many nodes reached by the infection message in the first instants without collisions is high. It also should be highlighted that excluding the borderline case with radius 100, radius 50 and 75 show worse coverage and on average a higher collision rate. 
 
 \clearpage 
 
