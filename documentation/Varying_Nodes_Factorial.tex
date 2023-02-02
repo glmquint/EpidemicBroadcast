@@ -3,35 +3,36 @@ The purpose of this section is to confront the results of the factorial analysis
 \subsection{Influence on coverage rate and time}
 We first analyze the result for the coverage percentage and the coverage time.
 
-\begin{table}[H]
+\begin{table}[H]\label{tab:CovPerc}
 \centering
-\begin{tabular}{|c|l|l|l|}
+\begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{Number of nodes} & \multicolumn{1}{c|}{\textbf{Probability}} & \multicolumn{1}{c|}{\textbf{Radius}} & \multicolumn{1}{c|}{\textbf{Combined}} \\ \hline
-\textbf{50} & 0,00206 & 0,996125 & 0,001816 \\ \hline
-\textbf{100} & 0,005405 & 0,993859 & 0,000736 \\ \hline
-\textbf{200} & 0,403551 & 0,447621 & 0,148828 \\ \hline
-\textbf{500} & 0,904792 & 0,046432 & 0,048775 \\ \hline
-\textbf{700} & 0,95802 & 0,020789 & 0,021191 \\ \hline
+\textbf{Number of   nodes} & \textbf{Probability} & \textbf{Radius} & \textbf{Combined} \\ \hline
+\textbf{50} & \textit{0,0021} & 0,9961 & \textit{0,0018} \\ \hline
+\textbf{100} & \textit{0,0054} & 0,9939 & \textit{0,0007} \\ \hline
+\textbf{200} & \textit{0,4036} & 0,4476 & 0,1488 \\ \hline
+\textbf{500} & \textit{0,9048} & \textit{0,0464} & \textit{0,0488} \\ \hline
+\textbf{700} & \textit{0,9580} & \textit{0,0208} & \textit{0,0212} \\ \hline
 \end{tabular}
-\caption{Influence for the coverage percentage}
+\caption{Influences for coverage percentage}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[H]\label{tab:CovTime}
 \centering
-\begin{tabular}{|c|l|l|l|}
+\begin{tabular}{|c|c|c|c|}
 \hline
-\multicolumn{1}{|l|}{\textbf{Number of nodes}} & \multicolumn{1}{c|}{\textbf{Probability}} & \multicolumn{1}{c|}{\textbf{Radius}} & \multicolumn{1}{c|}{\textbf{Combined}} \\ \hline
-\textbf{50} & 0,826853 & 0,11478 & 0,058367 \\ \hline
-\textbf{100} & 0,981894 & 0,010828 & 0,007278 \\ \hline
-\textbf{200} & 0,667182 & 0,237209 & 0,09561 \\ \hline
-\textbf{500} & 0,957135 & 0,033649 & 0,009216 \\ \hline
-\textbf{700} & 0,96461 & 0,00596 & 0,029431 \\ \hline
+\textbf{Number of   nodes} & \textbf{Probability} & \textbf{Radius} & \textbf{Combined} \\ \hline
+\textbf{50} & \textit{0,8269} & 0,1148 & \textit{0,0584} \\ \hline
+\textbf{100} & \textit{0,9819} & \textit{0,0108} & \textit{0,0073} \\ \hline
+\textbf{200} & \textit{0,6672} & \textit{0,2372} & 0,0956 \\ \hline
+\textbf{500} & \textit{0,9571} & \textit{0,0336} & \textit{0,0092} \\ \hline
+\textbf{700} & \textit{0,9646} & \textit{0,0060} & \textit{0,0294} \\ \hline
 \end{tabular}
-\caption{Influence for the coverage time}
+\caption{Influences for coverage time}
 \end{table}
 
-To draw easier conclusion, in the following section, these result are plotted in a scatter plot with lines.
+
+To draw easier conclusion, in the following section, these result are plotted in a scatter plot with lines. Note that the values underlined are referred to influence of factors with a negative contribution.
 
 \begin{figure}[H]\label{pic:CovPerc}
 \centering
@@ -48,9 +49,9 @@ To draw easier conclusion, in the following section, these result are plotted in
     \label{fig:immagine}
 \end{figure}
 
-Let's start with \ref{pic:CovPerc} it is easy to understand that a low density the radius is far more critical then the probability since with low radius it is likely that many nodes are isolated or do not get a second "chance" after receiving a collision. At high number of nodes, the contrary happens the reason of this behavior is that even with low radius each node as a lot of neighbors so it is far more important for them to be able to easily transmit.
+Let's start with \ref{pic:CovPerc} it is easy to understand that a low density the radius is far more critical then the probability since with low radius it is likely that many nodes are isolated or do not get a second "chance" after receiving a collision. At high number of nodes, the contrary happens the reason of this behavior is that even with low radius each node as a lot of neighbors so it is far more important for them to avoid collision, this is achieved by a low probability as seen in the boxplot and as indicated in \ref{tab:CovPerc}.
 
-The coverage time is more tricky to understand, with a high number of nodes it is far more important for the nodes to quickly transmit for same motivation previously stated. However with a low density the behavior for the influences is more chaotic, this happens because, since this analysis takes account only for the coverage time, some runs end immediately with a high probability and low radius however these configuration result in a very low coverage percentage. With 200 nodes a critical point is reached the reason behind is that this configuration have a high enough density for the runs to not immediately terminate as in the previous cases, this result in a still high influence for the probability factor due to the same reason explained for configuration with high number of node, but still gains for a higher radius so that more nodes are reached at each transmission.
+The coverage time is more tricky to understand, with a high number of nodes it is far more important for the nodes to quickly transmit for same motivation previously stated. However with a low density the behavior for the influences is more chaotic, this happens because, since this analysis takes account only for the coverage time, some runs end immediately with a high probability and low radius however these configurations result in a very low coverage percentage. With 200 nodes a critical point is reached, the reason behind is that this configuration have a high enough density for the runs to not immediately terminate as in the previous cases, this determines a still high influence for the probability factor, but still gains from a higher radius so that more nodes are reached at each transmission. Note that almost all of the values for influence in \ref{tab:CovTime} are in italics, this make sense because our objective is to diminish the coverage time overall, not increase it.
 
 \subsection{Analysis on the models parameter}
 The next step is to perform the same confrontation for the models parameters, obviously the Gompertz model is used since it was already concluded to be the most fitting one
@@ -59,42 +60,43 @@ The next step is to perform the same confrontation for the models parameters, ob
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{Number} & \textbf{Probability} & \textbf{Radius} & \textbf{Combined} \\ \hline
-\textbf{50} & 0,002001 & 0,996207 & 0,001792 \\ \hline
-\textbf{100} & 0,005439 & 0,993876 & 0,000685 \\ \hline
-\textbf{200} & 0,409502 & 0,436643 & 0,153855 \\ \hline
-\textbf{500} & 0,899014 & 0,057842 & 0,043144 \\ \hline
-\textbf{700} & 0,951368 & 0,0317 & 0,016932 \\ \hline
+\textbf{Number of   nodes} & \textbf{Probability} & \textbf{Radius} & \textbf{Combined} \\ \hline
+\textbf{50} & \textit{0,0020} & 0,9962 & \textit{0,0018} \\ \hline
+\textbf{100} & \textit{0,0054} & 0,9939 & \textit{0,0007} \\ \hline
+\textbf{200} & \textit{0,4095} & 0,4366 & 0,1539 \\ \hline
+\textbf{500} & \textit{0,8990} & \textit{0,0578} & \textit{0,0431} \\ \hline
+\textbf{700} & \textit{0,9514} & \textit{0,0317} & \textit{0,0169} \\ \hline
 \end{tabular}
 \caption{Influence for the asymptote}
-\end{table} 
-
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|c|l|l|l|}
-\hline
-\textbf{Number} & \multicolumn{1}{c|}{\textbf{Probability}} & \multicolumn{1}{c|}{\textbf{Radius}} & \multicolumn{1}{c|}{\textbf{Combined}} \\ \hline
-\textbf{50} & \multicolumn{1}{c|}{0,232476} & 0,057973 & 0,709551 \\ \hline
-\textbf{100} & 0,549222 & 0,309554 & 0,141225 \\ \hline
-\textbf{200} & 0,066563 & 0,901042 & 0,032395 \\ \hline
-\textbf{500} & 0,002461 & 0,985123 & 0,012416 \\ \hline
-\textbf{700} & 0,001625 & 0,990217 & 0,008158 \\ \hline
-\end{tabular}
-\caption{Influence for the displacement}
 \end{table}
-
 
 \begin{table}[H]
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{Number} & \textbf{Probability} & \textbf{Radius} & \textbf{Combined} \\ \hline
-\textbf{50} & 0,944422 & 0,002066 & 0,053511 \\ \hline
-\textbf{100} & 0,36719 & 0,346769 & 0,286041 \\ \hline
-\textbf{200} & 0,557802 & 0,379108 & 0,06309 \\ \hline
-\textbf{500} & 0,904364 & 0,028022 & 0,067614 \\ \hline
-\textbf{700} & 0,958562 & 0,011033 & 0,030405 \\ \hline
+\textbf{Number of   nodes} & \textbf{Probability} & \textbf{Radius} & \textbf{Combined} \\ \hline
+\textbf{50} & \textit{0,2325} & 0,0580 & \textit{0,7096} \\ \hline
+\textbf{100} & \textit{0,5492} & \textit{0,3096} & \textit{0,1412} \\ \hline
+\textbf{200} & \textit{0,0666} & \textit{0,9010} & \textit{0,0324} \\ \hline
+\textbf{500} & \textit{0,0025} & \textit{0,9851} & \textit{0,0124} \\ \hline
+\textbf{700} & \textit{0,0016} & \textit{0,9902} & \textit{0,0082} \\ \hline
+\end{tabular}
+\caption{Influence for the displacement}
+\end{table}
+
+
+
+
+\begin{table}[H]\label{tab:Growth}
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Number of   nodes} & \textbf{Probability} & \textbf{Radius} & \textbf{Combined} \\ \hline
+\textbf{50} & 0,9444 & 0,0021 & \textit{0,0535} \\ \hline
+\textbf{100} & 0,3672 & 0,3468 & 0,2860 \\ \hline
+\textbf{200} & 0,5578 & 0,3791 & 0,0631 \\ \hline
+\textbf{500} & 0,9044 & 0,0280 & 0,0676 \\ \hline
+\textbf{700} & 0,9586 & \textit{0,0110} & 0,0304 \\ \hline
 \end{tabular}
 \caption{Influence for the growth rate}
 \end{table}
@@ -124,4 +126,5 @@ At low density to achieve a high displacement it is necessary to have a high com
     \caption{Growth rate influences at different nodes}
 \end{figure}
 
-The growth rate 
+For the growth rate it is easy to understand that at high density, since even with low radius nodes tent to have many neighbors, the probability is the most influencing factor. With low density the result are similar, but for another reason. In these conditions nodes have few neighbors so it is imperative for them to immediately re-transmit the infection message. It is also important to notice that even with a high radius, nodes would not have many more neighbors. At medium density the influence of the factors tent to be more equally distributed, this makes sense because a high probability is still helpful as previously said and a high radius allow the node to have many more neighbors 
+

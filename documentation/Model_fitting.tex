@@ -89,7 +89,7 @@ We then follow with the tables for displacement.
 \end{table}
 
 
-\begin{table}[H]
+\begin{table}[H] \label{tab:Displacement}
 \centering
 \begin{tabular}{l|l|l|l|l|ll}
 \cline{2-7}
@@ -107,8 +107,6 @@ We then follow with the tables for displacement.
 
 Finally we end up with the tables for the growth rate.
 
-% Please add the following required packages to your document preamble:
-% \usepackage{multirow}
 \begin{table}[H]
 \centering
 \begin{tabular}{|cl|ll|}
@@ -141,7 +139,7 @@ Finally we end up with the tables for the growth rate.
 These results confirm our initial ideas and expectations, the first thing to notice is the influences for the asymptote are similar to the ones for the coverage percentage; this make sense because the asymptote is the maximum reach of the curve and the coverage percentage is the maximum coverage that a run achieves, so it's natural for them to be almost the same. 
 
 \medskip
-The displacement represent how high is the rate for nodes in the done status at the second clock of each run, the first one is excluded because it's always constant due to the fact that at the first clock only the zero-patient node is done. By translating these results on the actual model for the analysis the displacement represent how well is connected the firstly infected node and how many of its neighbor immediately pass the check for sending a new infection message. It make sense for the radius to have 90\% influence because   having a big radius means having a lot of neighbor. A high displacement is not always a good thing however because a big radius, as previously shown, can lead to more collision and less coverage percentage in some cases. 
+The displacement represent how high is the rate for nodes in the done status at the second clock of each run, the first one is excluded because it's always constant due to the fact that at the first clock only the zero-patient node is done. By translating these results on the actual model for the analysis the displacement represent how well is connected the firstly infected node and how many of its neighbor immediately pass the check for sending a new infection message. It make sense for the radius to have 90\% influence because having a big radius means having a lot of neighbor. Pay attention that the q values in \ref{tab:Displacement} are negative so, by incrementing the radius, we are diminishing the displacement; this makes sense since lower values for the B parameter indicates a higher Y(t) when t = 0 in the Gompertz function. A low displacement is not always a good thing however because a big radius, as previously shown, can lead to more collision and less coverage percentage in some cases. 
 
 \medskip
 The growth rate, as its name suggests, indicates how much fast the curve in grows. In regards of the analysis a high growth rate is achieved when nodes do not experience many collisions and, after receiving a message correctly, can quickly transmit which translate to quickly passing the lottery. So it make sense for the probability to influence the 55\% of the result. The radius accounts for a little more the a third of the influence this is easy to imagine since a high radius means a high number of nodes reached.
