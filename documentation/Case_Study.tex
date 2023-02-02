@@ -148,3 +148,37 @@ Influenza              &          & 0,403551 & 0,447621 & 0,148828 &          & 
 \caption{Influence of factors for ending coverage}
 \label{tab:influence-on-end-coverage}
 \end{table}
+
+And for the completion time, the extreme values are shown in Table \ref{tab:extreme-factors-on-completion-time} and influences in Table \ref{tab:influence-on-completion-time}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|cl|rr|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{Completion Time}}  & \multicolumn{2}{c|}{Radius}                             \\ \cline{3-4} 
+\multicolumn{2}{|c|}{}                                  & \multicolumn{1}{l|}{10}       & \multicolumn{1}{l|}{75} \\ \hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{Probability}} & 15 & \multicolumn{1}{r|}{111,0152} & 47,65152                \\ \cline{2-4} 
+\multicolumn{1}{|c|}{}                             & 85 & \multicolumn{1}{r|}{21,40909} & 7,257576                \\ \hline
+\end{tabular}
+\caption{Influence of factors for ending coverage}
+\label{tab:extreme-factors-on-completion-time}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+                       & I        & Prob     & Radius   & RP       &          &          \\ \hline
+                       & 1        & -1       & -1       & 1        & 111,0152 & 4119,306 \\ \hline
+                       & 1        & 1        & -1       & -1       & 21,40909 & 646,3921 \\ \hline
+                       & 1        & -1       & 1        & -1       & 47,65152 & 0,669421 \\ \hline
+                       & 1        & 1        & 1        & 1        & 7,257576 & 1566,241 \\ \hline
+4q                     & 187,3333 & -130     & -77,5152 & 49,21212 &          & 6332,608 \\ \hline
+q                      & 46,83333 & -32,5    & -19,3788 & 12,30303 &          &          \\ \hline
+4 q\textasciicircum{}2 &          & 4225     & 1502,15  & 605,4582 &          &          \\ \hline
+                       &          &          &          &          &          &          \\ \hline
+Influenza              &          & 0,667182 & 0,237209 & 0,09561  &          &          \\ \hline
+\end{tabular}
+\caption{Influence of factors for ending coverage}
+\label{tab:influence-on-completion-time}
+\end{table}
