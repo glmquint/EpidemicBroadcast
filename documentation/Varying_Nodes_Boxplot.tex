@@ -38,14 +38,17 @@ r                           & n                           & \multicolumn{1}{l|}{
 \label{tab:my-table}
 \end{table}
 
+
 It is interesting to notice that lower radii become better at higher number of nodes regarding coverage percentage, this happens because the area in which the nodes are distributed does not change so the density increases and so does the number of neighbor for each node. 
 Another thing to notice is that, for the coverage time, the values increase with the number of nodes, but they do far worse when the sending probability is lower; this divides each rectangle (one for each group of radius) in two triangle, the lower left with the worse times and the upper right with the best ones and, at growing radius, the last one get bigger.
 Finally we can see that lower probabilities tent to perform better than higher ones for coverage percentage in spite of coverage time independently from the number of nodes and radius except for the first rows.
 
-\section{50 and 700 cases}
+
+\subsection{50 and 700 cases}
+
 At the edges of the node numbers chosen for our configurations we have 50 and 700. We now want to analyze the performance indixes for 50 and then for 700 nodes, to discover any similarities and/or differences with the case at 200. Note how for the configuration of radius 10 at 700 nodes appears to be a valid configuration but due to the symmetry of the graphs at 200 and 50 nodes it is not shown.
 
-\subsection{Coverage percentage}\label{subsec:CovPerc}
+\subsubsection{Coverage percentage}\label{subsec:CovPerc}
 \begin{figure}[H]
 \minipage{0.50\linewidth}
   \includegraphics[width=\linewidth]{./images/Rate50Boxplot.png}
@@ -70,7 +73,7 @@ At the edges of the node numbers chosen for our configurations we have 50 and 70
 
 
 
-\subsection{Coverage time}
+\subsubsection{Coverage time}
 \begin{figure}[H]
 \minipage{0.50\linewidth}
   \includegraphics[width=\linewidth]{./images/Time50Boxplot.png}
@@ -93,7 +96,7 @@ At the edges of the node numbers chosen for our configurations we have 50 and 70
 \endminipage
 \end{figure}
 
-\subsection{Collision rate}
+\subsubsection{Collision rate}
 \begin{figure}[H]
 \minipage{0.50\linewidth}
   \includegraphics[width=\linewidth]{./images/Collision50Boxplot.png}
@@ -116,4 +119,4 @@ At the edges of the node numbers chosen for our configurations we have 50 and 70
 \endminipage
 \end{figure}
 
-By varying the number of nodes, the visible trends for the case of 200 nodes seem to be confirmed (insert quote). As regards the coverage time at low probabilities, an increase is noted, as expected, as the number of nodes increases.
+By varying the number of nodes, the visible trends for the case of 200 nodes seem to be confirmed (insert quote). As regards the coverage time at low probabilities, an increase is noted, as expected, as the number of nodes increases. It is also visible how as the number of nodes increases, and therefore their density in the plane, the number of collisions increases, even for very low radii and probabilities. However, it must be specified that a high number of collisions does not necessarily imply a worse percentage of coverage, as the density of the nodes increases for small radii.
