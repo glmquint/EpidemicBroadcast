@@ -113,72 +113,74 @@ $$
 
 Starting with the final node coverage, i.e. the fraction of nodes in the Done status at the end of simulation, extreme values are shown in Table \ref{tab:extreme-factors-end-coverage} and the final influence in Table \ref{tab:influence-on-end-coverage}. It is important to notice that the extremes do not include a sending probability of 100\% and radius of 100 because we decide to handle these as particular configuration that serve only to show the limit cases for the system.
 
+
 \begin{table}[H]
 \centering
-\begin{tabular}{|cl|r|r|l}
-\cline{1-4}
-\multicolumn{2}{|c|}{\multirow{2}{*}{End Coverage}}     & \multicolumn{1}{c|}{Radius} & \multicolumn{1}{c|}{}   &  \\ \cline{3-4}
-\multicolumn{2}{|c|}{}                                  & \multicolumn{1}{l|}{10}     & \multicolumn{1}{l|}{75} &  \\ \cline{1-4}
-\multicolumn{1}{|c|}{\multirow{2}{*}{Probability}} & 15 & 0,907273                    & 1                       &  \\ \cline{2-4}
-\multicolumn{1}{|c|}{}                             & 85 & 0,57303                     & 0,918333                &  \\ \cline{1-4}
+\begin{tabular}{|cc|cc|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{\textbf{Asymptote}}} & \multicolumn{2}{c|}{\textbf{Radius}} \\ \cline{3-4} 
+\multicolumn{2}{|c|}{} & \multicolumn{1}{c|}{\textbf{10}} & \textbf{75} \\ \hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Probability}}} & \textbf{15} & \multicolumn{1}{c|}{0,9073} & 1,0000 \\ \cline{2-4} 
+\multicolumn{1}{|c|}{} & \textbf{85} & \multicolumn{1}{c|}{0,5730} & 0,9183 \\ \hline
 \end{tabular}
 \caption{Extreme factor levels for ending coverage}
 \label{tab:extreme-factors-end-coverage}
 \end{table}
 
+
 \begin{table}[H]
 \centering
-\begin{tabular}{|l|l|l|l|l|l|l|}
-\hline
-                       & I        & Prob     & Radius   & RP       &          &          \\ \hline
-                       & 1        & -1       & -1       & 1        & 0,907273 & 0,003319 \\ \hline
-                       & 1        & 1        & -1       & -1       & 0,57303  & 0,076523 \\ \hline
-                       & 1        & -1       & 1        & -1       & 1        & 0,022602 \\ \hline
-                       & 1        & 1        & 1        & 1        & 0,918333 & 0,004716 \\ \hline
-4q                     & 3,398636 & -0,41591 & 0,43803  & 0,252576 &          & 0,107161 \\ \hline
-q                      & 0,849659 & -0,10398 & 0,109508 & 0,063144 &          &          \\ \hline
-4 q\textasciicircum{}2 &          & 0,043245 & 0,047968 & 0,015949 &          &          \\ \hline
-                       &          &          &          &          &          &          \\ \hline
-Influenza              &          & 0,403551 & 0,447621 & 0,148828 &          &          \\ \hline
+\begin{tabular}{c|c|c|c|c|cc}
+\cline{2-7}
+ & \textbf{I} & \textbf{Probability} & \textbf{Radius} & \textbf{Combined} & \multicolumn{1}{c|}{\textbf{Time Cov.}} & \multicolumn{1}{c|}{\textbf{SD\_i}} \\ \cline{2-7} 
+ & 1 & -1 & -1 & 1 & \multicolumn{1}{c|}{111,0152} & \multicolumn{1}{c|}{4119,3058} \\ \cline{2-7} 
+ & 1 & 1 & -1 & -1 & \multicolumn{1}{c|}{21,4091} & \multicolumn{1}{c|}{646,3921} \\ \cline{2-7} 
+ & 1 & -1 & 1 & -1 & \multicolumn{1}{c|}{47,6515} & \multicolumn{1}{c|}{0,6694} \\ \cline{2-7} 
+ & 1 & 1 & 1 & 1 & \multicolumn{1}{c|}{7,2576} & \multicolumn{1}{c|}{1566,2406} \\ \hline
+\multicolumn{1}{|c|}{\textbf{4q}} & 187,3333 & -130,0000 & -77,5152 & 49,2121 & \multicolumn{1}{c|}{Total} & \multicolumn{1}{c|}{6332,6079} \\ \hline
+\multicolumn{1}{|c|}{\textbf{q}} & 46,8333 & -32,5000 & -19,3788 & 12,3030 &  &  \\ \cline{1-5}
+\multicolumn{1}{|c|}{\textbf{4 q\textasciicircum{}2}} &  & 4225,0000 & 1502,1497 & 605,4582 &  &  \\ \cline{1-5}
+\multicolumn{1}{|c|}{\textbf{Influenza}} &  & 0,6672 & 0,2372 & 0,0956 &  &  \\ \cline{1-5}
 \end{tabular}
 \caption{Influence of factors for ending coverage}
 \label{tab:influence-on-end-coverage}
 \end{table}
 
+
 We get a pretty balanced influence between radius and probability of about $\sim 42\%$ each, although we must notice that the term $q_P$ is negative $(-0.10)$, which implies a reduction of the final coverage with an increase in probability. Looking at Figure \ref{fig:mean-collision-rate200} we can clearly understand that this is primarily due to an increase in collisions, which naturally reflects the much lower coverage. Finally, we can assess that the interaction of both parameters is relatively small $(0,14)$, and thus we can study the system by just fixing one parameter and varying the other.
 
-Regarding the completion time, the extreme values are shown in Table \ref{tab:extreme-factors-on-completion-time} and influences in Table \ref{tab:influence-on-completion-time}
+Regarding the completion time, the extreme values are shown in Table \ref{tab:extreme-factors-time-coverage} and influences in Table \ref{tab:influence-on-time-coverage}
 
 \begin{table}[H]
 \centering
-\begin{tabular}{|cl|rr|}
+\begin{tabular}{|cc|cc|}
 \hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{Completion Time}}  & \multicolumn{2}{c|}{Radius}                             \\ \cline{3-4} 
-\multicolumn{2}{|c|}{}                                  & \multicolumn{1}{l|}{10}       & \multicolumn{1}{l|}{75} \\ \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{Probability}} & 15 & \multicolumn{1}{r|}{111,0152} & 47,65152                \\ \cline{2-4} 
-\multicolumn{1}{|c|}{}                             & 85 & \multicolumn{1}{r|}{21,40909} & 7,257576                \\ \hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{\textbf{Displacement}}} & \multicolumn{2}{c|}{\textbf{Radius}} \\ \cline{3-4} 
+\multicolumn{2}{|c|}{} & \multicolumn{1}{c|}{\textbf{10}} & \textbf{75} \\ \hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Probability}}} & \textbf{15} & \multicolumn{1}{c|}{111,0152} & 47,6515 \\ \cline{2-4} 
+\multicolumn{1}{|c|}{} & \textbf{85} & \multicolumn{1}{c|}{21,4091} & 7,2576 \\ \hline
 \end{tabular}
-\caption{Influence of factors for ending coverage}
-\label{tab:extreme-factors-on-completion-time}
+\caption{Extreme level of factors for time coverage}
+\label{tab:extreme-factors-time-coverage}
 \end{table}
 
 \begin{table}[H]
 \centering
-\begin{tabular}{|l|l|l|l|l|l|l|}
-\hline
-                       & I        & Prob     & Radius   & RP       &          &          \\ \hline
-                       & 1        & -1       & -1       & 1        & 111,0152 & 4119,306 \\ \hline
-                       & 1        & 1        & -1       & -1       & 21,40909 & 646,3921 \\ \hline
-                       & 1        & -1       & 1        & -1       & 47,65152 & 0,669421 \\ \hline
-                       & 1        & 1        & 1        & 1        & 7,257576 & 1566,241 \\ \hline
-4q                     & 187,3333 & -130     & -77,5152 & 49,21212 &          & 6332,608 \\ \hline
-q                      & 46,83333 & -32,5    & -19,3788 & 12,30303 &          &          \\ \hline
-4 q\textasciicircum{}2 &          & 4225     & 1502,15  & 605,4582 &          &          \\ \hline
-                       &          &          &          &          &          &          \\ \hline
-Influenza              &          & 0,667182 & 0,237209 & 0,09561  &          &          \\ \hline
+\begin{tabular}{c|c|c|c|c|cc}
+\cline{2-7}
+ & \textbf{I} & \textbf{Probability} & \textbf{Radius} & \textbf{Combined} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{} \\ \cline{2-7} 
+ & 1 & -1 & -1 & 1 & \multicolumn{1}{c|}{111,0152} & \multicolumn{1}{c|}{4119,3058} \\ \cline{2-7} 
+ & 1 & 1 & -1 & -1 & \multicolumn{1}{c|}{21,4091} & \multicolumn{1}{c|}{646,3921} \\ \cline{2-7} 
+ & 1 & -1 & 1 & -1 & \multicolumn{1}{c|}{47,6515} & \multicolumn{1}{c|}{0,6694} \\ \cline{2-7} 
+ & 1 & 1 & 1 & 1 & \multicolumn{1}{c|}{7,2576} & \multicolumn{1}{c|}{1566,2406} \\ \hline
+\multicolumn{1}{|c|}{\textbf{4q}} & 187,3333 & -130,0000 & -77,5152 & 49,2121 & \multicolumn{1}{c|}{Total} & \multicolumn{1}{c|}{6332,6079} \\ \hline
+\multicolumn{1}{|c|}{\textbf{q}} & 46,8333 & -32,5000 & -19,3788 & 12,3030 &  &  \\ \cline{1-5}
+\multicolumn{1}{|c|}{\textbf{4 q\textasciicircum{}2}} &  & 4225,0000 & 1502,1497 & 605,4582 &  &  \\ \cline{1-5}
+\multicolumn{1}{|c|}{\textbf{Influence}} &  & 0,6672 & 0,2372 & 0,0956 &  &  \\ \cline{1-5}
 \end{tabular}
-\caption{Influence of factors for ending coverage}
-\label{tab:influence-on-completion-time}
+\caption{Influence of factors for time coverage}
+\label{tab:influence-on-time-coverage}
 \end{table}
+
 
 It is clear that having both negative coefficients ($q_P = -32.50$ and $q_R = -19.38$) is beneficial for a faster system termination (lower is better). The probability is also $\sim\times 3$ more effective at reducing the completion time, which is also stated by Figure \ref{fig:coverage-time200} and in line with what is expected: even if it means having more collisions, having a higher probability reduces the time a node waits in the Ready status. Again, the interaction of both parameters is negligible and allows us to study the effect of each parameter separately.

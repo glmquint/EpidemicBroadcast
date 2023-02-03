@@ -50,33 +50,31 @@ The Gompertz model ($ Y = Ae^{-Be^{-rt}} $) has three parameters:
 \end{itemize}
 The first to be analyzed is the asymptote.
 
-
 \begin{table}[H]
 \centering
-\begin{tabular}{|cl|ll|l}
-\cline{1-4}
-\multicolumn{2}{|c|}{\multirow{2}{*}{Asymptote}}        & \multicolumn{2}{c|}{Radius}              &  \\ \cline{3-4}
-\multicolumn{2}{|c|}{}                                  & \multicolumn{1}{l|}{10}       & 75       &  \\ \cline{1-4}
-\multicolumn{1}{|c|}{\multirow{2}{*}{Probability}} & 0.15 & \multicolumn{1}{l|}{0,911651} & 0,999465 &  \\ \cline{2-4}
-\multicolumn{1}{|c|}{}                             & 0.85 & \multicolumn{1}{l|}{0,574134} & 0,918475 &  \\ \cline{1-4}
+\begin{tabular}{|cc|cc|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{\textbf{Asymptote}}} & \multicolumn{2}{c|}{\textbf{Radius}} \\ \cline{3-4} 
+\multicolumn{2}{|c|}{} & \multicolumn{1}{c|}{\textbf{10}} & \textbf{75} \\ \hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Probability}}} & \textbf{15} & \multicolumn{1}{c|}{0,9117} & 0,9995 \\ \cline{2-4} 
+\multicolumn{1}{|c|}{} & \textbf{85} & \multicolumn{1}{c|}{0,5741} & 0,9185 \\ \hline
 \end{tabular}
 \caption{Extreme factor levels for asymptote}
 \end{table}
 
-
 \begin{table}[H]
 \centering
-\begin{tabular}{l|l|l|l|l|ll}
+\begin{tabular}{c|c|c|c|c|cc}
 \cline{2-7}
- & I & Prob & Radius & RP & \multicolumn{1}{l|}{Asymptote} & \multicolumn{1}{l|}{SST\_i} \\ \cline{2-7} 
- & 1 & -1 & -1 & 1 & \multicolumn{1}{l|}{0,911651} & \multicolumn{1}{l|}{0,003687} \\ \cline{2-7} 
- & 1 & 1 & -1 & -1 & \multicolumn{1}{l|}{0,574134} & \multicolumn{1}{l|}{0,076617} \\ \cline{2-7} 
- & 1 & -1 & 1 & -1 & \multicolumn{1}{l|}{0,999465} & \multicolumn{1}{l|}{0,022062} \\ \cline{2-7} 
- & 1 & 1 & 1 & 1 & \multicolumn{1}{l|}{0,918475} & \multicolumn{1}{l|}{0,004562} \\ \hline
-\multicolumn{1}{|l|}{4q} & 3,403726 & -0,41851 & 0,432155 & 0,256526 & \multicolumn{1}{l|}{Total} & \multicolumn{1}{l|}{0,106928} \\ \hline
-\multicolumn{1}{|l|}{q} & 0,850931 & -0,10463 & 0,108039 & 0,064132 &  &  \\ \cline{1-5}
-\multicolumn{1}{|l|}{4 q\textasciicircum{}2} &  & 0,043787 & 0,046689 & 0,016451 &  &  \\ \cline{1-5}
-\multicolumn{1}{|l|}{Influence} &  & 0,409502 & 0,436643 & 0,153855 &  &  \\ \cline{1-5}
+ & \textbf{I} & \textbf{Probability} & \textbf{Radius} & \textbf{Combined} & \multicolumn{1}{c|}{\textbf{Asymptote}} & \multicolumn{1}{c|}{\textbf{SD\_i}} \\ \cline{2-7} 
+ & 1 & -1 & -1 & 1 & \multicolumn{1}{c|}{0,9117} & \multicolumn{1}{c|}{0,0037} \\ \cline{2-7} 
+ & 1 & 1 & -1 & -1 & \multicolumn{1}{c|}{0,5741} & \multicolumn{1}{c|}{0,0766} \\ \cline{2-7} 
+ & 1 & -1 & 1 & -1 & \multicolumn{1}{c|}{0,9995} & \multicolumn{1}{c|}{0,0221} \\ \cline{2-7} 
+ & 1 & 1 & 1 & 1 & \multicolumn{1}{c|}{0,9185} & \multicolumn{1}{c|}{0,0046} \\ \hline
+\multicolumn{1}{|c|}{\textbf{4q}} & 3,4037 & -0,4185 & 0,4322 & 0,2565 & \multicolumn{1}{c|}{Total} & \multicolumn{1}{c|}{0,1069} \\ \hline
+\multicolumn{1}{|c|}{\textbf{q}} & 0,8509 & -0,1046 & 0,1080 & 0,0641 &  &  \\ \cline{1-5}
+\multicolumn{1}{|c|}{\textbf{4 q\textasciicircum{}2}} &  & 0,0438 & 0,0467 & 0,0165 &  &  \\ \cline{1-5}
+\multicolumn{1}{|c|}{\textbf{Influence}} &  & 0,4095 & 0,4366 & 0,1539 &  &  \\ \cline{1-5}
 \end{tabular}
 \caption{Influence of factors for asymptote}
 \end{table}
@@ -85,68 +83,71 @@ We then follow with the tables for displacement.
 
 \begin{table}[H]
 \centering
-\begin{tabular}{|cl|ll|}
+\begin{tabular}{|cc|cc|}
 \hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{Displacement}} & \multicolumn{2}{c|}{Radius} \\ \cline{3-4} 
-\multicolumn{2}{|c|}{} & \multicolumn{1}{l|}{10} & 75 \\ \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{Probability}} & 15 & \multicolumn{1}{l|}{4,095867} & 1,862222 \\ \cline{2-4} 
-\multicolumn{1}{|c|}{} & 85 & \multicolumn{1}{l|}{3,869347} & 0,590452 \\ \hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{\textbf{Displacement}}} & \multicolumn{2}{c|}{\textbf{Radius}} \\ \cline{3-4} 
+\multicolumn{2}{|c|}{} & \multicolumn{1}{c|}{\textbf{10}} & \textbf{75} \\ \hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Probability}}} & \textbf{15} & \multicolumn{1}{c|}{4,0959} & 1,8622 \\ \cline{2-4} 
+\multicolumn{1}{|c|}{} & \textbf{85} & \multicolumn{1}{c|}{3,8693} & 0,5905 \\ \hline
 \end{tabular}
 \caption{Extreme factor levels for displacement}
 \end{table}
 
-
-\begin{table}[H] \label{tab:Displacement}
+\begin{table}[H]\label{tab:InflDisp}
 \centering
-\begin{tabular}{l|l|l|l|l|ll}
+\begin{tabular}{c|c|c|c|c|cc}
 \cline{2-7}
- & I & Prob & Radius & RP & \multicolumn{1}{l|}{Displacement} & \multicolumn{1}{l|}{SS\_i} \\ \cline{2-7} 
- & 1 & -1 & -1 & 1 & \multicolumn{1}{l|}{4,095867} & \multicolumn{1}{l|}{2,224258} \\ \cline{2-7} 
- & 1 & 1 & -1 & -1 & \multicolumn{1}{l|}{3,869347} & \multicolumn{1}{l|}{1,599909} \\ \cline{2-7} 
- & 1 & -1 & 1 & -1 & \multicolumn{1}{l|}{1,862222} & \multicolumn{1}{l|}{0,550935} \\ \cline{2-7} 
- & 1 & 1 & 1 & 1 & \multicolumn{1}{l|}{0,590452} & \multicolumn{1}{l|}{4,056277} \\ \hline \multicolumn{1}{|l|}{4q} & 10,41789 & -1,49829 & -5,51254 & -1,04525 & \multicolumn{1}{l|}{Total:} & \multicolumn{1}{l|}{8,431378} \\ \hline
-\multicolumn{1}{|l|}{q} & 2,604472 & -0,37457 & -1,37813 & -0,26131 &  &  \\ \cline{1-5}
-\multicolumn{1}{|l|}{4 q\textasciicircum{}2} &  & 0,561218 & 7,597023 & 0,273137 &  &  \\ \cline{1-5}
-\multicolumn{1}{|l|}{Influenza} &  & 0,066563 & 0,901042 & 0,032395 &  &  \\ \cline{1-5}
+ & \textbf{I} & \textbf{Probability} & \textbf{Radius} & \textbf{Combined} & \multicolumn{1}{c|}{\textbf{Displacement}} & \multicolumn{1}{c|}{\textbf{SD\_i}} \\ \cline{2-7} 
+ & 1 & -1 & -1 & 1 & \multicolumn{1}{c|}{0,9117} & \multicolumn{1}{c|}{0,0037} \\ \cline{2-7} 
+ & 1 & 1 & -1 & -1 & \multicolumn{1}{c|}{0,5741} & \multicolumn{1}{c|}{0,0766} \\ \cline{2-7} 
+ & 1 & -1 & 1 & -1 & \multicolumn{1}{c|}{0,9995} & \multicolumn{1}{c|}{0,0221} \\ \cline{2-7} 
+ & 1 & 1 & 1 & 1 & \multicolumn{1}{c|}{0,9185} & \multicolumn{1}{c|}{0,0046} \\ \hline
+\multicolumn{1}{|c|}{\textbf{4q}} & 3,4037 & -0,4185 & 0,4322 & 0,2565 & \multicolumn{1}{c|}{Total} & \multicolumn{1}{c|}{0,1069} \\ \hline
+\multicolumn{1}{|c|}{\textbf{q}} & 0,8509 & -0,1046 & 0,1080 & 0,0641 &  &  \\ \cline{1-5}
+\multicolumn{1}{|c|}{\textbf{4 q\textasciicircum{}2}} &  & 0,0438 & 0,0467 & 0,0165 &  &  \\ \cline{1-5}
+\multicolumn{1}{|c|}{\textbf{Influence}} &  & 0,4095 & 0,4366 & 0,1539 &  &  \\ \cline{1-5}
 \end{tabular}
 \caption{Influence of factors for displacement}
 \end{table}
 
+
 Finally we end up with the tables for the growth rate.
+
 
 \begin{table}[H]
 \centering
-\begin{tabular}{|cl|ll|}
+\begin{tabular}{|cc|cc|}
 \hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{Growth Rate}} & \multicolumn{2}{c|}{Radius} \\ \cline{3-4} 
-\multicolumn{2}{|c|}{} & \multicolumn{1}{l|}{10} & 75 \\ \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{Probability}} & 15 & \multicolumn{1}{l|}{0,04144} & 0,128276 \\ \cline{2-4} 
-\multicolumn{1}{|c|}{} & 85 & \multicolumn{1}{l|}{0,159516} & 0,366016 \\ \hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{\textbf{Displacement}}} & \multicolumn{2}{c|}{\textbf{Radius}} \\ \cline{3-4} 
+\multicolumn{2}{|c|}{} & \multicolumn{1}{c|}{\textbf{10}} & \textbf{75} \\ \hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Probability}}} & \textbf{15} & \multicolumn{1}{c|}{4,0959} & 1,8622 \\ \cline{2-4} 
+\multicolumn{1}{|c|}{} & \textbf{85} & \multicolumn{1}{c|}{3,8693} & 0,5905 \\ \hline
 \end{tabular}
 \caption{Extreme factor levels for growth rate}
 \end{table}
 
 \begin{table}[H]
 \centering
-\begin{tabular}{l|l|l|l|l|ll}
+\begin{tabular}{c|c|c|c|c|cc}
 \cline{2-7}
- & I & Prob & Radius & RP & \multicolumn{1}{l|}{Growth rate} & \multicolumn{1}{l|}{SS\_i} \\ \cline{2-7} 
- & 1 & -1 & -1 & 1 & \multicolumn{1}{l|}{0,04144} & \multicolumn{1}{l|}{0,017522} \\ \cline{2-7} 
- & 1 & 1 & -1 & -1 & \multicolumn{1}{l|}{0,159516} & \multicolumn{1}{l|}{0,000204} \\ \cline{2-7} 
- & 1 & -1 & 1 & -1 & \multicolumn{1}{l|}{0,128276} & \multicolumn{1}{l|}{0,002074} \\ \cline{2-7} 
- & 1 & 1 & 1 & 1 & \multicolumn{1}{l|}{0,366016} & \multicolumn{1}{l|}{0,036943} \\ \hline
-\multicolumn{1}{|l|}{4q} & 0,695249 & 0,355816 & 0,293337 & 0,119664 & \multicolumn{1}{l|}{Total} & \multicolumn{1}{l|}{0,056743} \\ \hline
-\multicolumn{1}{|l|}{q} & 0,173812 & 0,088954 & 0,073334 & 0,029916 &  &  \\ \cline{1-5}
-\multicolumn{1}{|l|}{4 q\textasciicircum{}2} &  & 0,031651 & 0,021512 & 0,00358 &  &  \\ \cline{1-5}
-\multicolumn{1}{|l|}{Influenza} &  & 0,557802 & 0,379108 & 0,06309 &  &  \\ \cline{1-5}
+ & \textbf{I} & \textbf{Probability} & \textbf{Radius} & \textbf{Combined} & \multicolumn{1}{c|}{\textbf{Growth}} & \multicolumn{1}{c|}{\textbf{SD\_i}} \\ \cline{2-7} 
+ & 1 & -1 & -1 & 1 & \multicolumn{1}{c|}{4,0959} & \multicolumn{1}{c|}{2,2243} \\ \cline{2-7} 
+ & 1 & 1 & -1 & -1 & \multicolumn{1}{c|}{3,8693} & \multicolumn{1}{c|}{1,5999} \\ \cline{2-7} 
+ & 1 & -1 & 1 & -1 & \multicolumn{1}{c|}{1,8622} & \multicolumn{1}{c|}{0,5509} \\ \cline{2-7} 
+ & 1 & 1 & 1 & 1 & \multicolumn{1}{c|}{0,5905} & \multicolumn{1}{c|}{4,0563} \\ \hline
+\multicolumn{1}{|c|}{\textbf{4q}} & 10,4179 & -1,4983 & -5,5125 & -1,0453 & \multicolumn{1}{c|}{Total} & \multicolumn{1}{c|}{8,4314} \\ \hline
+\multicolumn{1}{|c|}{\textbf{q}} & 2,6045 & -0,3746 & -1,3781 & -0,2613 &  &  \\ \cline{1-5}
+\multicolumn{1}{|c|}{\textbf{4 q\textasciicircum{}2}} &  & 0,5612 & 7,5970 & 0,2731 &  &  \\ \cline{1-5}
+\multicolumn{1}{|c|}{\textbf{Influence}} &  & 0,0666 & 0,9010 & 0,0324 &  &  \\ \cline{1-5}
 \end{tabular}
 \caption{Influence of factors for growth rate}
 \end{table}
 
+
 These results confirm our initial ideas and expectations, the first thing to notice is the influences for the asymptote are similar to the ones for the coverage percentage; this make sense because the asymptote is the maximum reach of the curve and the coverage percentage is the maximum coverage that a run achieves, so it's natural for them to be almost the same. 
 
 \medskip
-The displacement represent how high is the rate for nodes in the done status at the second clock of each run, the first one is excluded because it's always constant due to the fact that at the first clock only the zero-patient node is done. By translating these results on the actual model for the analysis the displacement represent how well is connected the firstly infected node and how many of its neighbor immediately pass the check for sending a new infection message. It make sense for the radius to have 90\% influence because having a big radius means having a lot of neighbor. Pay attention that the q values in \ref{tab:Displacement} are negative so, by incrementing the radius, we are diminishing the displacement; this makes sense since lower values for the B parameter indicates a higher Y(t) when t = 0 in the Gompertz function. A low displacement is not always a good thing however because a big radius, as previously shown, can lead to more collision and less coverage percentage in some cases. 
+The displacement represent how high is the rate for nodes in the done status at the second clock of each run, the first one is excluded because it's always constant due to the fact that at the first clock only the zero-patient node is done. By translating these results on the actual model for the analysis the displacement represent how well is connected the firstly infected node and how many of its neighbor immediately pass the check for sending a new infection message. It make sense for the radius to have 90\% influence because having a big radius means having a lot of neighbor. Pay attention that the q values in \ref{tab:InflDisp} are negative so, by incrementing the radius, we are diminishing the displacement; this makes sense since lower values for the B parameter indicates a higher Y(t) when t = 0 in the Gompertz function. A low displacement is not always a good thing however because a big radius, as previously shown, can lead to more collision and less coverage percentage in some cases. 
 
 \medskip
 The growth rate, as its name suggests, indicates how much fast the curve in grows. In regards of the analysis a high growth rate is achieved when nodes do not experience many collisions and, after receiving a message correctly, can quickly transmit which translate to quickly passing the lottery. So it make sense for the probability to influence the 55\% of the result. The radius accounts for a little more the a third of the influence this is easy to imagine since a high radius means a high number of nodes reached.
