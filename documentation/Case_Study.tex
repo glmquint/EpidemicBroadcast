@@ -2,7 +2,7 @@
 \subsection{Introduction}
 In this chapter we want to analyze the case at 200 nodes, as it is the quantity that is halfway between our configurations. At the end of the simulations we decided to calculate the average coverage rate, summarized in this table.
 
-\begin{table}[H]
+\begin{table}[h!]
 \centering
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
@@ -19,7 +19,7 @@ p=1    & 0,47545 & 0,81909 & 0,67121 & 0,76303 & 0,96727 \\ \hline
 \end{table}
 
 Since the mean didn't give enough information about the index variation, we decided to calculate the standard deviation as well.
-\begin{table}[H]
+\begin{table}[h!]
 \centering
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -36,7 +36,7 @@ p=1    & 0,27804 & 0,14129 & 0,17092 & 0,12449 & 0,03833 \\ \hline
 \end{table}
 
 In this way we have excluded the configurations with a difference between mean and standard deviation of the coverage rate less than 90\%. We are interested in configurations that have a satisfactory coverage percentage, as these situations model a reliable real system.
-\begin{table}[H]
+\begin{table}[h!]
 \centering
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -55,7 +55,7 @@ p=1    & 0,19741 & 0,67781                         & 0,5003                     
 \subsection{Performance indexes} \label{200Index}
 After selecting the runs to be analysed, we chose to plot the most interesting performance indicators such as the percentage of collisions, coverage and the completion time of each scenario. For symmetry, the graphs also show configurations, such as the one with probability 0.7 and radius 75, which we had previously rejected.
 
-\begin{figure}[H]
+\begin{figure}[h!]
 \centering
     \includegraphics[width= 1\textwidth]{./images/Rate200Boxplot.png}
     \caption{Coverage percentage}
@@ -63,7 +63,7 @@ After selecting the runs to be analysed, we chose to plot the most interesting p
 \end{figure}
 
 
-\begin{figure}[H]
+\begin{figure}[h!]
 \centering
     \includegraphics[width= 1\textwidth]{./images/Time200Boxplot.png}
     \caption{Coverage time}
@@ -72,7 +72,7 @@ After selecting the runs to be analysed, we chose to plot the most interesting p
 
 \clearpage 
 
-\begin{figure}[H]
+\begin{figure}[h!]
 \centering
     \includegraphics[width= 1\textwidth]{./images/Collision200Boxplot.png}
     \caption{Mean collision rate}
@@ -96,12 +96,24 @@ Considering runs of interest, as highlighted in Table \ref{tab:run-to-analyze}, 
 We can rank them based on the coverage time, using Table \ref{fig:coverage-time} and we see that an increase for low probabilities is clearly beneficial for a system speed-up. We can observe that the third quartile for $p=0.3$, $r=75$ is strictly below the first quartile for every configuration with $p=0.15$ and thus we can assert with a confidence level of at least 75\% that this configuration is faster. Therefore we choose it as the best trade-off to analyze.
 
 \subsection{Time evolution}
-Thanks to the data collected, we have the state of the system for each instant of time, and we are able to analyze the temporal evolution of the system. In the graph in Figure \ref{fig:done-status} we have considered radius 75 and probabity 0,3 inside the 200 nodes case.
+Thanks to the data collected, we have the state of the system for each instant of time, and we are able to analyze the temporal evolution of the system. Considering the case with 200 nodes, we examine all four combinations of radius $(10-75)$ and probability $(0.3-0.85)$, plus the special configuration $p=0.30$ and $r=10$. 
+Figure \ref{fig:done-status} is plotted on a linear time scale and shows the relative speed of completion for the different configurations; in particular, it is evident the negative impact given by a small probability of transmission. 
+Unfortunately, this figure doesn't show confidence intervals, as they would clutter the graph too much, particularly in the most critical initial instants. 
+Figure \ref{fig:done-status-log} tries to fix this problem by employing a logarithmic scale on the time axis. This allows us to better define differences between configurations, as the colored areas represent the first and third quartiles. It is clear that the special configuration $p=0.30$ and $r=10$ is the fastest one between those that reach a complete coverage. 
+Increasing the probability makes the system faster given that we increase the radius too: this is the difference between the configuration $p=0.85\,r=75$, which is the fastest to reach $85\%$ coverage with a $75\%$ confidence level, and the configuration $p=0.85\,r=10$, which has a higher chance of representing an unconnected graph. 
+Finally, if the problem imposes a small radius, it is clear that drastically reducing the probability (configuration $p=0.15\,r=10$) guarantees a coverage of at least $90\%$ with a $75\%$ confidence level, as we get much fewer collisions. Obviously we must accept the fact that this implies a much longer wait before reaching the final state.
+%which is the preferred one, considering the priorities previously considered. Indeed, we can 
 \begin{figure}[H]
 \centering
-    \includegraphics[width= 1\textwidth]{./images/DoneStatus_200N-30p75r.png}
-    \caption{Done status}
+    \includegraphics[width= 1\textwidth]{./images/temporalDone.png}
+    \caption{Mean done status}
     \label{fig:done-status}
+\end{figure}
+\begin{figure}[H]
+\centering
+    \includegraphics[width= 1\textwidth]{./images/temporalDoneLog.png}
+    \caption{Done status on a logarithmic scale with mean and quartiles}
+    \label{fig:done-status-log}
 \end{figure}
 
 \subsection{Factorial Analysis of ending time and ending coverage}
@@ -114,7 +126,7 @@ $$
 Starting with the final node coverage, i.e. the fraction of nodes in the Done status at the end of simulation, extreme values are shown in Table \ref{tab:extreme-factors-end-coverage} and the final influence in Table \ref{tab:influence-on-end-coverage}. It is important to notice that the extremes do not include a sending probability of 100\% and radius of 100 because we decide to handle these as particular configuration that serve only to show the limit cases for the system.
 
 
-\begin{table}[H]
+\begin{table}[h!]
 \centering
 \begin{tabular}{|cc|cc|}
 \hline
@@ -151,7 +163,7 @@ We get a pretty balanced influence between radius and probability of about $\sim
 
 Regarding the completion time, the extreme values are shown in Table \ref{tab:extreme-factors-time-coverage} and influences in Table \ref{tab:influence-on-time-coverage}
 
-\begin{table}[H]
+\begin{table}[h!]
 \centering
 \begin{tabular}{|cc|cc|}
 \hline
@@ -164,7 +176,7 @@ Regarding the completion time, the extreme values are shown in Table \ref{tab:ex
 \label{tab:extreme-factors-time-coverage}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[h!]
 \centering
 \begin{tabular}{c|c|c|c|c|cc}
 \cline{2-7}
@@ -183,4 +195,3 @@ Regarding the completion time, the extreme values are shown in Table \ref{tab:ex
 \end{table}
 
 
-It is clear that having both negative coefficients ($q_P = -32.50$ and $q_R = -19.38$) is beneficial for a faster system termination (lower is better). The probability is also $\sim\times 3$ more effective at reducing the completion time, which is also stated by Figure \ref{fig:coverage-time200} and in line with what is expected: even if it means having more collisions, having a higher probability reduces the time a node waits in the Ready status. Again, the interaction of both parameters is negligible and allows us to study the effect of each parameter separately.
