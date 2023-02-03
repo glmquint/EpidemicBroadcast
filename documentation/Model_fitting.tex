@@ -1,5 +1,5 @@
 \section{Model fitting} \label{sec:ModelFitting}
-In the following section we try to find and determine a model, in regards of how many nodes reach the done state successfully. The first step is to find a model that can fit the temporal evolution of the system and, given the shape shown in Figure \ref{fig:done-status} there are several options:
+In the following section we try to find and determine a model to describe the evolution of the done status of the nodes in function of the time passed, given the shape shown in Figure \ref{fig:done-status} there are several options that fit the general trend of the curve:
 
 \begin{itemize}
 	\item Logistic model $ Y = \frac{A}{1 + e^{-rt}} $
@@ -30,7 +30,14 @@ The requirements for both Gompertz and asymptotic models are met, in particular:
 		\end{itemize}
 \end{itemize}
 
-By performing a residual analysis the Gomperz model result to be the most suited for our samples, it also fits the logic of one of its typical usage of examining disease spread.
+By performing a residual analysis the Gomperz model result to be the most suited for our samples, it also fits the logic of one of its typical usage of examining disease spread. Following there is the QQ plot between the theoretical distribution on the X axis and the sample one in the Y axis.
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width= 1\textwidth]{./images/QQPlot200.png}
+\end{figure}
+
+It is clear that there is a linear relationship between the values from our sample and the ones from the Gompertz model, this is also indicated by the value for $R^2$.
 
 \section{Factorial analysis on the models parameters}
 As previously stated we consider for extremes the values 0.15 and 0.85 for probability and 10 and 75 for the range.
