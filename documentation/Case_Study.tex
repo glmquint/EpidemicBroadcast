@@ -2,7 +2,7 @@
 \subsection{Introduction}
 In this chapter we want to analyze the case at 200 nodes, as it is the quantity that is halfway between our configurations. At the end of the simulations we decided to calculate the average coverage rate, summarized in this table.
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
@@ -19,7 +19,7 @@ p=1    & 0,47545 & 0,81909 & 0,67121 & 0,76303 & 0,96727 \\ \hline
 \end{table}
 
 Since the mean didn't give enough information about the index variation, we decided to calculate the standard deviation as well.
-\begin{table}[h!]
+\begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -36,7 +36,7 @@ p=1    & 0,27804 & 0,14129 & 0,17092 & 0,12449 & 0,03833 \\ \hline
 \end{table}
 
 In this way we have excluded the configurations with a difference between mean and standard deviation of the coverage rate less than 90\%. We are interested in configurations that have a satisfactory coverage percentage, as these situations model a reliable real system.
-\begin{table}[h!]
+\begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -55,7 +55,7 @@ p=1    & 0,19741 & 0,67781                         & 0,5003                     
 \section{Performance indexes}
 After selecting the runs to be analysed, we chose to plot the most interesting performance indicators such as the percentage of collisions, coverage and the completion time of each scenario. For symmetry, the graphs also show configurations, such as the one with probability 0.7 and radius 75, which we had previously rejected.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
     \includegraphics[width= 1\textwidth]{./images/Rate200Boxplot.png}
     \caption{Coverage percentage}
@@ -63,7 +63,7 @@ After selecting the runs to be analysed, we chose to plot the most interesting p
 \end{figure}
 
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
     \includegraphics[width= 1\textwidth]{./images/Time200Boxplot.png}
     \caption{Coverage time}
@@ -72,7 +72,7 @@ After selecting the runs to be analysed, we chose to plot the most interesting p
 
 \clearpage 
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
     \includegraphics[width= 1\textwidth]{./images/Collision200Boxplot.png}
     \caption{Mean collision rate}
@@ -113,7 +113,7 @@ $$
 
 Starting with the final node coverage, i.e. the fraction of nodes in the Done status at the end of simulation, extreme values are shown in Table \ref{tab:extreme-factors-end-coverage} and the final influence in Table \ref{tab:influence-on-end-coverage}
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering
 \begin{tabular}{|cl|r|r|l}
 \cline{1-4}
@@ -126,7 +126,7 @@ Starting with the final node coverage, i.e. the fraction of nodes in the Done st
 \label{tab:extreme-factors-end-coverage}
 \end{table}
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
@@ -149,7 +149,7 @@ We get a pretty balanced influence between radius and probability of about $\sim
 
 Regarding the completion time, the extreme values are shown in Table \ref{tab:extreme-factors-on-completion-time} and influences in Table \ref{tab:influence-on-completion-time}
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering
 \begin{tabular}{|cl|rr|}
 \hline
@@ -162,7 +162,7 @@ Regarding the completion time, the extreme values are shown in Table \ref{tab:ex
 \label{tab:extreme-factors-on-completion-time}
 \end{table}
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline

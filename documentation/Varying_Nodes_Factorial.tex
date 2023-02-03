@@ -32,7 +32,7 @@ We first analyze the result for the coverage percentage and the coverage time.
 \end{table}
 
 
-To draw easier conclusion, in the following section, these result are plotted in a scatter plot with lines. Note that the values underlined are referred to influence of factors with a negative contribution.
+To draw easier conclusion, in the following section, these result are plotted in a scatter plot with lines. Note that the values in italic are referred to influence of factors with a negative contribution meaning that a higher value for that specific factor produce a lower output, however this is not a bad thing because in the case of the coverage time the objective is to reduce it, not increase it.
 
 \begin{figure}[H]\label{pic:CovPerc}
 \centering
@@ -49,9 +49,9 @@ To draw easier conclusion, in the following section, these result are plotted in
     \label{fig:immagine}
 \end{figure}
 
-Let's start with \ref{pic:CovPerc} it is easy to understand that a low density the radius is far more critical then the probability since with low radius it is likely that many nodes are isolated or do not get a second "chance" after receiving a collision. At high number of nodes, the contrary happens the reason of this behavior is that even with low radius each node as a lot of neighbors so it is far more important for them to avoid collision, this is achieved by a low probability as seen in the boxplot and as indicated in \ref{tab:CovPerc}.
+Let's start with Figure \ref{pic:CovPerc} it is easy to understand that a low density the radius is far more critical then the probability since with low radius it is likely that many nodes are isolated or do not get a second "chance" after receiving a collision. At high number of nodes, the contrary happens the reason of this behavior is that even with low radius each node as a lot of neighbors so it is far more important for them to avoid collision, this is achieved by a low probability as seen in the boxplot and as indicated in section \ref{subsec:CovPerc}.
 
-The coverage time is more tricky to understand, with a high number of nodes it is far more important for the nodes to quickly transmit for same motivation previously stated. However with a low density the behavior for the influences is more chaotic, this happens because, since this analysis takes account only for the coverage time, some runs end immediately with a high probability and low radius however these configurations result in a very low coverage percentage. With 200 nodes a critical point is reached, the reason behind is that this configuration have a high enough density for the runs to not immediately terminate as in the previous cases, this determines a still high influence for the probability factor, but still gains from a higher radius so that more nodes are reached at each transmission. Note that almost all of the values for influence in \ref{tab:CovTime} are in italics, this make sense because our objective is to diminish the coverage time overall, not increase it.
+The coverage time is more tricky to understand, with a high number of nodes it is far more important for the nodes to quickly transmit. However with a low density the behavior for the influences is more chaotic, this happens because, since this analysis takes account only for the coverage time, some runs end immediately with a high probability and low radius however these configurations result in a very low coverage percentage. With 200 nodes a critical point is reached, the reason behind is that this configuration have a high enough density for the runs to not immediately terminate as in the previous cases, this determines a still high influence for the probability factor, but still gains from a higher radius so that more nodes are reached at each transmission. Note that almost all of the values for influence in \ref{tab:CovTime} are in italics, this make sense because our objective is to diminish the coverage time overall, not increase it.
 
 \subsection{Analysis on the models parameter}
 The next step is to perform the same confrontation for the models parameters, obviously the Gompertz model is used since it was already concluded to be the most fitting one
@@ -101,7 +101,7 @@ The next step is to perform the same confrontation for the models parameters, ob
 \caption{Influence for the growth rate}
 \end{table}
 
-As previously done the same kind of scatter plot is shown underneath to better understand the patterns.
+As previously done the same kind of scatter plot is shown underneath to better understand the patterns, the values in italic have the same meaning as in the previous section.
 
 \begin{figure}[H]\label{pic:AsymptoteNodes}
 \centering
@@ -118,7 +118,7 @@ As expected the influences for the asymptote are similar to the one for the cove
     \caption{Displacement influences at different nodes}
 \end{figure}
 
-At low density to achieve a high displacement it is necessary to have a high combined effort so that the patient zero node have many neighbor and so that they can transmit immediately due to a high probability. With a growing density the radius influence takes up with a "quantity over quality" logic where, even with low probability, a high radius allow the first infected node to reach a great number of nodes, generating a high displacement even if some nodes do not immediately re-transmit.
+At low density to achieve a high displacement it is necessary to have a high combined effort so that the patient zero node have many neighbor and so that they can transmit immediately due to a high probability. With a growing density the radius influence takes up with a "quantity over quality" logic where, even with low probability, a high radius allow the first infected node to reach a great number of nodes, generating a lower displacement (the influence are referencing factors with negative influence) even if some nodes do not immediately re-transmit.
 
 \begin{figure}[H]\label{pic:GrowthRatesNodes}
 \centering
@@ -126,5 +126,5 @@ At low density to achieve a high displacement it is necessary to have a high com
     \caption{Growth rate influences at different nodes}
 \end{figure}
 
-For the growth rate it is easy to understand that at high density, since even with low radius nodes tent to have many neighbors, the probability is the most influencing factor. With low density the result are similar, but for another reason. In these conditions nodes have few neighbors so it is imperative for them to immediately re-transmit the infection message. It is also important to notice that even with a high radius, nodes would not have many more neighbors. At medium density the influence of the factors tent to be more equally distributed, this makes sense because a high probability is still helpful as previously said and a high radius allow the node to have many more neighbors 
+For the growth rate it is easy to understand that at high density, since even with low radius nodes tent to have many neighbors, the probability is the most influencing factor. With low density the result are similar, but for another reason. In these conditions nodes have few neighbors so it is imperative for them to immediately re-transmit the infection message. It is also important to notice that even with a high radius, nodes would not have many more neighbors. At medium density the influence of the factors tent to be more equally distributed, this makes sense because a high probability is still helpful as previously said and a high radius allow the node to have many more neighbors.
 
