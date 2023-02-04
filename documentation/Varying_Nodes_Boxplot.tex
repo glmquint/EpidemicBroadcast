@@ -1,4 +1,4 @@
-\section{Varying Nodes}
+\section{Varying node number}
 In this chapter we observe what happens when the number of nodes in the system varies. We summarize the value of coverage percentage and the coverage time in the table below.
 \begin{table}[h!]
 \centering
@@ -39,14 +39,14 @@ r                           & n                           & \multicolumn{1}{l|}{
 \end{table}
 
 
-It is interesting to notice that lower radii become better at higher number of nodes regarding coverage percentage, this happens because the area in which the nodes are distributed does not change so the density increases and so does the number of neighbor for each node. 
-Another thing to notice is that, for the coverage time, the values increase with the number of nodes, but they do far worse when the sending probability is lower; this divides each rectangle (one for each group of radius) in two triangle, the lower left with the worse times and the upper right with the best ones and, at growing radius, the last one get bigger.
-Finally we can see that lower probabilities tent to perform better than higher ones for coverage percentage in spite of coverage time independently from the number of nodes and radius except for the first rows.
+It is interesting to notice that lower radii are better suited at higher number of nodes for a better coverage percentage: this happens because the area in which the nodes are distributed does not change so the density increases and so does the number of neighbors for each node. 
+Another thing to notice is that, for the completing time, the values increase with the number of nodes, but they become much worse when the sending probability is lower. This divides each rectangle (one for each group of radii) in two triangles, the lower left with the worse times and the upper right with the best ones and, with a growing radius, the last one gets bigger.
+Finally we can see that lower probabilities tend to perform better than higher ones for coverage percentage despite coverage time, independently from the number of nodes and radius. The only exceptions are the extreme cases of really low radii and number of nodes ($r=10$ with $n=50-100-200$ and $r=30$ with $n=50$)
 
 
 \subsection{50 and 700 cases}
 
-At the edges of the node numbers chosen for our configurations we have 50 and 700. We now want to analyze the performance indixes for 50 and then for 700 nodes, to discover any similarities and/or differences with the case at 200. Note how for the configuration of radius 10 at 700 nodes appears to be a valid configuration but due to the symmetry of the graphs at 200 and 50 nodes it is not shown.
+At the edges of the node numbers chosen for our configurations we have 50 and 700. We now want to analyze the performance indixes for 50 and then for 700 nodes, to discover any similarities and/or differences with the case at 200. Note that for readability, the configuration of $r=10$ for $700$ nodes is not shown, even if it should not be excluded by the metrics shown in \ref{subsec:case-study-intro}
 
 \subsubsection{Coverage percentage}\label{subsec:CovPerc}
 \begin{figure}[H]

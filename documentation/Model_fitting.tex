@@ -1,5 +1,5 @@
 \section{Model fitting} \label{sec:ModelFitting}
-In the following section we try to find and determine a model to describe the evolution of the done status of the nodes in function of the time passed, given the shape shown in Figure \ref{fig:done-status} there are several options that fit the general trend of the curve:
+In the following section we try to find and determine a model to describe the evolution of the done status of the nodes as a function of time passed. Given the shape shown in Figure \ref{fig:done-status} there are several options that fit the general trend of the curve:
 
 \begin{itemize}
 	\item Logistic model $ Y = \frac{A}{1 + e^{-rt}} $
@@ -8,7 +8,7 @@ In the following section we try to find and determine a model to describe the ev
 	\item Asymptotic model $ Y = A + Be^{-rt}$
 \end{itemize} 
 
-The next step is to find the most adapt for our case, by looking for the requirement and assumption of each model some of them need to be excluded. The first one is quickly discarded because it requires the output to have only two possible outcomes, such as "success" and "failure", this is not the case.
+The next step is to find the most adapt for our case: by looking for the requirements and assumptions of each model, some of them need to be excluded. The first one is quickly discarded because it requires the output to have only two possible outcomes, such as "success" and "failure", this is not the case.
 Similarly the Sigmoid model is discard because it assume the output to follow a S shape behavior with a slow start,an accelerated growth and then a slow decline, depending on the configuration for the runs this is not always true.
 
 
@@ -30,6 +30,9 @@ The requirements for both Gompertz and asymptotic models are met, in particular:
 		\end{itemize}
 \end{itemize}
 
+%TODO rimuovere esclusione del modello sigmoidale e aggiunta esclusione dell'asintotico causa derivata seconda
+% analisi sui residui considerando diverse combinazioni di parametri: a titolo di esempio, 
+
 By performing a residual analysis the Gomperz model result to be the most suited for our samples, it also fits the logic of one of its typical usage of examining disease spread. Following there is the QQ plot between the theoretical distribution on the X axis and the sample one in the Y axis.
 
 \begin{figure}[H]
@@ -40,7 +43,7 @@ By performing a residual analysis the Gomperz model result to be the most suited
 It is clear that there is a linear relationship between the values from our sample and the ones from the Gompertz model, this is also indicated by the value for $R^2$.
 
 \section{Factorial analysis on the models parameters}
-As previously stated we consider for extremes the values 0.15 and 0.85 for probability and 10 and 75 for the range.
+As previously stated we consider for extremes the values 0.15 and 0.85 for probability and 10 and 75 for the radius.
 
 The Gompertz model ($ Y = Ae^{-Be^{-rt}} $) has three parameters:
 \begin{itemize}
@@ -144,13 +147,13 @@ Finally we end up with the tables for the growth rate.
 \end{table}
 
 
-These results confirm our initial ideas and expectations, the first thing to notice is the influences for the asymptote are similar to the ones for the coverage percentage; this make sense because the asymptote is the maximum reach of the curve and the coverage percentage is the maximum coverage that a run achieves, so it's natural for them to be almost the same. 
+These results confirm our initial ideas and expectations: the first thing to notice is that the influences for the asymptote are similar to the ones for the coverage percentage; this make sense because the asymptote is the maximum height of the curve and the coverage percentage is the maximum coverage that a run achieves, so it's natural for them to be almost the same. 
 
 \medskip
-The displacement represent how high is the rate for nodes in the done status at the second clock of each run, the first one is excluded because it's always constant due to the fact that at the first clock only the zero-patient node is done. By translating these results on the actual model for the analysis the displacement represent how well is connected the firstly infected node and how many of its neighbor immediately pass the check for sending a new infection message. It make sense for the radius to have 90\% influence because having a big radius means having a lot of neighbor. Pay attention that the q values in \ref{tab:InflDisp} are negative so, by incrementing the radius, we are diminishing the displacement; this makes sense since lower values for the B parameter indicates a higher Y(t) when t = 0 in the Gompertz function. A low displacement is not always a good thing however because a big radius, as previously shown, can lead to more collision and less coverage percentage in some cases. 
+The displacement represent how high is the percentage of nodes in the done status at the second clock of each run, the first one is excluded because it's always constant due to the fact that at the first clock only the zero-patient node is done. By translating these results on the actual model for the analysis, the displacement represent how well the firstly infected node is connected and how many of its neighbors immediately pass the RV threshold for sending a new infection message. It make sense for the radius to have 90\% influence because having a big radius means having a lot of neighbors. Pay attention that the q values in Table \ref{tab:InflDisp} are negative so, by incrementing the radius, we are diminishing the displacement; this makes sense since lower values for the B parameter indicates a higher Y(t) when t = 0 in the Gompertz function. A low displacement is not always a good thing however because a big radius, as previously shown, can lead to more collision and less coverage percentage in some cases. 
 
 \medskip
-The growth rate, as its name suggests, indicates how much fast the curve in grows. In regards of the analysis a high growth rate is achieved when nodes do not experience many collisions and, after receiving a message correctly, can quickly transmit which translate to quickly passing the lottery. So it make sense for the probability to influence the 55\% of the result. The radius accounts for a little more the a third of the influence this is easy to imagine since a high radius means a high number of nodes reached.
+In regards of the analysis a high growth rate is achieved when nodes do not experience many collisions and thus, after receiving a message correctly, can quickly relay it. So it make sense for the probability to influence the 55\% of the result. The radius accounts for a little more the a third of the influence: this is easy to imagine since a high radius means a high number of nodes reached.
 
 \medskip
-These results give us an general idea on how the factor weight on the model and how to maximize certain aspect of it, but to perform a proper analysis of the system it is a good idea to pair these values with the box-plot and factorial analysis previously presented.
+These results give us a general idea on how the factors weight on the model and how to maximize certain aspects of it, but to perform a proper analysis of the system it is a good idea to pair these values with the box-plot and factorial analysis previously presented.
