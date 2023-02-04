@@ -1,6 +1,6 @@
 \section{Introduction}
 \subsection{Problem Description}
-$N$ nodes are randomly placed on a 2D \textit{floorplan}. A random node within the floorplan produces a \textit{message} that should reach all users as soon as possible. Communications are slotted. Each node has a broadcast radius $R$ defined so that only the receivers within that radius from the transmitter receive the message. A node that receives more than one message in the same slot experiences a collision and isn't able to decode any of them.
+$N$ nodes are randomly placed on a 2D \textit{floorplan}. A random node within the floorplan produces a \textit{message} that should reach all users as soon as possible. Communications are slotted. Each node has a broadcast radius $R$ defined so that only the receivers within that radius from the transmitter receive the message. A node that receives more than one message in the same slot experiences a collision and it is not able to decode any of them.
 
 After a node successfully receives a message, it keeps extracting a value from a Bernoullian RV with success probability $p$ on every slot, until it achieves success, after which it relays the message and stops.
 
@@ -31,7 +31,7 @@ For each combination of these parameters, we performed $33$ repetitions, in orde
 The following modules have been implemented:
 \begin{itemize}
 \item \texttt{Node} that can receive and transmit messages according to the specifications
-\item \texttt{StatCollector} that retrieves statistical information from the system for each time slot, after all nodes have completed their task
+\item \texttt{StatCollector} that retrieves statistical information from the system at every time slot.
 \end{itemize}
 For debugging purpose, a color code inside omnetpp's graphical interface has been chosen to reflect the status of each node at every instant, as can be seen in Figure \ref{fig:floorplan}
 
@@ -45,11 +45,11 @@ For debugging purpose, a color code inside omnetpp's graphical interface has bee
 \subsection{Node Behaviour}
 A node can be found on 5 different statuses
 \begin{itemize}
-\item \textit{Waiting}. Node is listening for an upcoming message from one of its neighbors (gray)
-\item \textit{OneMessage}. Node received exactly one message in this time slot. At the end of it, if it doesn't receive any other message, it will transition to the Ready state, otherwise it will be a Collision (blue)
-\item \textit{Collision}. Node received more that one message in this time slot. In the next time slot it will restart its cycle from the Waiting state (orange)
-\item \textit{Ready}. Node has a valid copy of the message. At the start of every time slot the Node extracts a uniformly distributed RV $\sim U(0,1)$ and confronts it with a constant threshold $p$. If it succeeds, it relays the message to its neighbors and transitions to the Done state, regardless of it having generated a collision or not, otherwise it remains in the Ready status. Over multiple time-slots, this implements the event of status transitions as a Bernoullian distributed RV with probability $p$(green)
-\item \textit{Done}. The node has completed its cycle. It won't respond to any more incoming messages (red)
+\item \textit{Waiting}. (gray) Node is listening for an upcoming message from one of its neighbors.
+\item \textit{OneMessage}. (blue) Node received exactly one message in this time slot. At the end of it, if it doesn't receive any other message, it will perform the random experiment as described in the Ready state, otherwise it will be a Collision.
+\item \textit{Collision}. (orange) Node received more that one message in this time slot. In the next time slot it will restart its cycle from the Waiting state.
+\item \textit{Ready}. (green) Node has a valid copy of the message. At the start of every time slot the Node extracts a uniformly distributed RV $\sim U(0,1)$ and confronts it with a constant threshold $p$. If it succeeds, it relays the message to its neighbors and transitions to the Done state, regardless of it having generated a collision or not, otherwise it remains in the Ready status. Over multiple time-slots, this implements the event of status transitions as a Bernoullian distributed RV with probability $p$.
+\item \textit{Done}. (red) The node has completed its cycle. It won't respond to any more incoming messages. 
 \end{itemize}
 Synchronization between nodes is idealized and isn't modeled. Each node starts its communication exactly at the beginning of the current time-slot.
 
@@ -62,7 +62,7 @@ Synchronization between nodes is idealized and isn't modeled. Each node starts i
 \subsection{StatCollector Behaviour}
 This module is a singleton for each simulation and isn't accessible to the rest of nodes. Because we assumed that every communication completes after $250$ ms (the delay of transmission), this modules executes with the same slotted frequency as all other nodes but with an offset of $500$ ms. This guarantees that the information retrieved by \texttt{StatCollector} comes after every node has already transitioned to the new status. From now on, if any time indication contains a $n,5$ offset, it is considered relative to the $n$-th time slot.
 
-This module saves the relative distribution of nodes between the different statuses, i.e. what fraction of the system is in what state for each time-slot. %TODO explain it better!
+This module saves the relative distribution of nodes between the different statuses, i.e. what fraction of the system is in what state for each time-slot.
 
 \iffalse
 presentazione problema

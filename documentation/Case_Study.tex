@@ -1,6 +1,6 @@
 \section{Case Study: 200 Nodes}
 \subsection{Introduction}
-In this chapter we want to analyze the case at 200 nodes, as it is the quantity that is halfway between our configurations. At the end of the simulations we decided to calculate the average coverage rate, summarized in this table.
+In this chapter we analyze the case at 200 nodes, as it is the quantity that is halfway between our configurations. At the end of the simulations we decide to calculate the average coverage percentage, summarized in this table.
 
 \begin{table}[h!]
 \centering
@@ -18,7 +18,7 @@ p=1    & 0,47545 & 0,81909 & 0,67121 & 0,76303 & 0,96727 \\ \hline
 \label{tab:mean-coverage-percentage}
 \end{table}
 
-Since the mean didn't give enough information about the index variation, we decided to calculate the standard deviation as well.
+Since the mean does not give enough information about the index variation, we decide to calculate the standard deviation as well.
 \begin{table}[h!]
 \centering
 \begin{tabular}{|l|l|l|l|l|l|}
@@ -35,7 +35,7 @@ p=1    & 0,27804 & 0,14129 & 0,17092 & 0,12449 & 0,03833 \\ \hline
 \label{tab:std-coverage-percentage}
 \end{table}
 
-In this way we have excluded the configurations with a difference between mean and standard deviation of the coverage rate less than 90\%. We are interested in configurations that have a satisfactory coverage percentage, as these situations model a reliable real system.
+In this way we exclude the configurations whose difference between mean and standard deviation is less than 90\%. We are interested in configurations that have a satisfactory coverage percentage, as these configurations model a reliable system.
 \begin{table}[h!]
 \centering
 \begin{tabular}{|l|l|l|l|l|l|}
@@ -48,12 +48,12 @@ p=0,7  & 0,46802 & \cellcolor[HTML]{92D050}0,95547 & 0,89807                    
 p=0,85 & 0,3049  & 0,88125                         & 0,78803                         & 0,80636                         & \cellcolor[HTML]{92D050}0,94492 \\ \hline
 p=1    & 0,19741 & 0,67781                         & 0,5003                          & 0,63854                         & \cellcolor[HTML]{92D050}0,92895 \\ \hline
 \end{tabular}
-\caption{Run that we decide to analyze}
+\caption{Runs that we decide to analyze}
 \label{tab:run-to-analyze}
 \end{table}
 
 \subsection{Performance indexes} \label{200Index}
-After selecting the runs to be analysed, we chose to plot the most interesting performance indicators such as the percentage of collisions, coverage and the completion time of each scenario. For symmetry, the graphs also show configurations, such as the one with probability 0.7 and radius 75, which we had previously rejected.
+After selecting the runs to be analysed, we choose to plot the most interesting performance indicators such as: the coverage percentage (Figure \ref{fig:coverage-percentage}), the completion time (Figure \ref{fig:coverage-time200}) and the mean percentage of collisions for each time-slot (Figure \ref{fig:mean-collision-rate200}). For symmetry, the graphs also show configurations, such as the one with probability 0.7 and radius 75, even if they  should not be considered as shown in Table \ref{tab:run-to-analyze}.
 
 \begin{figure}[h!]
 \centering
@@ -79,8 +79,7 @@ After selecting the runs to be analysed, we chose to plot the most interesting p
     \label{fig:mean-collision-rate200}
 \end{figure}
 
-\noindent Looking at coverage percentage graph, it can be seen that increasing the probability does not give better coverage in most cases, as one would expect. In fact, it should be emphasized that as the probability increases, collisions also increase accordingly. As imagined, the coverage time decreases as the probability increases, as a higher probability translates into more nodes that can send the infection message. As regards the collision index, the average value from the initial instant to the completion instant was obtained for all 33 runs. For this index, as expected, there is an increasing trend with the growth of probability, in fact more nodes can transmit at the same time the message. It should be noted that as the radius and the probability increase, the possibility of having many nodes reached by the infection message in the first instants without collisions is high. It also should be highlighted that excluding the borderline case with 50,75 and 100 radii show worse coverage and on average a higher collision rate. 
-
+\noindent Looking at coverage percentage graph (Fig. \ref{fig:coverage-percentage}), it can be seen that increasing the probability does not give better coverage in most cases, as one would expect. In fact, it should be emphasized that as the probability increases, collisions also tend to increase accordingly. As imagined, the coverage time (Fig. \ref{fig:coverage-time200}) decreases as the probability increases, as a higher probability translates into more nodes that can send the infection message. Regarding the collision index (Fig \ref{fig:mean-collision-rate200}), the average values were obtained for each repetition. For this index, as expected, there is an increasing trend with the growth of probability which implies that more nodes can transmit the message in the same time-slot. It also should be noted that the cases with 75 and 100 radii do not follow the highlighted patters: the reason why is because, as the radius and the probability increase, the possibility of having many nodes reached by the infection message in the first instant is high.
 \clearpage 
 
 \subsection{Hierarchy of priorities}
@@ -89,11 +88,11 @@ Thinking of a real system we have elaborated a hierarchy of priorities to try to
 \begin{enumerate}
 \item High coverage percentage
 \item Minimum coverage time
-\item Minimum collision rate
+\item Minimum collision percentage
 \end{enumerate}
 
 Considering runs of interest, as highlighted in Table \ref{tab:run-to-analyze}, we filter only those with $(p=0.15)$ and with $(p=0.3;r=75)$, as they are the only configurations always covering all nodes.
-We can rank them based on the coverage time, using Table \ref{fig:coverage-time} and we see that an increase for low probabilities is clearly beneficial for a system speed-up. We can observe that the third quartile for $p=0.3$, $r=75$ is strictly below the first quartile for every configuration with $p=0.15$ and thus we can assert with a confidence level of at least 75\% that this configuration is faster. Therefore we choose it as the best trade-off to analyze.
+We can rank them based on the coverage time, using Figure \ref{fig:coverage-time200} and we see that an increase in probability is clearly beneficial for a system speed-up although with a diminishing return. We can observe that the third quartile for $p=0.3$, $r=75$ is strictly below the first quartile for every configuration with $p=0.15$ and thus we can assert with a confidence level of at least 75\% that this configuration is faster. Therefore we choose it as the best trade-off to analyze.
 
 \subsection{Time evolution}
 Thanks to the data collected, we have the state of the system for each instant of time, and we are able to analyze the temporal evolution of the system. Considering the case with 200 nodes, we examine all four combinations of radius $(10-75)$ and probability $(0.3-0.85)$, plus the special configuration $p=0.30$ and $r=10$. 
