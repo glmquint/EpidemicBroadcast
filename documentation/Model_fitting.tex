@@ -9,10 +9,10 @@ In the following section we try to find and determine a model to describe the ev
 \end{itemize} 
 
 The next step is to find the most adapt for our case: by looking for the requirements and assumptions of each model, some of them need to be excluded. The first one is quickly discarded because it requires the output to have only two possible outcomes, such as "success" and "failure", this is not the case.
-Similarly the Sigmoid model is discard because it assume the output to follow a S shape behavior with a slow start,an accelerated growth and then a slow decline, depending on the configuration for the runs this is not always true.
+Similarly the asymptotic model is discarded because its second derivative have no change of sign, this is not applicable to the system because, as show in Figure \ref{fig:done-status-log} the function can have a change in curvature.
 
 
-The requirements for both Gompertz and asymptotic models are met, in particular:
+The requirements for both Gompertz and Sigmoid models are met, in particular:
 \begin{itemize}
 	\item the outcome variable is continuous
 	\item there is no multicollinearity
@@ -24,20 +24,20 @@ The requirements for both Gompertz and asymptotic models are met, in particular:
 		\begin{itemize}
 			\item the sample shows a monotonic behavior
 		\end{itemize}
-		\item for the asymptotic
+		\item for the sigmoid
 		\begin{itemize}
-			\item the sample shows a asymptotic behavior
+			\item the sample shows a behavior with a fast growth and slow decline
 		\end{itemize}
 \end{itemize}
 
-%TODO rimuovere esclusione del modello sigmoidale e aggiunta esclusione dell'asintotico causa derivata seconda
-% analisi sui residui considerando diverse combinazioni di parametri: a titolo di esempio, 
 
-By performing a residual analysis the Gomperz model result to be the most suited for our samples, it also fits the logic of one of its typical usage of examining disease spread. Following there is the QQ plot between the theoretical distribution on the X axis and the sample one in the Y axis.
+
+By performing a residual analysis the Gomperz model result to be the most suited for our samples i. e. for the configuration of $p=0.15 r=75$ the MSE value for Gompertz is 0,0027 meanwhile the one for the sigmoid is 0,2984. Note that these values are very close to 0 since a spreadsheet solver was used to minimize the MSE, a QQ plot for this configuration is shown below. In addition the use of the Gompertz model fits the logic of one of its typical case: examining disease spread.
 
 \begin{figure}[H]
 \centering
     \includegraphics[width= 1\textwidth]{./images/QQPlot200.png}
+    \caption{QQ plot for the Gompertz model for runs with configuration $p=0.15 r=75$}
 \end{figure}
 
 It is clear that there is a linear relationship between the values from our sample and the ones from the Gompertz model, this is also indicated by the value for $R^2$.
