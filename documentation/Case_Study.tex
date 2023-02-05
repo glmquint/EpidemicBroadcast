@@ -2,55 +2,63 @@
 \subsection{Introduction}\label{subsec:case-study-200}
 In this chapter we analyze the case at 200 nodes, as it is the quantity that is halfway between our configurations. At the end of the simulations we decide to calculate the average coverage percentage, summarized in this table.
 
-\begin{table}[h!]
+
+
+\begin{table}[H]
 \centering
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
-       & r=10    & r=30    & r=50    & r=75    & r=100   \\ \hline
-p=0,15 & 0,90727 & 1       & 1       & 1       & 1       \\ \hline
-p=0,3  & 0,89379 & 0,99924 & 0,99561 & 1       & 0,99924 \\ \hline
-p=0,5  & 0,79909 & 0,99424 & 0,98803 & 0,98894 & 0,99591 \\ \hline
-p=0,7  & 0,71045 & 0,97985 & 0,96455 & 0,93727 & 0,9903  \\ \hline
-p=0,85 & 0,57303 & 0,94212 & 0,90212 & 0,91833 & 0,9797  \\ \hline
-p=1    & 0,47545 & 0,81909 & 0,67121 & 0,76303 & 0,96727 \\ \hline
+ & \textbf{r=10} & \textbf{r=30} & \textbf{r=50} & \textbf{r=75} & \textbf{r=100} \\ \hline
+\textbf{p=0.15} & 0,9073 & 1 & 1 & 1 & 1 \\ \hline
+\textbf{p=0.3} & 0,8938 & 0,9992 & 0,9956 & 1 & 0,9992 \\ \hline
+\textbf{p=0.5} & 0,7991 & 0,9942 & 0,9880 & 0,9889 & 0,9959 \\ \hline
+\textbf{p=0.7} & 0,7105 & 0,9798 & 0,9645 & 0,9373 & 0,9903 \\ \hline
+\textbf{p=0.85} & 0,5730 & 0,9421 & 0,9021 & 0,9183 & 0,9797 \\ \hline
+\textbf{p=1} & 0,4755 & 0,8191 & 0,6712 & 0,7630 & 0,9673 \\ \hline
 \end{tabular}
 \caption{Mean coverage percentage}
 \label{tab:mean-coverage-percentage}
 \end{table}
 
+
 Since the mean does not give enough information about the index variation, we decide to calculate the standard deviation as well.
-\begin{table}[h!]
+
+
+\begin{table}[H]
 \centering
-\begin{tabular}{|l|l|l|l|l|l|}
+\begin{tabular}{|c|r|r|r|r|r|}
 \hline
-       & r=10    & r=30    & r=50    & r=75    & r=100   \\ \hline
-p=0,15 & 0,16006 & 0       & 0       & 0       & 0       \\ \hline
-p=0,3  & 0,12149 & 0,00283 & 0,01886 & 0       & 0,00435 \\ \hline
-p=0,5  & 0,21101 & 0,00686 & 0,0454  & 0,02858 & 0,01618 \\ \hline
-p=0,7  & 0,24243 & 0,02438 & 0,06648 & 0,09235 & 0,02274 \\ \hline
-p=0,85 & 0,26813 & 0,06087 & 0,11409 & 0,11198 & 0,03477 \\ \hline
-p=1    & 0,27804 & 0,14129 & 0,17092 & 0,12449 & 0,03833 \\ \hline
+ & \multicolumn{1}{c|}{\textbf{r=10}} & \multicolumn{1}{c|}{\textbf{r=30}} & \multicolumn{1}{c|}{\textbf{r=50}} & \multicolumn{1}{c|}{\textbf{r=75}} & \multicolumn{1}{c|}{\textbf{r=100}} \\ \hline
+\textbf{p=0.15} & 0,1601 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{p=0.3} & 0,1215 & 0,0028 & 0,0189 & 0,0000 & 0,0044 \\ \hline
+\textbf{p=0.5} & 0,2110 & 0,0069 & 0,0454 & 0,0286 & 0,0162 \\ \hline
+\textbf{p=0.7} & 0,2424 & 0,0244 & 0,0665 & 0,0923 & 0,0227 \\ \hline
+\textbf{p=0.85} & 0,2681 & 0,0609 & 0,1141 & 0,1120 & 0,0348 \\ \hline
+\textbf{p=1} & 0,2780 & 0,1413 & 0,1709 & 0,1245 & 0,0383 \\ \hline
 \end{tabular}
 \caption{Standard deviation of the coverage percentage}
 \label{tab:std-coverage-percentage}
 \end{table}
 
 In this way we exclude the configurations whose difference between mean and standard deviation is less than 90\%. We are interested in configurations that have a satisfactory coverage percentage, as these configurations model a reliable system.
-\begin{table}[h!]
+
+\begin{table}[H]
 \centering
-\begin{tabular}{|l|l|l|l|l|l|}
+\begin{tabular}{|c|c|c|c|c|c|}
 \hline
-       & r=10    & r=30                            & r=50                            & r=75                            & r=100                           \\ \hline
-p=0,15 & 0,74721 & \cellcolor[HTML]{92D050}1       & \cellcolor[HTML]{92D050}1       & \cellcolor[HTML]{92D050}1       & \cellcolor[HTML]{92D050}1       \\ \hline
-p=0,3  & 0,7723  & \cellcolor[HTML]{92D050}0,99641 & \cellcolor[HTML]{92D050}0,97674 & \cellcolor[HTML]{92D050}1       & \cellcolor[HTML]{92D050}0,99489 \\ \hline
-p=0,5  & 0,58808 & \cellcolor[HTML]{92D050}0,98738 & \cellcolor[HTML]{92D050}0,94263 & \cellcolor[HTML]{92D050}0,96036 & \cellcolor[HTML]{92D050}0,97973 \\ \hline
-p=0,7  & 0,46802 & \cellcolor[HTML]{92D050}0,95547 & 0,89807                         & 0,84492                         & \cellcolor[HTML]{92D050}0,96756 \\ \hline
-p=0,85 & 0,3049  & 0,88125                         & 0,78803                         & 0,80636                         & \cellcolor[HTML]{92D050}0,94492 \\ \hline
-p=1    & 0,19741 & 0,67781                         & 0,5003                          & 0,63854                         & \cellcolor[HTML]{92D050}0,92895 \\ \hline
+ & \textbf{r=10} & \textbf{r=30} & \textbf{r=50} & \textbf{r=75} & \textbf{r=100} \\ \hline
+\textbf{p=0.15} & 0,7472 & \cellcolor[HTML]{92D050}1 & \cellcolor[HTML]{92D050}1 & \cellcolor[HTML]{92D050}1 & \cellcolor[HTML]{92D050}1 \\ \hline
+\textbf{p=0.3} & 0,7723 & \cellcolor[HTML]{92D050}0,9964 & \cellcolor[HTML]{92D050}0,9767 & \cellcolor[HTML]{92D050}1 & \cellcolor[HTML]{92D050}0,9949 \\ \hline
+\textbf{p=0.5} & 0,5881 & \cellcolor[HTML]{92D050}0,9874 & \cellcolor[HTML]{92D050}0,9426 & \cellcolor[HTML]{92D050}0,9604 & \cellcolor[HTML]{92D050}0,9797 \\ \hline
+\textbf{p=0.7} & 0,4680 & \cellcolor[HTML]{92D050}0,9555 & 0,8981 & 0,8449 & \cellcolor[HTML]{92D050}0,9676 \\ \hline
+\textbf{p=0.85} & 0,3049 & 0,8813 & 0,7880 & 0,8064 & \cellcolor[HTML]{92D050}0,9449 \\ \hline
+\textbf{p=1} & 0,1974 & 0,6778 & 0,5003 & 0,6385 & \cellcolor[HTML]{92D050}0,9289 \\ \hline
 \end{tabular}
 \caption{Runs that we decide to analyze}
 \label{tab:run-to-analyze}
 \end{table}
+
+
 
 \subsection{Performance indexes} \label{200Index}
 After selecting the runs to be analysed, we choose to plot the most interesting performance indicators such as: the coverage percentage (Figure \ref{fig:coverage-percentage}), the completion time (Figure \ref{fig:coverage-time200}) and the mean percentage of collisions for each time-slot (Figure \ref{fig:mean-collision-rate200}). For symmetry, the graphs also show configurations, such as the one with probability 0.7 and radius 75, even if they  should not be considered as shown in Table \ref{tab:run-to-analyze}.
@@ -129,31 +137,28 @@ Starting with the final node coverage, i.e. the fraction of nodes in the Done st
 \centering
 \begin{tabular}{|cc|cc|}
 \hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{\textbf{Asymptote}}} & \multicolumn{2}{c|}{\textbf{Radius}} \\ \cline{3-4} 
+\multicolumn{2}{|c|}{\multirow{2}{*}{\textbf{Coverage percentage}}} & \multicolumn{2}{c|}{\textbf{Radius}} \\ \cline{3-4} 
 \multicolumn{2}{|c|}{} & \multicolumn{1}{c|}{\textbf{10}} & \textbf{75} \\ \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Probability}}} & \textbf{15} & \multicolumn{1}{c|}{0,9073} & 1,0000 \\ \cline{2-4} 
+\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Probability}}} & \textbf{15} & \multicolumn{1}{c|}{0,9073} & 1 \\ \cline{2-4} 
 \multicolumn{1}{|c|}{} & \textbf{85} & \multicolumn{1}{c|}{0,5730} & 0,9183 \\ \hline
 \end{tabular}
 \caption{Extreme factor levels for ending coverage}
 \label{tab:extreme-factors-end-coverage}
 \end{table}
 
-
 \begin{table}[H]
 \centering
-\begin{tabular}{|l|l|l|l|l|l|l|}
-\hline
-                       & I        & Prob     & Radius   & RP       &          &          \\ \hline
-                       & 1        & -1       & -1       & 1        & 0,907273 & 0,003319 \\ \hline
-                       & 1        & 1        & -1       & -1       & 0,57303  & 0,076523 \\ \hline
-                       & 1        & -1       & 1        & -1       & 1        & 0,022602 \\ \hline
-                       & 1        & 1        & 1        & 1        & 0,918333 & 0,004716 \\ \hline
-4q                     & 3,398636 & -0,41591 & 0,43803  & 0,252576 &          & 0,107161 \\ \hline
-q                      & 0,849659 & -0,10398 & 0,109508 & 0,063144 &          &          \\ \hline
-4 q\textasciicircum{}2 &          & 0,043245 & 0,047968 & 0,015949 &          &          \\ \hline
-                       &          &          &          &          &          &          \\ \hline
-Influenza              &          & 0,403551 & 0,447621 & 0,148828 &          &          \\ \hline
-
+\begin{tabular}{c|c|c|c|c|cc}
+\cline{2-7}
+ & \textbf{I} & \textbf{Probability} & \textbf{Radius} & \textbf{Combined} & \multicolumn{1}{c|}{\textbf{Cov. Perc}} & \multicolumn{1}{c|}{\textbf{SD\_i}} \\ \cline{2-7} 
+ & 1 & -1 & -1 & 1 & \multicolumn{1}{c|}{0,9073} & \multicolumn{1}{c|}{0,0033} \\ \cline{2-7} 
+ & 1 & 1 & -1 & -1 & \multicolumn{1}{c|}{0,5730} & \multicolumn{1}{c|}{0,0765} \\ \cline{2-7} 
+ & 1 & -1 & 1 & -1 & \multicolumn{1}{c|}{1,0000} & \multicolumn{1}{c|}{0,0226} \\ \cline{2-7} 
+ & 1 & 1 & 1 & 1 & \multicolumn{1}{c|}{0,9183} & \multicolumn{1}{c|}{0,0047} \\ \hline
+\multicolumn{1}{|c|}{\textbf{4q}} & 3,3986 & -0,4159 & 0,4380 & 0,2526 & \multicolumn{1}{c|}{Total} & \multicolumn{1}{c|}{0,1072} \\ \hline
+\multicolumn{1}{|c|}{\textbf{q}} & 0,8497 & -0,1040 & 0,1095 & 0,0631 &  &  \\ \cline{1-5}
+\multicolumn{1}{|c|}{\textbf{4 q\textasciicircum{}2}} &  & 0,0432 & 0,0480 & 0,0159 &  &  \\ \cline{1-5}
+\multicolumn{1}{|c|}{\textbf{Influenza}} &  & 0,4036 & 0,4476 & 0,1488 &  &  \\ \cline{1-5}
 \end{tabular}
 \caption{Influence of factors for ending coverage}
 \label{tab:influence-on-end-coverage}
@@ -168,7 +173,7 @@ Regarding the completion time, the extreme values are shown in Table \ref{tab:ex
 \centering
 \begin{tabular}{|cc|cc|}
 \hline
-\multicolumn{2}{|c|}{\multirow{2}{*}{\textbf{Displacement}}} & \multicolumn{2}{c|}{\textbf{Radius}} \\ \cline{3-4} 
+\multicolumn{2}{|c|}{\multirow{2}{*}{\textbf{Coverage time}}} & \multicolumn{2}{c|}{\textbf{Radius}} \\ \cline{3-4} 
 \multicolumn{2}{|c|}{} & \multicolumn{1}{c|}{\textbf{10}} & \textbf{75} \\ \hline
 \multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Probability}}} & \textbf{15} & \multicolumn{1}{c|}{111,0152} & 47,6515 \\ \cline{2-4} 
 \multicolumn{1}{|c|}{} & \textbf{85} & \multicolumn{1}{c|}{21,4091} & 7,2576 \\ \hline
@@ -177,11 +182,11 @@ Regarding the completion time, the extreme values are shown in Table \ref{tab:ex
 \label{tab:extreme-factors-time-coverage}
 \end{table}
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering
 \begin{tabular}{c|c|c|c|c|cc}
 \cline{2-7}
- & \textbf{I} & \textbf{Probability} & \textbf{Radius} & \textbf{Combined} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{} \\ \cline{2-7} 
+ & \textbf{I} & \textbf{Probability} & \textbf{Radius} & \textbf{Combined} & \multicolumn{1}{c|}{\textbf{Cov. time}} & \multicolumn{1}{c|}{\textbf{SD\_i}} \\ \cline{2-7} 
  & 1 & -1 & -1 & 1 & \multicolumn{1}{c|}{111,0152} & \multicolumn{1}{c|}{4119,3058} \\ \cline{2-7} 
  & 1 & 1 & -1 & -1 & \multicolumn{1}{c|}{21,4091} & \multicolumn{1}{c|}{646,3921} \\ \cline{2-7} 
  & 1 & -1 & 1 & -1 & \multicolumn{1}{c|}{47,6515} & \multicolumn{1}{c|}{0,6694} \\ \cline{2-7} 
@@ -189,7 +194,7 @@ Regarding the completion time, the extreme values are shown in Table \ref{tab:ex
 \multicolumn{1}{|c|}{\textbf{4q}} & 187,3333 & -130,0000 & -77,5152 & 49,2121 & \multicolumn{1}{c|}{Total} & \multicolumn{1}{c|}{6332,6079} \\ \hline
 \multicolumn{1}{|c|}{\textbf{q}} & 46,8333 & -32,5000 & -19,3788 & 12,3030 &  &  \\ \cline{1-5}
 \multicolumn{1}{|c|}{\textbf{4 q\textasciicircum{}2}} &  & 4225,0000 & 1502,1497 & 605,4582 &  &  \\ \cline{1-5}
-\multicolumn{1}{|c|}{\textbf{Influence}} &  & 0,6672 & 0,2372 & 0,0956 &  &  \\ \cline{1-5}
+\multicolumn{1}{|c|}{\textbf{Influenza}} &  & 0,6672 & 0,2372 & 0,0956 &  &  \\ \cline{1-5}
 \end{tabular}
 \caption{Influence of factors for time coverage}
 \label{tab:influence-on-time-coverage}
