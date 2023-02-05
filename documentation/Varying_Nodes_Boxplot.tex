@@ -46,76 +46,67 @@ Finally we can see that lower probabilities tend to perform better than higher o
 
 \subsection{50 and 700 cases}
 
-At the edges of the node numbers chosen for our configurations we have 50 and 700. We now want to analyze the performance indixes for 50 and then for 700 nodes, to discover any similarities and/or differences with the case at 200. Note that for readability, the configuration of $r=10$ for $700$ nodes is not shown, even if it should not be excluded since  its coverage percentage is within acceptable range.
-\subsubsection{Coverage percentage}\label{subsec:CovPerc}
-\begin{figure}[H]
-\minipage{0.50\linewidth}
-  \includegraphics[width=\linewidth]{./images/Rate50Boxplot.png}
-  \caption{50 Nodes}\label{fig:awesome_image1}
-\endminipage\hfill
-\minipage{0.50\linewidth}
-  \includegraphics[width=\linewidth]{./images/Rate200Boxplot.png}
-  \caption{200 Nodes}\label{fig:awesome_image2}
-\endminipage
-\end{figure}
+At the edges of the node numbers chosen for our configurations we have 50 and 700. We now want to analyze the performance indixes for 50 and then for 700 nodes, to discover any similarities and/or differences with the case at 200. Note that for readability, the configuration of $r=10$ for $700$ nodes is not shown, even if it should not be excluded since  its coverage percentage is within acceptable range. 
+As can be seen in figure \ref{subsec:CovPerc}, by varying the number of nodes, the visible trends for the case of 200 nodes as highlighted in section \ref{200Index} seem to be confirmed. As regards the coverage time at low probabilities, an increase is noted, as expected, as the number of nodes increases. It is also visible how as the number of nodes increases, and therefore their density in the plane, the number of collisions increases, even for very low radii and probabilities. However, it must be specified that a high number of collisions does not necessarily imply a worse percentage of coverage. It should also be noted that an increase in node density has two different effects on data variability. Firstly, an increase in variance for coverage time caused by a higher percentage of collisions. Secondly, a decrease in variance for coverage percentage due to the fact that the same amount of nodes that do not receive the infection message correctly accounts for a minor portion of the total coverage. 
 
-\begin{figure}[H]
-\minipage{0.50\linewidth}
-  \includegraphics[width=\linewidth]{./images/Rate700Boxplot.png}
-  \caption{700 Nodes}\label{fig:awesome_image1}
-\endminipage\hfill
-\minipage{0.50\linewidth}
-  \includegraphics[width=\linewidth]{./images/Rate200Boxplot.png}
-  \caption{200 Nodes}\label{fig:awesome_image2}
-\endminipage
-\end{figure}
-
+\begin{sidewaysfigure}
+\begin{subfigure}{0.35\hsize}\centering
+    \includegraphics[width=1\hsize]{./images/Rate50Boxplot.png}
+\caption{50 Nodes}  
+\end{subfigure}%
+%\hfill <-- it is superfluous 
+\begin{subfigure}{0.35\hsize}\centering
+    \includegraphics[width=1\hsize]{./images/Rate200Boxplot.png}
+\caption{200 Nodes}
+    
+\end{subfigure}
+\begin{subfigure}{0.35\hsize}\centering
+    \includegraphics[width=1\hsize]{./images/Rate700Boxplot.png}
+\caption{700 Nodes}
+    
+\end{subfigure}
+\caption{Coverage percentage}
+\label{subsec:CovPerc} 
+\end{sidewaysfigure}
 
 
-\subsubsection{Coverage time}
-\begin{figure}[H]
-\minipage{0.50\linewidth}
-  \includegraphics[width=\linewidth]{./images/Time50Boxplot.png}
-  \caption{50 Nodes}\label{fig:awesome_image1}
-\endminipage\hfill
-\minipage{0.50\linewidth}
-  \includegraphics[width=\linewidth]{./images/Time200BoxplotScaled.png}
-  \caption{200 Nodes}\label{fig:awesome_image2}
-\endminipage
-\end{figure}
+\begin{sidewaysfigure}
+\begin{subfigure}{0.35\hsize}\centering
+    \includegraphics[width=1\hsize]{./images/Time50Boxplot.png}
+\caption{50 Nodes}
+    \label{fig:sub1}
+\end{subfigure}%
+%\hfill <-- it is superfluous 
+\begin{subfigure}{0.35\hsize}\centering
+    \includegraphics[width=1\hsize]{./images/Time200BoxplotScaled.png}
+\caption{200 Nodes}
+    \label{fig:sub2}
+\end{subfigure}
+\begin{subfigure}{0.35\hsize}\centering
+    \includegraphics[width=1\hsize]{./images/Time700Boxplot.png}
+\caption{700 Nodes}
+    \label{fig:sub2}
+\end{subfigure}
+\caption{Coverage time}
+\end{sidewaysfigure}
 
-\begin{figure}[H]
-\minipage{0.50\linewidth}
-  \includegraphics[width=\linewidth]{./images/Time700Boxplot.png}
-  \caption{700 Nodes}\label{fig:awesome_image1}
-\endminipage\hfill
-\minipage{0.50\linewidth}
-  \includegraphics[width=\linewidth]{./images/Time200BoxplotScaled.png}
-  \caption{200 Nodes}\label{fig:awesome_image2}
-\endminipage
-\end{figure}
 
-\subsubsection{Collision rate}
-\begin{figure}[H]
-\minipage{0.50\linewidth}
-  \includegraphics[width=\linewidth]{./images/Collision50Boxplot.png}
-  \caption{50 Nodes}\label{fig:awesome_image1}
-\endminipage\hfill
-\minipage{0.50\linewidth}
-  \includegraphics[width=\linewidth]{./images/Collision200BoxplotScaled.png}
-  \caption{200 Nodes}\label{fig:awesome_image2}
-\endminipage
-\end{figure}
-
-\begin{figure}[H]
-\minipage{0.50\linewidth}
-  \includegraphics[width=\linewidth]{./images/Collision700Boxplot.png}
-  \caption{700 Nodes}\label{fig:awesome_image1}
-\endminipage\hfill
-\minipage{0.50\linewidth}
-  \includegraphics[width=\linewidth]{./images/Collision200BoxplotScaled.png}
-  \caption{200 Nodes}\label{fig:awesome_image2}
-\endminipage
-\end{figure}
-
-By varying the number of nodes, the visible trends for the case of 200 nodes as highlighted in section \ref{200Index} seem to be confirmed. As regards the coverage time at low probabilities, an increase is noted, as expected, as the number of nodes increases. It is also visible how as the number of nodes increases, and therefore their density in the plane, the number of collisions increases, even for very low radii and probabilities. However, it must be specified that a high number of collisions does not necessarily imply a worse percentage of coverage. It should also be noted that an increase in node density has two different effects on data variability. Firstly, an increase in variance for coverage time caused by a higher percentage of collisions. Secondly, a decrease in variance for coverage percentage due to the fact that the same amount of nodes that do not receive the infection message correctly accounts for a minor portion of the total coverage. 
+\begin{sidewaysfigure}
+\begin{subfigure}{0.35\hsize}\centering
+    \includegraphics[width=1\hsize]{./images/Collision50Boxplot.png}
+\caption{50 Nodes}
+    \label{fig:sub1}
+\end{subfigure}%
+%\hfill <-- it is superfluous 
+\begin{subfigure}{0.35\hsize}\centering
+    \includegraphics[width=1\hsize]{./images/Collision200BoxplotScaled.png}
+\caption{200 Nodes}
+    \label{fig:sub2}
+\end{subfigure}
+\begin{subfigure}{0.35\hsize}\centering
+    \includegraphics[width=1\hsize]{./images/Collision700Boxplot.png}
+\caption{700 Nodes}
+    \label{fig:sub2}
+\end{subfigure}
+\caption{Mean collision percentage}
+\end{sidewaysfigure}
