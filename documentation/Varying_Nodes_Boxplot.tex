@@ -39,15 +39,14 @@ r                           & n                           & \multicolumn{1}{l|}{
 \end{table}
 
 
-It is interesting to notice that lower radii are better suited at higher number of nodes for a better coverage percentage: this happens because the area in which the nodes are distributed does not change so the density increases and so does the number of neighbors for each node. 
+It is interesting to notice that lower radii are better suited at higher number of nodes for a better coverage percentage. This happens because the area in which the nodes are distributed does not change so the node density increases as the number of neighbors; this increases the chances for a fully connected graph. 
 Another thing to notice is that, for the completing time, the values increase with the number of nodes, but they become much worse when the sending probability is lower. This divides each rectangle (one for each group of radii) in two triangles, the lower left with the worse times and the upper right with the best ones and, with a growing radius, the last one gets bigger.
 Finally we can see that lower probabilities tend to perform better than higher ones for coverage percentage despite coverage time, independently from the number of nodes and radius. The only exceptions are the extreme cases of really low radii and number of nodes ($r=10$ with $n=50-100-200$ and $r=30$ with $n=50$)
 
 
 \subsection{50 and 700 cases}
 
-At the edges of the node numbers chosen for our configurations we have 50 and 700. We now want to analyze the performance indixes for 50 and then for 700 nodes, to discover any similarities and/or differences with the case at 200. Note that for readability, the configuration of $r=10$ for $700$ nodes is not shown, even if it should not be excluded by the metrics shown in \ref{subsec:case-study-intro}
-
+At the edges of the node numbers chosen for our configurations we have 50 and 700. We now want to analyze the performance indixes for 50 and then for 700 nodes, to discover any similarities and/or differences with the case at 200. Note that for readability, the configuration of $r=10$ for $700$ nodes is not shown, even if it should not be excluded since  its coverage percentage is within acceptable range.
 \subsubsection{Coverage percentage}\label{subsec:CovPerc}
 \begin{figure}[H]
 \minipage{0.50\linewidth}
@@ -119,4 +118,4 @@ At the edges of the node numbers chosen for our configurations we have 50 and 70
 \endminipage
 \end{figure}
 
-By varying the number of nodes, the visible trends for the case of 200 nodes seem to be confirmed \ref{200Index}. As regards the coverage time at low probabilities, an increase is noted, as expected, as the number of nodes increases. It is also visible how as the number of nodes increases, and therefore their density in the plane, the number of collisions increases, even for very low radii and probabilities. However, it must be specified that a high number of collisions does not necessarily imply a worse percentage of coverage, as the density of the nodes increases for small radii.
+By varying the number of nodes, the visible trends for the case of 200 nodes as highlighted in section \ref{200Index} seem to be confirmed. As regards the coverage time at low probabilities, an increase is noted, as expected, as the number of nodes increases. It is also visible how as the number of nodes increases, and therefore their density in the plane, the number of collisions increases, even for very low radii and probabilities. However, it must be specified that a high number of collisions does not necessarily imply a worse percentage of coverage. It should also be noted that an increase in node density has two different effects on data variability. Firstly, an increase in variance for coverage time caused by a higher percentage of collisions. Secondly, a decrease in variance for coverage percentage due to the fact that the same amount of nodes that do not receive the infection message correctly accounts for a minor portion of the total coverage. 
