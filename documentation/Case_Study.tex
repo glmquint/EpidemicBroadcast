@@ -94,7 +94,7 @@ Thinking of a real system we have elaborated a hierarchy of priorities to try to
 Considering runs of interest, as highlighted in Table \ref{tab:run-to-analyze}, we filter only those with $(p=0.15)$ and with $(p=0.3;r=75)$, as they are the only configurations always covering all nodes.
 We can rank them based on the coverage time, using Figure \ref{fig:coverage-time200} and we see that an increase in probability is clearly beneficial for a system speed-up although with a diminishing return. We can observe that the third quartile for $p=0.3$, $r=75$ is strictly below the first quartile for every configuration with $p=0.15$ and thus we can assert with a confidence level of at least 75\% that this configuration is faster. Therefore we choose it as the best trade-off to analyze.
 
-\subsection{Time evolution}
+\subsection{Time evolution}\label{time-evolution}
 Thanks to the data collected, we have the state of the system for each instant of time, and we are able to analyze the temporal evolution of the system. Considering the case with 200 nodes, we examine all four combinations of radius $(10-75)$ and probability $(0.15-0.85)$, plus the special configuration $p=0.30$ and $r=75$. 
 Figure \ref{fig:done-status} is plotted on a linear time scale and shows the relative speed of completion for the different configuration. In particular, it is evident the negative impact given by a small probability of transmission, especially if coupled with a small radius. 
 Unfortunately, this figure doesn't show confidence intervals, as they would clutter the graph too much, particularly in the most critical initial instants. 

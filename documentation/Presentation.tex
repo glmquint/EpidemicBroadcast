@@ -4,14 +4,14 @@ $N$ nodes are randomly placed on a 2D \textit{floorplan}. A random node within t
 
 After a node successfully receives a message, it keeps extracting a value from a Bernoullian RV with success probability $p$ on every slot, until it achieves success, after which it relays the message and stops.
 
-\subsection{Performance Indexes}
+\subsection{Performance Indexes}\label{sec:perf-index}
 The performance of a given configuration is defined through different performance indexes, namely:
 \begin{itemize}
 \item the time it takes a message to reach all nodes, or alternatively, the time after which every node is either stopped or waiting for a message
 \item the percentage of nodes that have received the message without collisions
 \item the mean percentage of nodes that experiences a collision in a given slot
 \end{itemize}
-\subsection{Parameters and assumptions}
+\subsection{Parameters and assumptions}\label{params-and-assumtions}
 The floorplan is assumed to be square and with a fixed dimension of side $L = 100$ units.
 
 Nodes are initialized with coordinates uniformly distributed on the $x$ and $y$ axis ranging from $0$ to $L$.
