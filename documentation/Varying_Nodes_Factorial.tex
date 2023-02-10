@@ -53,6 +53,7 @@ Let's start with Figure \ref{pic:CovPerc} it is easy to understand that a low de
 
 The coverage time is more tricky to understand, with a high number of nodes it is far more important for the nodes to quickly transmit. However with a low density the behavior for the influences is more chaotic, this happens because, since this analysis takes account only for the coverage time, some runs end immediately with a high probability and low radius however these configurations result in a very low coverage percentage. With 200 nodes a critical point is reached, the reason behind is that this configuration has a high enough density for the runs to not immediately terminate as in the previous cases. This still determines a high influence for the probability factor, but still gains from a higher radius so that more nodes are reached at each transmission. Note that almost all of the values for influence in table \ref{tab:CovTime} are in italics, this make sense because our objective is to diminish the coverage time overall.
 
+\iffalse
 \subsection{Analysis on the models parameters}
 The next step is to perform the same confrontation for the models parameters, obviously the Gompertz model is used since it was already concluded to be the most fitting one
 
@@ -128,3 +129,4 @@ At low density to achieve a high displacement it is necessary to have a high com
 
 For the growth rate it is easy to understand that at high density the probability is the most influencing factor since, even with low radius, nodes tend to have many neighbors. With low density the results are similar, but for another reason. In these conditions, nodes have few neighbors so it is imperative for them to immediately re-transmit the infection message. It is also important to notice that even with a high radius, nodes would not have many more neighbors. At medium density the influence of the factors tends to be more equally distributed; this makes sense because a high probability is still helpful as previously said and a high radius allows the node to have many more neighbors.
 
+\fi
