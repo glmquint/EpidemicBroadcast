@@ -106,9 +106,9 @@ We can rank them based on the coverage time, using Figure \ref{fig:coverage-time
 Thanks to the data collected, we have the state of the system for each instant of time, and we are able to analyze the temporal evolution of the system. Considering the case with 200 nodes, we examine all four combinations of radius $(10-75)$ and probability $(0.15-0.85)$, plus the special configuration $p=0.30$ and $r=75$. 
 Figure \ref{fig:done-status} is plotted on a linear time scale and shows the relative speed of completion for the different configuration. In particular, it is evident the negative impact given by a small probability of transmission, especially if coupled with a small radius. 
 Unfortunately, this figure doesn't show confidence intervals, as they would clutter the graph too much, particularly in the most critical initial instants. 
-Figure \ref{fig:done-status-log} tries to fix this problem by employing a logarithmic scale on the time axis. This allows us to better define differences between configurations, as the colored areas represent the first and third quartiles. It is clear that the special configuration $p=0.30$ and $r=75$ is the fastest one between those that reach a complete coverage. 
-Increasing the probability makes the system faster given that we increase the radius too: this is the difference between the configuration $p=0.85\,r=75$, which is the fastest to reach $85\%$ coverage with a $75\%$ confidence level, and the configuration $p=0.85\,r=10$, which has a higher chance of representing an unconnected graph. 
-Finally, if the problem imposes a small radius, it is clear that drastically reducing the probability (configuration $p=0.15\,r=10$) guarantees a coverage of at least $90\%$ with a $75\%$ confidence level, as we get much fewer collisions. Obviously we must accept the fact that this implies a much longer wait before reaching the final state.
+Figure \ref{fig:done-status-log} tries to fix this problem by employing a logarithmic scale on the time axis. This allows us to better define differences between configurations, as the colored areas represent a 90\% confidence interval. It is clear that the special configuration $p=0.30$ and $r=75$ is the fastest one between those that reach a complete coverage. 
+Increasing the probability makes the system faster given that we increase the radius too: this is the difference between the configuration $p=0.85$ $r=75$, which is the fastest to reach an almost $90\%$ coverage with a $90\%$ confidence level, and the configuration $p=0.85$ $r=10$, which has a higher chance of representing an unconnected graph. 
+Finally, if the problem imposes a small radius, it is clear that drastically reducing the probability (configuration $p=0.15$ $r=10$) guarantees a higher final coverage in regards of other runs with higher probability (configuration $p=0.85$ $r=10$, as we get much fewer collisions. Obviously we must accept the fact that this implies a much longer wait before reaching the final state.
 %which is the preferred one, considering the priorities previously considered. Indeed, we can 
 \begin{figure}[H]
 \centering
@@ -119,7 +119,7 @@ Finally, if the problem imposes a small radius, it is clear that drastically red
 \begin{figure}[H]
 \centering
     \includegraphics[width= 1\textwidth]{./images/temporalDoneLog.png}
-    \caption{Done status on a logarithmic scale with mean and quartiles}
+    \caption{Done status on a logarithmic scale with 90\% CI}
     \label{fig:done-status-log}
 \end{figure}
 
