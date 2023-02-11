@@ -3,7 +3,6 @@
 In this chapter we analyze the case at 200 nodes, as it is the quantity that is halfway between our configurations. At the end of the simulations we decide to calculate the average coverage percentage, summarized in this table.
 
 
-
 \begin{table}[H]
 \centering
 \begin{tabular}{|c|c|c|c|c|c|}
@@ -19,6 +18,58 @@ In this chapter we analyze the case at 200 nodes, as it is the quantity that is 
 \caption{Mean coverage percentage}
 \label{tab:mean-coverage-percentage}
 \end{table}
+
+The following table show the mean coverage time for each run.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+ & \textbf{r=10} & \textbf{r=30} & \textbf{r=50} & \textbf{r=75} & \textbf{r=100} \\ \hline
+\textbf{p=0.15} & 111,0152 & 45,1364 & 49,0455 & 47,6515 & 41,0152 \\ \hline
+\textbf{p=0.3} & 61,8636 & 26,0152 & 29,5909 & 25,3182 & 18,2879 \\ \hline
+\textbf{p=0.5} & 37,8333 & 20,5606 & 21,3182 & 16,7727 & 11,0455 \\ \hline
+\textbf{p=0.7} & 28,0152 & 17,1970 & 15,6515 & 10,5303 & 7,0758 \\ \hline
+\textbf{p=0.85} & 21,4091 & 13,6818 & 11,1061 & 7,2576 & 4,6515 \\ \hline
+\textbf{p=1} & 16,8939 & 9,9242 & 3,8030 & 1,5 & 1,5 \\ \hline
+\end{tabular}
+\caption{Mean coverage time}
+\label{tab:mean-coverage-time}
+\end{table}
+
+
+Since the means do not include any information on the variance of the data, we decide to plot a column graph showing the 90\% confidence interval for the average coverage values (Fig. \ref{fig:200-90CI}). Note that we chose to discard all runs that do not end with a coverage percentage above 95\% with a 90\% coverage. That's why in the following boxplot the runs with radius 10 are not shown.
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{./images/200coverageCI.png}
+  \caption{Coverage percentage}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{./images/200endtimeCI.png}
+  \caption{Coverage time}
+  \label{fig:sub2}
+\end{subfigure}
+\caption{Column graph with 90\% CI}
+\label{fig:200-90CI}
+\end{figure}
+
+
+\iffalse
+
+\begin{figure}[h!]
+    \centering
+    \subfloat[\centering Coverage percentage]{{\includegraphics[width= 8cm]{./images/200coverageCI.png}}}
+    \qquad
+    \subfloat[\centering Coverage time]{{\includegraphics[width=8cm]{./images/200endtimeCI.png}}}
+    \caption{Column graph with 90\% CI}
+    \label{fig:200-90CI}
+\end{figure}
+
 
 
 Since the mean does not give enough information about the index variation, we decide to calculate the standard deviation as well.
@@ -58,14 +109,14 @@ In this way we exclude the configurations whose difference between mean and stan
 \label{tab:run-to-analyze}
 \end{table}
 
-
+\fi
 
 \subsection{Performance indexes} \label{200Index}
-After selecting the runs to be analysed, we choose to plot the most interesting performance indicators such as: the coverage percentage (Figure \ref{fig:coverage-percentage}), the completion time (Figure \ref{fig:coverage-time200}) and the mean percentage of collisions for each time-slot (Figure \ref{fig:mean-collision-rate200}). For symmetry, the graphs also show configurations, such as the one with probability 0.7 and radius 75, even if they  should not be considered as shown in Table \ref{tab:run-to-analyze}.
+After selecting the runs to be analysed, we choose to plot the most interesting performance indicators such as: the coverage percentage (Figure \ref{fig:coverage-percentage}), the completion time (Figure \ref{fig:coverage-time200}) and the mean percentage of collisions for each time-slot (Figure \ref{fig:mean-collision-rate200}). For symmetry, the graphs also show configurations, such as the one with probability 0.7 and radius 75, even if they  should not be considered according to the previously  set standards.
 
 \begin{figure}[h!]
 \centering
-    \includegraphics[width= .9\textwidth]{./images/Rate200Boxplot.png}
+    \includegraphics[width= 1\textwidth]{./images/Rate200Boxplot.png}
     \caption{Coverage percentage}
     \label{fig:coverage-percentage}
 \end{figure}
@@ -73,7 +124,7 @@ After selecting the runs to be analysed, we choose to plot the most interesting 
 
 \begin{figure}[h!]
 \centering
-    \includegraphics[width= .9\textwidth]{./images/Time200Boxplot.png}
+    \includegraphics[width= 1\textwidth]{./images/Time200Boxplot.png}
     \caption{Coverage time}
     \label{fig:coverage-time200}
 \end{figure}
@@ -82,7 +133,7 @@ After selecting the runs to be analysed, we choose to plot the most interesting 
 
 \begin{figure}[h!]
 \centering
-    \includegraphics[width= .9\textwidth]{./images/Collision200Boxplot.png}
+    \includegraphics[width= 1\textwidth]{./images/Collision200Boxplot.png}
     \caption{Mean collision percentage}
     \label{fig:mean-collision-rate200}
 \end{figure}
