@@ -1,17 +1,9 @@
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Lesser General Public License for more details.
-// 
-// You should have received a copy of the GNU Lesser General Public License
-// along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
+/*
+ * Node class implementation
+ *
+ * Node's behavioiur follow a FSM mechanism with 5 states, defined in status.h
+ * A complete description is provided in the documentation
+ */
 
 #include "Node.h"
 #include <stdio.h>
@@ -21,68 +13,62 @@ Define_Module(Node);
 
 # define INFECTION_FRMT "Infetto %d"
 
+// omnetpp's initialization stage
 void Node::initialize()
 {
-    //statCollectorRef = check_and_cast<StatCollector*>(getModuleByPath("statCollector"));
+    // parameter initialization from omnetpp's ini file
     self_id = getIndex();
     limitProbability=par("limitProbability");
     int sumNeighbors = 0;
     numberOfNodes = par("numberOfNodes");
 
+    // discovery of node neighbors that are
+    // reachable within the radius R
     setupAdjacencyList();
     for (int i = 0; i < numberOfNodes; ++i){
         sumNeighbors += isReachable[i];
     }
-
-    /*
-    neighborsSignal = registerSignal("neighbors");
-    endTimeSignal = registerSignal("endTime");
-    collisionSignal = registerSignal("collision");
-    hopSignal = registerSignal("hop");
-    */
-    //EV << self_id << " neighbor count: " << sumNeighbors << endl;
+    // patient zero is set by the configuration file
     if(par("firstInfected")){
         sendAll(0.0);
         star = Done;
         colorNode();
-    } else {
+    } else { // every other node starts in waiting status
         scheduleClock();
         star = Waiting;
-        //emit(endTimeSignal, -1.0);
-        //emit(hopSignal, -1);
     }
-    //emit(neighborsSignal, sumNeighbors);
 }
 
+// O(n^2) implementation of the adjacency matrix
+// Each node computes its bitmask of reachable neighbors
+// within a radius R
+// For an improved performance, a spatial partitioning algorithm
+// could be implemented as a preprocessing stage
 void Node::setupAdjacencyList()
 {
-    isReachable = new bool[numberOfNodes]();
+    isReachable = new bool[numberOfNodes](); // the portion of the adjacency matrix for this node
     char str[8];
     double pos_x = par("pos_x");
     double pos_y = par("pos_y");
     double other_x, other_y;
     double radius_squared = (double)par("radius") * (double)par("radius");
-    for (int i = 0; i < numberOfNodes; ++i){
+    for (int i = 0; i < numberOfNodes; ++i){ // O(n) called once for each node at initialization
         sprintf(str, "nodeX[%d]", i);
         cModule* other = getModuleByPath(str);
         other_x = other->par("pos_x");
         other_y = other->par("pos_y");
         double distance = (other_x - pos_x)*(other_x - pos_x) +
                 (other_y - pos_y)*(other_y - pos_y);
-        isReachable[i] = (i != self_id && radius_squared >= distance);
-//        EV << self_id << "(" << pos_x << "," << pos_y << ")"
-//                << " " << i << "(" << other_x << "," << other_y << ")"
-//                << " -> " << isReachable[i]
-//                << " because distance: " << distance
-//                << " radius_squared: " << radius_squared << endl;
+        isReachable[i] = (i != self_id && radius_squared >= distance); // proximity check and auto-linking exclusion
         cDisplayString& connDispStr = gate("out", i)->getDisplayString();
-        if (isReachable[i])
+        if (isReachable[i]) // link color coding that hides unused connections
             connDispStr.parse("ls=black");
         else
             connDispStr.parse("ls=red,0;");
     }
 }
 
+// omnetpp's implementation of a fixed time slot execution for every node in the graph
 void Node::scheduleClock()
 {
     cMessage *self = new cMessage("clock");
@@ -90,27 +76,24 @@ void Node::scheduleClock()
     scheduleAt(sim,self);
 }
 
+// infection message transmission to all nodes within radius R
 void Node::sendAll(double time)
 {
     for(int i = 0; i < numberOfNodes; ++i ){
-       char str[20];
-       sprintf(str, INFECTION_FRMT, infectionHop);
-
-        if(isReachable[i]){
-            cMessage * mess = new cMessage(str);
-            send(mess,"out",i);
-        }
+        if(!isReachable[i]) // adjacency matrix is used to skip unreachable nodes
+            continue;
+        char str[20];
+        sprintf(str, INFECTION_FRMT, infectionHop);
+        cMessage * mess = new cMessage(str);
+        send(mess,"out",i);
         EV<<"INVIATO "<<str<<endl;
     }
-    //hasInfected=true;
-//    colorNode((char*)"red");
-
-    //emit(endTimeSignal, time);
-    //emit(hopSignal, infectionHop);
 }
 
+// global mapping for node status color coding
 char* STAR2COLOR[STATUS_NUMBER] = {(char*)"lightgrey", (char*)"green", (char*)"orange", (char*)"blue", (char*)"red"};
 
+// node color coding updating
 void Node::colorNode()
 {
     char str[50];
@@ -121,47 +104,56 @@ void Node::colorNode()
     nodeDispStr.parse(str);
 }
 
-Status Node::getStatus(){
+// node status retrieval for stat collection
+Status Node::getStatus()
+{
     return star;
 }
 
+// random experiment as described in requirements
+// A RV is extracted from a uniform distribution
+// and is compared with a fixed treshold
+// Returns the new state the node should transition to,
+// either Done (success) or Ready (failed)
 Status Node::lottery()
 {
     sendingProbability=par("sendingProbability");
     if(sendingProbability<=limitProbability){
-        sendAll(simTime().dbl());
+        sendAll(simTime().dbl()); // performs the infection message relay
         return Done;
     }
     return Ready;
 }
 
+// omnetpp's functionality at message reception
+// This implements the FSM behaviour as described in the documentation
 void Node::handleMessage(cMessage* msg)
 {
-    if(!strcmp("clock", msg->getName())){
+    if(!strcmp("clock", msg->getName())){// message is a self clock. This represents the beginning of a new time slot
         switch (star) {
             case OneMessage:
-            case Ready:
+            case Ready: // node has a message and performs the random experiment
                 star = lottery(); break;
-            case Collision:
+            case Collision: // node cycles back to listening for incoming messages
                 star = Waiting; break;
             default:
                 break;
         }
-    } else {
+    } else { // message is an infection from another node
         switch (star) {
-            case Waiting:
+            case Waiting: // this is the first message in this time slot
                 sscanf(msg->getName(), INFECTION_FRMT, &infectionHop);
                 infectionHop++;
                 EV << "received" << msg->getName() << " -> " << infectionHop << endl;
                 star = OneMessage; break;
-            case OneMessage:
+            case OneMessage: // if node already had a message in this time slot, it collides
                 star = Collision; break;
             default:
                 break;
         }
     }
-    colorNode();
-    if (star != Done && !strcmp("clock", msg->getName()))
+    colorNode(); // update the color coding for debugging after a potential status change
+    if (star != Done && !strcmp("clock", msg->getName())) // only done nodes are deactivated
         scheduleClock();
     delete(msg);
 }

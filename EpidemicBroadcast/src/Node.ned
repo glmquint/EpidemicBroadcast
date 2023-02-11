@@ -1,22 +1,10 @@
 //
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Lesser General Public License for more details.
-// 
-// You should have received a copy of the GNU Lesser General Public License
-// along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
-
+// Node configuration definition
 //
-// TODO auto-generated module
+// Node's behavioiur follow a FSM mechanism with 5 states, defined in status.h
+// A complete description is provided in the documentation
 //
-
+ 
 package epidemicbroadcast;
 
 simple Node
@@ -30,20 +18,7 @@ simple Node
         double pos_x = default(uniform(0, 500));
         double pos_y = default(uniform(0, 500));
         double radius = default(100.0);
-        //@display("p=$pos_x,$pos_y;r=$radius;");
         @display("p=$pos_x,$pos_y");
-        //=====statistics=======//
-		 
-        //@signal[collision](type=int);
-		//@statistic[collisionStat](source="collision";record=sum;);
-		//@signal[neighbors](type=int);
-		//@statistic[neighborsStat](source="neighbors";record=sum;);
-		//@signal[endTime](type=double);
-		//@statistic[endTimeStat](source="endTime";record=max;);
-		//@signal[hop](type=int);
-		//@statistic[hopStat](source="hop";record=max;);
-		
-
 
     gates:
         input in[numberOfNodes];

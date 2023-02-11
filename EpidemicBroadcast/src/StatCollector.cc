@@ -1,37 +1,31 @@
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Lesser General Public License for more details.
-// 
-// You should have received a copy of the GNU Lesser General Public License
-// along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
+/*
+ * StatCollector class implementation
+ *
+ * This utility node has access to all instanced nodes on the floorplan
+ * This allows the collection of the number of nodes in a specific
+ * status at each time slot
+ */
 
 #include <assert.h>
 #include "StatCollector.h"
 
 Define_Module(StatCollector);
 
+// omnetpp's initialization stage
 void StatCollector::initialize()
 {
-    assert(TIME_LIMIT == par("time_limit"));
+    assert(TIME_LIMIT == par("time_limit")); // assertion for omnetpp and c++ class configuration alignment
     int sumNeighbors = 0;
     char str[8];
     numberOfNodes = par("numberOfNodes");
     nodes = new Node*[numberOfNodes]();
     for (int i = 0; i < numberOfNodes; ++i){
         sprintf(str, "nodeX[%d]", i);
-        nodes[i] = check_and_cast<Node*>(getModuleByPath(str));
+        nodes[i] = check_and_cast<Node*>(getModuleByPath(str)); // node referencing for stat retrieval
     }
     for (int i = 0; i < TIME_LIMIT; ++i){
         for (int j = 0; j < STATUS_NUMBER; ++j)
-            stats[j][i] = 0;
+            stats[j][i] = 0; // initialized mem setting for each statistcs, for each time slot
     }
     collectorSignal[Waiting] = registerSignal("waiting");
     collectorSignal[OneMessage] = registerSignal("oneMSG");
@@ -39,26 +33,23 @@ void StatCollector::initialize()
     collectorSignal[Ready] = registerSignal("ready");
     collectorSignal[Done] = registerSignal("done");
     rateSignal = registerSignal("rate");
-
-    /*waitingSignal = registerSignal("waiting");
-    oneMSGSignal = registerSignal("oneMSG");
-    collisionCollectorSignal = registerSignal("collision");
-    readySignal = registerSignal("ready");
-    doneSignal = registerSignal("done");
-    */
     cMessage *self = new cMessage("clock");
+    // initial time slot is offset by half a time slot
+    // this guarantees that stat retrieval is performed after every node status transitioned
     simtime_t sim = simTime()+((double)par("timer")/2);
     scheduleAt(sim,self);
 
 }
 
+// omnetpp's functionality at message reception
+// only self messages are expected, which trigger the
+// saving of how many nodes are in each status in this time slot
 void StatCollector::handleMessage(cMessage *msg)
 {
-    int64_t t = (int64_t)simTime().raw()/1000000000000;
+    int64_t t = (int64_t)simTime().raw()/1000000000000; // second
     for (int i = 0; i < numberOfNodes; ++i){
         Status s = nodes[i]->getStatus();
-        stats[s][t]++;
-        //EV << t << " " << i << " (" << s << ")" << endl;
+        stats[s][t]++; // cumulative sum for status s at time t
     }
     for(int i = 0; i<STATUS_NUMBER; ++i){
         double rate = (double)stats[i][t]/numberOfNodes;
@@ -71,41 +62,12 @@ void StatCollector::handleMessage(cMessage *msg)
         emitCheck = false;
     }
 
-
     cMessage *self = new cMessage("clock");
     simtime_t sim = simTime()+par("timer");
+    // every other self message has the same frequency as node's
+    // but the initial offset will keep them always
+    // subsequent to node's status transition
     scheduleAt(sim,self);
     delete(msg);
 
 }
-
-//void StatCollector::registerStatus(char status[9])
-//{
-//    int64_t t = (int64_t)simTime().raw()/1000000000000;
-//    //EV << t << " status: " << status << endl;
-//    //status[t.raw()][status]++;
-//    if (strcmp(status, "=WAITING="))
-//        statsW[t] += 1;
-//    else if (strcmp(status, "==READY=="))
-//        statsR[t] += 1;
-//    else if (strcmp(status, "COLLISION"))
-//        statsC[t] += 1;
-//}
-/*
-void StatCollector::finish()
-{
-   // EV << "t W " << "1 " << "C " << "R " << "D sum" << endl;
-    int sum, nodesInStatus;
-    for (int i = 0; i < TIME_LIMIT; ++i){
-        //EV << i << " W: " << statsW[i] << " R: " << statsR[i] << " C: " << statsC[i] << endl;
-        //EV << i;
-        sum = 0;
-        for (int j = 0; j < STATUS_NUMBER; ++j){
-            nodesInStatus = stats[j][i];
-            sum += nodesInStatus;
-            //EV << " " << nodesInStatus;
-        }
-        //EV << "  " << sum << endl;
-        assert(sum == numberOfNodes);
-    }
-}*/
