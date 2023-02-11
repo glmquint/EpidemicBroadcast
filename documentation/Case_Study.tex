@@ -40,7 +40,26 @@ The following table show the mean coverage time for each run.
 
 Since the means do not give enough information, we decide to plot a column graph showing the 90\% confidence interval for the average coverage values (Fig. \ref{fig:200-90CI}). Note that we chose to discard all runs that do not end with a coverage percentage above 95\% with a 90\% coverage. That's why in the following boxplot the runs with radius 10 are not shown.
 
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{./images/200coverageCI.png}
+  \caption{Coverage percentage}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{./images/200endtimeCI.png}
+  \caption{Coverage time}
+  \label{fig:sub2}
+\end{subfigure}
+\caption{Column graph with 90\% CI}
+\label{fig:200-90CI}
+\end{figure}
 
+
+\iffalse
 
 \begin{figure}[h!]
     \centering
@@ -53,7 +72,6 @@ Since the means do not give enough information, we decide to plot a column graph
 
 
 
-\iffalse
 Since the mean does not give enough information about the index variation, we decide to calculate the standard deviation as well.
 
 
