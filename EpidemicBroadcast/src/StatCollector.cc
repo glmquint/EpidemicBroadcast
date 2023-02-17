@@ -71,3 +71,19 @@ void StatCollector::handleMessage(cMessage *msg)
     delete(msg);
 
 }
+
+// omnetpp's completion function at the end of simulation
+// This performs a sanity check for validity of data retrieved
+// It has been commented in the final simulation for performance reasons
+void StatCollector::finish()
+{
+    int sum, nodesInStatus;
+    for (int i = 0; i < TIME_LIMIT; ++i){
+        sum = 0;
+        for (int j = 0; j < STATUS_NUMBER; ++j){
+            nodesInStatus = stats[j][i];
+            sum += nodesInStatus;
+        }
+        assert(sum == numberOfNodes);
+    }
+}
