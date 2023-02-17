@@ -60,7 +60,7 @@ Synchronization between nodes is idealized and isn't modeled. Each node starts i
 \label{fig:fsm}
 \end{figure}
 \subsection{StatCollector Behaviour}
-This module is a singleton for each simulation and isn't accessible to the rest of nodes. Because we assumed that every communication completes after $250$ ms (the delay of transmission), this modules executes with the same slotted frequency as all other nodes but with an offset of $500$ ms. This guarantees that the information retrieved by \texttt{StatCollector} comes after every node has already transitioned to the new status. From now on, if any time indication contains a $n,5$ offset, it is considered relative to the $n$-th time slot.
+This module is a singleton for each simulation and isn't accessible to the rest of nodes. Because we assumed that every communication completes after $250$ ms (the delay of transmission), this modules executes with the same slotted frequency as all other nodes but with an offset of $500$ ms. This guarantees that the information retrieved by \texttt{StatCollector} comes after every node has already transitioned to the new status. 
 
 This module saves the relative distribution of nodes between the different statuses, i.e. what fraction of the system is in what state for each time-slot.
 
