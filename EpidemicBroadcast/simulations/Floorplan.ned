@@ -16,6 +16,7 @@
 package epidemicbroadcast.simulations;
 
 import epidemicbroadcast.Node;
+import epidemicbroadcast.StatCollector;
 
 
 network Floorplan
@@ -26,7 +27,8 @@ network Floorplan
         @display("bgb=642,470");
 
     submodules:
-        nodeX[numberOfNodes]: Node {}
+        nodeX[numberOfNodes]: Node {};
+        statCollector: StatCollector{}
     connections:// allowunconnected:
         for i=0..sizeof(nodeX)-1, for j=0..sizeof(nodeX)-1 {
             nodeX[i].out[j] --> {  delay = 25ms; } --> nodeX[j].in[i];
